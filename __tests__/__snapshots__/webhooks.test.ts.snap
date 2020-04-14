@@ -12,9 +12,9 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
-    "href": "https://www.riminder.net/sf/public/api/v1.0/webhook/check",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
+    "href": "https://www.hrflow.ai/sf/public/api/v1.0/webhook/check",
     "path": "/sf/public/api/v1.0/webhook/check",
     "pathname": "/sf/public/api/v1.0/webhook/check",
     "port": null,

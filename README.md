@@ -1,23 +1,23 @@
-# node-riminder-api
-⚡️ Riminder API Node Wrapper
+# node-hrflow-api
+⚡️ Hrflow API Node Wrapper
 
 # Install
 
 ```bash
-npm install --save riminder
+npm install --save hrflow
 npm run build
 ```
 
 # Usage
 
 ```typescript
-import Riminder from 'riminder';
-const client = new Riminder({API_Key: "Your API Key"});
+import Hrflow from 'hrflow';
+const client = new Hrflow({API_Key: "Your API Key"});
 ```
 
 # API
 
-## Riminder
+## Hrflow
 
 Class constructor for your client instance, it should be called with an `options` object where you define your `API_Key`.
 
@@ -25,7 +25,7 @@ Class constructor for your client instance, it should be called with an `options
 
 ## Source
 
-### riminder.source.list
+### hrflow.source.list
 
 Method that gets a list of sources.
 
@@ -33,7 +33,7 @@ Method that gets a list of sources.
 client.source.list();
 ```
 
-### riminder.source.get
+### hrflow.source.get
 
 Method that gets a source by its id.
 
@@ -43,7 +43,7 @@ client.source.get("source_id_here");
 
 ## Filter
 
-### riminder.filter.list
+### hrflow.filter.list
 
 Method that gets a list of filters.
 
@@ -51,7 +51,7 @@ Method that gets a list of filters.
 client.filter.list();
 ```
 
-### riminder.filter.get
+### hrflow.filter.get
 
 Method that gets a filter by its id or its reference. It accepts an object as follows
 
@@ -67,7 +67,7 @@ client.filter.get(options);
 
 ## Profile
 
-### riminder.profile.list
+### hrflow.profile.list
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
 
@@ -122,7 +122,7 @@ const options: ProfilesOptions = {
 client.profile.list(options);
 ```
 
-### riminder.profile.add
+### hrflow.profile.add
 
 Method that uploads a resume for a particular profile. It uses the following data:
 
@@ -162,7 +162,7 @@ const options: ProfileUpload = {
 client.profile.add(data, fs.createReadStream("myFile"));
 ```
 
-### riminder.profile.get
+### hrflow.profile.get
 
 Method that gets a profile from a source using its id or reference.
 
@@ -179,7 +179,7 @@ client.profile.get(options);
 
 ### JSON
 
-#### riminder.profile.json.check
+#### hrflow.profile.json.check
 
 Method that check if the structured profile is valid.
 
@@ -306,7 +306,7 @@ const data: JsonUploadCheck = {
 client.profile.json.check(options);
 ```
 
-#### riminder.profile.json.add
+#### hrflow.profile.json.add
 
 Method that upload a structured profile to the platform.
 
@@ -438,7 +438,7 @@ client.profile.json.add(options);
 
 ### Document
 
-#### riminder.profile.document.list
+#### hrflow.profile.document.list
 
 Method that gets the documents associated to a profile by its id or reference.
 
@@ -455,7 +455,7 @@ client.profile.document.list(options);
 
 ### Parsing
 
-#### riminder.profile.parsing.get
+#### hrflow.profile.parsing.get
 
 Method that gets the parsing result of a profile by its id or reference.
 
@@ -472,7 +472,7 @@ client.profile.parsing.get(options);
 
 ### Scoring
 
-#### riminder.profile.scoring.list
+#### hrflow.profile.scoring.list
 
 Method that gets the scoring result of a profile by its id or reference.
 
@@ -489,7 +489,7 @@ client.profile.scoring.list(options);
 
 ### Revealing
 
-#### riminder.profile.revealing.get
+#### hrflow.profile.revealing.get
 
 Method that reveals the interpretability result of a profile (by id or reference) with a filter (by id or reference).
 
@@ -509,7 +509,7 @@ client.profile.revealing.get(options);
 
 ### Staging
 
-#### riminder.profile.stage.set
+#### hrflow.profile.stage.set
 
 Method that updates the stage of a profile on a particular filter.
 
@@ -538,7 +538,7 @@ client.profile.stage.set(data);
 
 ### Rating
 
-#### riminder.profile.rating.set
+#### hrflow.profile.rating.set
 
 Method that updates the rating of a profile on a particular filter.
 
@@ -560,12 +560,12 @@ client.profile.rating.set(data);
 
 # Webhooks
 
-## Riminder.webhooks
+## Hrflow.webhooks
 
-This object is used to handle webhooks. If you give your webhooks secret key when you create the Riminder objects, you can set them up.
+This object is used to handle webhooks. If you give your webhooks secret key when you create the Hrflow objects, you can set them up.
 
 ```typescript
-const client = new Riminder({
+const client = new Hrflow({
     API_Key: "Your API Key",
     Webhooks_Key: "Your Webhooks key"
 });

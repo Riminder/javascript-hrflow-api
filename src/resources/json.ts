@@ -1,25 +1,25 @@
-import Riminder = require("..");
+import Hrflow = require("..");
 import defaults from "../defaults";
 import { JsonUpload, TrainingMetadata, JsonUploadCheck } from "../types";
 import { httpPostRequest } from "../http";
 
 export default class JSON {
-  private riminder: Riminder;
+  private hrflow: Hrflow;
 
-  constructor(riminder: Riminder) {
-    this.riminder = riminder;
+  constructor(hrflow: Hrflow) {
+    this.hrflow = hrflow;
   }
 
   add(data: JsonUpload) {
     const transformedData = this._tranformTimestamp(data);
     const url = `${defaults.API_URL}/profile/json`;
-    return httpPostRequest(url, transformedData, null, { headers: this.riminder.headers });
+    return httpPostRequest(url, transformedData, null, { headers: this.hrflow.headers });
   }
 
   check(data: JsonUploadCheck) {
     const transformedData = this._tranformTimestamp(data);
     const url = `${defaults.API_URL}/profile/json/check`;
-    return httpPostRequest(url, transformedData, null, { headers: this.riminder.headers });
+    return httpPostRequest(url, transformedData, null, { headers: this.hrflow.headers });
   }
 
   private _tranformTimestamp(data: JsonUpload | JsonUploadCheck): JsonUpload | JsonUploadCheck {

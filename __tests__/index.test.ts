@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import { generateURLParams } from "../src/utils";
 import { httpRequest } from "../src/http";
-import Riminder = require("../src/index");
-import { RiminderOptions, ProfilesOptions, ProfileUpload, StagePatch, Stage, RatingPatch, Seniority, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
+import Hrflow = require("../src/index");
+import { HrflowOptions, ProfilesOptions, ProfileUpload, StagePatch, Stage, RatingPatch, Seniority, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
 
-let app: Riminder;
+let app: Hrflow;
 
 /**
  * @Readme: These tests are incomplete. We should also test the content of the request. It's currently testing
@@ -19,10 +19,10 @@ function getQueryParamAsArray(query: string): Array<string> {
 }
 
 describe("Other tests", () => {
-  describe("\"Riminder\" object relative tests", () => {
+  describe("\"Hrflow\" object relative tests", () => {
     test("it should throw an error when no key is given", () => {
       expect(() => {
-        app = new Riminder({} as RiminderOptions);
+        app = new Hrflow({} as HrflowOptions);
       }).toThrowErrorMatchingSnapshot();
     });
   });
@@ -58,7 +58,7 @@ describe("Other tests", () => {
 });
 
 describe("Wrapper test", () => {
-    app = new Riminder({API_Key: "api_key"});
+    app = new Hrflow({API_Key: "api_key"});
     describe("Source endpoints", () => {
         test("It should call the get source list endpoint", () =>
         app.source.list().then((response: any) => {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Other tests "Riminder" object relative tests it should throw an error when no key is given 1`] = `"No API Key was supplied for Riminder SDK"`;
+exports[`Other tests "Hrflow" object relative tests it should throw an error when no key is given 1`] = `"No API Key was supplied for Hrflow SDK"`;
 
 exports[`Other tests http module relative tests It should throw an error if the error code is not 200 or 201 1`] = `[Error: An error occured]`;
 
@@ -17,8 +17,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/filters",
     "path": "/v1/filters",
     "pathname": "/v1/filters",
@@ -42,8 +42,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/filter?filter_id=filter_id",
     "path": "/v1/filter?filter_id=filter_id",
     "pathname": "/v1/filter",
@@ -67,8 +67,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/filter?filter_reference=filter_reference",
     "path": "/v1/filter?filter_reference=filter_reference",
     "pathname": "/v1/filter",
@@ -93,8 +93,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/json/check",
     "path": "/v1/profile/json/check",
     "pathname": "/v1/profile/json/check",
@@ -118,8 +118,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/documents?source_id=source_id&profile_id=profile_id",
     "path": "/v1/profile/documents?source_id=source_id&profile_id=profile_id",
     "pathname": "/v1/profile/documents",
@@ -143,8 +143,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/documents?source_id=source_id&profile_reference=profile_reference",
     "path": "/v1/profile/documents?source_id=source_id&profile_reference=profile_reference",
     "pathname": "/v1/profile/documents",
@@ -168,8 +168,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profiles?source_ids=[%22source1%22,%22source2%22]&date_start=0&date_end=1514764800&page=1&seniority=all&filter_id=filter_id&filter_reference=filter_reference&stage=YES&rating=1&limit=30&sort_by=reception&order_by=desc",
     "path": "/v1/profiles?source_ids=[%22source1%22,%22source2%22]&date_start=0&date_end=1514764800&page=1&seniority=all&filter_id=filter_id&filter_reference=filter_reference&stage=YES&rating=1&limit=30&sort_by=reception&order_by=desc",
     "pathname": "/v1/profiles",
@@ -193,8 +193,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profiles?source_ids=[%22source1%22,%22source2%22]&date_start=0&date_end=1&page=1&seniority=all&filter_id=filter_id&filter_reference=filter_reference&stage=YES&rating=1&limit=30&sort_by=reception&order_by=desc",
     "path": "/v1/profiles?source_ids=[%22source1%22,%22source2%22]&date_start=0&date_end=1&page=1&seniority=all&filter_id=filter_id&filter_reference=filter_reference&stage=YES&rating=1&limit=30&sort_by=reception&order_by=desc",
     "pathname": "/v1/profiles",
@@ -218,8 +218,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile?source_id=source_id&profile_id=profile_id",
     "path": "/v1/profile?source_id=source_id&profile_id=profile_id",
     "pathname": "/v1/profile",
@@ -243,8 +243,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile?source_id=source_id&profile_reference=profile_reference",
     "path": "/v1/profile?source_id=source_id&profile_reference=profile_reference",
     "pathname": "/v1/profile",
@@ -268,8 +268,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/parsing?source_id=source_id&profile_id=profile_id",
     "path": "/v1/profile/parsing?source_id=source_id&profile_id=profile_id",
     "pathname": "/v1/profile/parsing",
@@ -293,8 +293,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/parsing?source_id=source_id&profile_reference=profile_reference",
     "path": "/v1/profile/parsing?source_id=source_id&profile_reference=profile_reference",
     "pathname": "/v1/profile/parsing",
@@ -318,8 +318,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/scoring?source_id=source_id&profile_id=profile_id",
     "path": "/v1/profile/scoring?source_id=source_id&profile_id=profile_id",
     "pathname": "/v1/profile/scoring",
@@ -343,8 +343,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/scoring?source_id=source_id&profile_reference=profile_reference",
     "path": "/v1/profile/scoring?source_id=source_id&profile_reference=profile_reference",
     "pathname": "/v1/profile/scoring",
@@ -369,8 +369,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/rating",
     "path": "/v1/profile/rating",
     "pathname": "/v1/profile/rating",
@@ -395,8 +395,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/rating",
     "path": "/v1/profile/rating",
     "pathname": "/v1/profile/rating",
@@ -421,8 +421,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/rating",
     "path": "/v1/profile/rating",
     "pathname": "/v1/profile/rating",
@@ -447,8 +447,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/rating",
     "path": "/v1/profile/rating",
     "pathname": "/v1/profile/rating",
@@ -473,8 +473,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/stage",
     "path": "/v1/profile/stage",
     "pathname": "/v1/profile/stage",
@@ -499,8 +499,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/stage",
     "path": "/v1/profile/stage",
     "pathname": "/v1/profile/stage",
@@ -525,8 +525,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/stage",
     "path": "/v1/profile/stage",
     "pathname": "/v1/profile/stage",
@@ -551,8 +551,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/stage",
     "path": "/v1/profile/stage",
     "pathname": "/v1/profile/stage",
@@ -577,8 +577,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile/json",
     "path": "/v1/profile/json",
     "pathname": "/v1/profile/json",
@@ -602,8 +602,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/profile",
     "path": "/v1/profile",
     "pathname": "/v1/profile",
@@ -627,8 +627,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/source?source_id=id",
     "path": "/v1/source?source_id=id",
     "pathname": "/v1/source",
@@ -652,8 +652,8 @@ Object {
   "url": Url {
     "auth": null,
     "hash": null,
-    "host": "www.riminder.net",
-    "hostname": "www.riminder.net",
+    "host": "www.hrflow.ai",
+    "hostname": "www.hrflow.ai",
     "href": "https://api.hrflow.ai/v1/sources",
     "path": "/v1/sources",
     "pathname": "/v1/sources",

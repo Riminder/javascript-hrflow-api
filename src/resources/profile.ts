@@ -1,4 +1,4 @@
-import Riminder = require("..");
+import Hrflow = require("..");
 import defaults from "../defaults";
 import { ProfilesOptions, ProfileOptionIdOrReference, ProfileUpload, TrainingMetadata } from "../types";
 import { generateURLParams } from "../utils";
@@ -13,7 +13,7 @@ import JSON from "./json";
 import Revealing from "./revealing";
 
 export default class Profile {
-  private riminder: Riminder;
+  private hrflow: Hrflow;
   document: Document;
   parsing: Parsing;
   scoring: Scoring;
@@ -22,20 +22,20 @@ export default class Profile {
   json: JSON;
   revealing: Revealing;
 
-  constructor(riminder: Riminder) {
-    this.riminder = riminder;
-    this.document = new Document(this.riminder);
-    this.parsing = new Parsing(this.riminder);
-    this.scoring = new Scoring(this.riminder);
-    this.stage = new Stage(this.riminder);
-    this.rating = new Rating(this.riminder);
-    this.json = new JSON(this.riminder);
-    this.revealing = new Revealing(this.riminder);
+  constructor(hrflow: Hrflow) {
+    this.hrflow = hrflow;
+    this.document = new Document(this.hrflow);
+    this.parsing = new Parsing(this.hrflow);
+    this.scoring = new Scoring(this.hrflow);
+    this.stage = new Stage(this.hrflow);
+    this.rating = new Rating(this.hrflow);
+    this.json = new JSON(this.hrflow);
+    this.revealing = new Revealing(this.hrflow);
   }
 
   get(options: ProfileOptionIdOrReference) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/profile?${urlParams}`, { headers: this.riminder.headers });
+    return httpRequest(`${defaults.API_URL}/profile?${urlParams}`, { headers: this.hrflow.headers });
   }
 
   list(options: ProfilesOptions) {
@@ -55,7 +55,7 @@ export default class Profile {
     }
     const urlParams = generateURLParams(options);
 
-    return httpRequest(`${defaults.API_URL}/profiles?${urlParams}`, { headers: this.riminder.headers });
+    return httpRequest(`${defaults.API_URL}/profiles?${urlParams}`, { headers: this.hrflow.headers });
   }
 
   add(data: ProfileUpload, file: ReadStream) {
@@ -81,6 +81,6 @@ export default class Profile {
       });
     }
     const url = `${defaults.API_URL}/profile`;
-    return httpPostRequest(url, data, file, { headers: this.riminder.headers });
+    return httpPostRequest(url, data, file, { headers: this.hrflow.headers });
   }
 }

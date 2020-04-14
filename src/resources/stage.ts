@@ -1,16 +1,16 @@
-import Riminder = require("..");
+import Hrflow = require("..");
 import defaults from "../defaults";
 import { httpPatchRequest } from "../http";
 import { StagePatch } from "../types";
 
 export default class Stage {
-  private riminder: Riminder;
-  constructor(riminder: Riminder) {
-    this.riminder = riminder;
+  private hrflow: Hrflow;
+  constructor(hrflow: Hrflow) {
+    this.hrflow = hrflow;
   }
 
   set(data: StagePatch) {
     let url = `${defaults.API_URL}/profile/stage`;
-    return httpPatchRequest(url, data, { headers: this.riminder.headers });
+    return httpPatchRequest(url, data, { headers: this.hrflow.headers });
   }
 }

@@ -1,10 +1,10 @@
-import { RiminderOptions } from "./types";
+import { HrflowOptions } from "./types";
 import { Webhooks } from "./webhooks";
 import Source from "./resources/source";
 import Filter from "./resources/filter";
 import Profile from "./resources/profile";
 
-class Riminder {
+class Hrflow {
   public headers: any;
   public API_Key: string;
   public Webhooks_Key: string;
@@ -13,10 +13,10 @@ class Riminder {
   public filter: Filter;
   public profile: Profile;
 
-  constructor(options: RiminderOptions) {
+  constructor(options: HrflowOptions) {
 
     if (!options.API_Key) {
-      let error = new Error("No API Key was supplied for Riminder SDK");
+      let error = new Error("No API Key was supplied for Hrflow SDK");
       throw error;
     }
 
@@ -43,4 +43,4 @@ class Riminder {
   }
 }
 
-export = Riminder;
+export = Hrflow;

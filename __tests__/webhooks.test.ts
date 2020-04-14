@@ -1,9 +1,9 @@
-import Riminder = require("../src/index");
+import Hrflow = require("../src/index");
 import { Webhooks } from "../src/webhooks";
 import * as util from "tweetnacl-util";
 import * as sha256 from "fast-sha256";
 
-let app: Riminder;
+let app: Hrflow;
 const API_Key = "api_key";
 const Webhooks_Key = "webhooks_key";
 
@@ -31,7 +31,7 @@ const callbackMock = jest.fn();
 describe("Webhooks tests",  () => {
     describe("Webhook check", () => {
         test("It should check if the webhook is correctly set up", () => {
-            app = new Riminder({ API_Key, Webhooks_Key });
+            app = new Hrflow({ API_Key, Webhooks_Key });
             app.webhooks.check()
                 .then((response) => {
                     expect(response).toMatchSnapshot();
@@ -41,12 +41,12 @@ describe("Webhooks tests",  () => {
 
     describe("Webhook creation", () => {
         test("It should not create webhooks if no key is given", () => {
-            app = new Riminder({ API_Key });
+            app = new Hrflow({ API_Key });
             expect(app.webhooks).toBeUndefined();
         });
 
         test("It should create webhooks if the key is given", () => {
-            app = new Riminder({ API_Key, Webhooks_Key });
+            app = new Hrflow({ API_Key, Webhooks_Key });
             expect(app.webhooks).toBeDefined();
         });
 
@@ -60,7 +60,7 @@ describe("Webhooks tests",  () => {
     describe("Webhooks usage", () => {
         describe("Webhooks binding", () => {
             beforeEach(() => {
-                app = new Riminder({ API_Key, Webhooks_Key });
+                app = new Hrflow({ API_Key, Webhooks_Key });
             });
 
             test("It should throw an error if we try to bind an inexistant event", (done) => {
@@ -92,7 +92,7 @@ describe("Webhooks tests",  () => {
 
         describe("Webhooks call", () => {
             beforeAll(() => {
-                app = new Riminder({ API_Key, Webhooks_Key });
+                app = new Hrflow({ API_Key, Webhooks_Key });
                 app.webhooks.on("profile.parse.success", callbackMock);
             });
 

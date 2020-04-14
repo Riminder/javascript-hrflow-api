@@ -31,7 +31,7 @@ gulp.task('ts', function () {
 gulp.task('browserify', ["ts"], function () {
   return browserify({
       entries: './temp/index.js',
-      standalone: 'riminder-sdk',
+      standalone: 'hrflow-sdk',
       debug: true,
       // transform: [babelify]
     })
@@ -39,7 +39,7 @@ gulp.task('browserify', ["ts"], function () {
       presets: ["es2015"]
     }))
     .bundle()
-    .pipe(source("riminder-sdk.js"))
+    .pipe(source("hrflow-sdk.js"))
     .pipe(gulp.dest("dist/"));
 })
 

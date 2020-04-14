@@ -13,7 +13,7 @@ export interface ProfilesOptions {
   order_by?: OrderBy;
 }
 
-export interface RiminderOptions {
+export interface HrflowOptions {
   API_Key: string;
   Webhooks_Key?: string;
 }
