@@ -24,6 +24,13 @@ export interface HrflowAPIResponse {
   data?: any;
 }
 
+export interface offersOptions {
+  page: number,
+  limit: number,
+  order_by: string,
+  sort_by: string,
+}
+
 export interface ProfileOptionId {
   source_id: string;
   profile_id: string;
@@ -36,6 +43,15 @@ export interface ProfileOptionReference {
 
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
 
+export interface OfferOptionId {
+  job_id: string;
+}
+
+export interface OfferOptionReference {
+  job_reference: string;
+}
+
+export type OfferOptionIdOrReference = OfferOptionId | OfferOptionReference;
 export interface TrainingMetadata {
   filter_reference: string;
   stage: Stage;
