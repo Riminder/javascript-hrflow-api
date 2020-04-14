@@ -15,7 +15,8 @@ export const httpRequest = (url: string, options?: any) => {
   // .then(successHandler, errorHandler)
   // .then((json: HrflowAPIResponse) => json.data);
   return axios.get(url, opts)
-  .then(json => json.data);
+  .then(json => json.data)
+  .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPostRequest = (url: string, data?: any, file?: ReadStream, options?: any) => {
