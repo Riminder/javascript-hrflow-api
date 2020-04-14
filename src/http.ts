@@ -1,7 +1,7 @@
 import "fetch-everywhere";
 const FormData = require("form-data");
 import { ReadStream } from "fs";
-import { RiminderAPIResponse } from "./types";
+import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
 
 export const httpRequest = (url: string, options?: any) => {
@@ -12,7 +12,7 @@ export const httpRequest = (url: string, options?: any) => {
 
   return fetch(url, opts)
   .then(successHandler, errorHandler)
-  .then((json: RiminderAPIResponse) => json.data);
+  .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPostRequest = (url: string, data?: any, file?: ReadStream, options?: any) => {
@@ -26,7 +26,7 @@ export const httpPostRequest = (url: string, data?: any, file?: ReadStream, opti
 
   return fetch(url, opts)
   .then(successHandler, errorHandler)
-  .then((json: RiminderAPIResponse) => json.data);
+  .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPatchRequest = (url: string, data: any, options?: any) => {
@@ -41,14 +41,14 @@ export const httpPatchRequest = (url: string, data: any, options?: any) => {
 
   return fetch(url, opts)
   .then(successHandler, errorHandler)
-  .then((json: RiminderAPIResponse) => json.data);
+  .then((json: HrflowAPIResponse) => json.data);
 };
 
 const successHandler = (response: Response) => {
   if (response.status === 200 || response.status === 201) {
     return response.json();
   }
-  return response.json().then((data: RiminderAPIResponse) => {
+  return response.json().then((data: HrflowAPIResponse) => {
     throw new APIError("An error occured", data);
   });
 };

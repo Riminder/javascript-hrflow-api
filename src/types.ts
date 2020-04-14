@@ -18,7 +18,7 @@ export interface RiminderOptions {
   Webhooks_Key?: string;
 }
 
-export interface RiminderAPIResponse {
+export interface HrflowAPIResponse {
   code: number;
   message: string;
   data?: any;

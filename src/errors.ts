@@ -1,8 +1,8 @@
-import { RiminderAPIResponse } from "./types";
+import { HrflowAPIResponse } from "./types";
 
 export class APIError extends Error {
-  response: RiminderAPIResponse;
-  constructor(message: string, response: RiminderAPIResponse) {
+  response: HrflowAPIResponse;
+  constructor(message: string, response: HrflowAPIResponse) {
     super(message);
     this.response = response;
   }
