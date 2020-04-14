@@ -3,6 +3,7 @@ import { Webhooks } from "./webhooks";
 import Source from "./resources/source";
 import Filter from "./resources/filter";
 import Profile from "./resources/profile";
+import Offer from "./resources/offer";
 
 class Hrflow {
   public headers: any;
@@ -12,6 +13,7 @@ class Hrflow {
   public source: Source;
   public filter: Filter;
   public profile: Profile;
+  public offer: Offer;
 
   constructor(options: HrflowOptions) {
 
@@ -39,6 +41,7 @@ class Hrflow {
     this.source = new Source(this);
     this.filter = new Filter(this);
     this.profile = new Profile(this);
+    this.offer = new Offer(this);
   }
 }
 
