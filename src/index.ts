@@ -23,7 +23,6 @@ class Hrflow {
     this.API_Key = options.API_Key;
     this.headers = {
       "X-API-Key": this.API_Key,
-      'Access-Control-Allow-Origin': 'http://localhost:8090',
     };
     if (options.Webhooks_Key) {
       this.Webhooks_Key = options.Webhooks_Key;

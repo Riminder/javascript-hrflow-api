@@ -1,5 +1,7 @@
 import "fetch-everywhere";
 const FormData = require("form-data");
+import axios from 'axios';
+
 import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
@@ -9,10 +11,11 @@ export const httpRequest = (url: string, options?: any) => {
     credentials: "include",
     ...options
   };
-
-  return fetch(url, opts)
-  .then(successHandler, errorHandler)
-  .then((json: HrflowAPIResponse) => json.data);
+  // return fetch(url, opts)
+  // .then(successHandler, errorHandler)
+  // .then((json: HrflowAPIResponse) => json.data);
+  return axios.get(url, opts)
+  .then(json => json.data);
 };
 
 export const httpPostRequest = (url: string, data?: any, file?: ReadStream, options?: any) => {
