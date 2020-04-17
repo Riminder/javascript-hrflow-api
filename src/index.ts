@@ -2,8 +2,8 @@ import { HrflowOptions } from "./types";
 import { Webhooks } from "./webhooks";
 import Source from "./resources/source";
 import Filter from "./resources/filter";
-import Profile from "./resources/profile";
-import Offer from "./resources/offer";
+import Profile from "./resources/profile/profile";
+import Offer from "./resources/job/job";
 
 class Hrflow {
   public headers: any;
