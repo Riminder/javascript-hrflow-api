@@ -234,8 +234,13 @@ export enum Stage {
 }
 
 export enum SortBy {
-  RECEPTION = "reception",
-  RANKING = "ranking"
+  DATE_RECEPTION = "date_reception",
+  DATE_CREATION = "date_creation",
+  LOCATION = "location",
+  LOCATION_EXPERIENCE = "location_experience",
+  LOCATION_EDUCATION = "location_education",
+  SCORE_SEMENTIC = "score_semantic",
+  SCORE_PREDECTIVE = "score_predictive",
 }
 
 export enum OrderBy {
@@ -252,5 +257,6 @@ export enum Seniority {
 export interface WebhooksResponse {
   team_name: string;
   webhook_id: string;
-  webhook_url: string;
+  url: string;
+  type: string;
 }
