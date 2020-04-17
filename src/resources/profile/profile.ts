@@ -6,6 +6,7 @@ import { ReadStream } from "fs";
 import { httpPostRequest, httpRequest } from "../../http";
 import Attachment from "./attachment";
 import Tags from './tags';
+import Metadata from "./metadata";
 import Parsing from "./parsing";
 import Scoring from "./scoring";
 import Stage from "./stage";
@@ -17,6 +18,7 @@ export default class Profile {
   private hrflow: Hrflow;
   attachment: Attachment;
   tags: Tags;
+  metadata: Metadata;
   parsing: Parsing;
   scoring: Scoring;
   revealing: Revealing;
@@ -29,6 +31,7 @@ export default class Profile {
     this.hrflow = hrflow;
     this.attachment = new Attachment(this.hrflow);
     this.tags = new Tags(this.hrflow);
+    this.metadata = new Metadata(this.hrflow);
     this.parsing = new Parsing(this.hrflow);
     this.scoring = new Scoring(this.hrflow);
     this.stage = new Stage(this.hrflow);
