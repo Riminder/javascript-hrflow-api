@@ -1,22 +1,42 @@
-export interface ProfilesOptions {
-  source_ids: Array<string>;
-  date_start: Date | number;
-  date_end: Date | number;
-  page?: number;
-  seniority?: Seniority;
-  filter_id?: string;
-  filter_reference?: string;
-  stage?: Stage;
-  rating?: number;
-  limit?: number;
-  sort_by: SortBy;
-  order_by?: OrderBy;
-}
-
 export interface HrflowOptions {
   API_Key: string;
   Webhooks_Key?: string;
 }
+
+export interface ProfilesOptions {
+  source_ids: Array<string>;
+  limit?: number;
+  page?: number;
+  order_by?: OrderBy;
+  sort_by?: SortBy;
+  timestamp_start?: Date | number;
+  timestamp_end?: Date | number;
+  name?: string;
+  email?: string;
+  location_geopoint?: {
+    lat: number;
+    lon: number;
+  };
+  location_distance?: number;
+  summary_keywords?: Array<string>;
+  text_keywords?: Array<string>;
+  experience_keywords?: Array<string>;
+  experience_location_geopoint?: {
+    lat: number;
+    lon: number;
+  };
+  experience_location_distance?: number;
+  experiences_duration_min?: number;
+  experiences_duration_max?: number;
+  skills_dict?: Array<string>;
+  languages_dict?: Array<string>;
+  interests_dict?: Array<string>;
+  tags_dict?: Array<string>;
+  seniority?: Seniority;
+  filter_id?: string;
+  filter_reference?: string;  
+}
+
 
 export interface HrflowAPIResponse {
   code: number;
