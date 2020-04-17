@@ -3,7 +3,13 @@ export interface HrflowOptions {
   Webhooks_Key?: string;
 }
 
-export interface ProfilesOptions {
+export interface HrflowAPIResponse {
+  code: number;
+  message: string;
+  data?: any;
+}
+
+export interface ProfilesSearchingOptions {
   source_ids: Array<string>;
   limit?: number;
   page?: number;
@@ -37,14 +43,12 @@ export interface ProfilesOptions {
   filter_reference?: string;  
 }
 
-
-export interface HrflowAPIResponse {
-  code: number;
-  message: string;
-  data?: any;
+export interface ProfilesScoringOptions {
+  source_ids: Array<string>;
+  job_id: string;
 }
 
-export interface offersOptions {
+export interface offersSearchingOptions {
   page: number,
   limit: number,
   order_by: string,
@@ -54,11 +58,13 @@ export interface offersOptions {
 export interface ProfileOptionId {
   source_id: string;
   profile_id: string;
+  profile_email?: string;
 }
 
 export interface ProfileOptionReference {
   source_id: string;
   profile_reference: string;
+  profile_email?: string;
 }
 
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
