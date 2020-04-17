@@ -59,6 +59,7 @@ export interface ProfileOptionId {
   source_id: string;
   profile_id: string;
   profile_email?: string;
+  fields?: any;
 }
 
 export interface ProfileOptionReference {

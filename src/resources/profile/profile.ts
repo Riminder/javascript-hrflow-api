@@ -11,16 +11,17 @@ import Stage from "./stage";
 import Rating from "./rating";
 import JSON from "./json";
 import Revealing from "./revealing";
-
+import Embedding from './embedding';
 export default class Profile {
   private hrflow: Hrflow;
   document: Document;
   parsing: Parsing;
   scoring: Scoring;
+  revealing: Revealing;
+  embedding: Embedding;
   stage: Stage;
   rating: Rating;
   json: JSON;
-  revealing: Revealing;
 
   constructor(hrflow: Hrflow) {
     this.hrflow = hrflow;
@@ -28,9 +29,11 @@ export default class Profile {
     this.parsing = new Parsing(this.hrflow);
     this.scoring = new Scoring(this.hrflow);
     this.stage = new Stage(this.hrflow);
+    this.revealing = new Revealing(this.hrflow);
+    this.embedding = new Embedding(this.hrflow);
     this.rating = new Rating(this.hrflow);
     this.json = new JSON(this.hrflow);
-    this.revealing = new Revealing(this.hrflow);
+    
   }
 
   get(options: ProfileOptionIdOrReference) {
