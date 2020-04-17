@@ -114,7 +114,7 @@ describe("Wrapper test", () => {
           stage: Stage.YES,
           rating: 1,
           limit: 30,
-          sort_by: SortBy.RECEPTION,
+          sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
         app.profile.list(options)
@@ -136,7 +136,7 @@ describe("Wrapper test", () => {
           stage: Stage.YES,
           rating: 1,
           limit: 30,
-          sort_by: SortBy.RECEPTION,
+          sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
         app.profile.list(options)
