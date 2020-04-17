@@ -1,10 +1,10 @@
 import Hrflow = require("../..");
 import defaults from "../../defaults";
-import { ProfilesOptions, ProfileOptionIdOrReference, ProfileUpload, TrainingMetadata } from "../../types";
+import { ProfileOptionIdOrReference, ProfileUpload, TrainingMetadata } from "../../types";
 import { generateURLParams } from "../../utils";
 import { ReadStream } from "fs";
 import { httpPostRequest, httpRequest } from "../../http";
-import Document from "./document";
+import Attachment from "./attachment";
 import Parsing from "./parsing";
 import Scoring from "./scoring";
 import Stage from "./stage";
@@ -14,7 +14,7 @@ import Revealing from "./revealing";
 import Embedding from './embedding';
 export default class Profile {
   private hrflow: Hrflow;
-  document: Document;
+  attachment: Attachment;
   parsing: Parsing;
   scoring: Scoring;
   revealing: Revealing;
@@ -25,7 +25,7 @@ export default class Profile {
 
   constructor(hrflow: Hrflow) {
     this.hrflow = hrflow;
-    this.document = new Document(this.hrflow);
+    this.attachment = new Attachment(this.hrflow);
     this.parsing = new Parsing(this.hrflow);
     this.scoring = new Scoring(this.hrflow);
     this.stage = new Stage(this.hrflow);
