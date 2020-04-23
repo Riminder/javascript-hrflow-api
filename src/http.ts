@@ -11,16 +11,16 @@ export const httpRequest = (url: string, options?: any) => {
     credentials: "include",
     ...options
   };
-  // return fetch(url, opts)
-  // .then(successHandler, errorHandler)
-  // .then((json: HrflowAPIResponse) => json.data);
-  return axios.get(url, opts)
-  .then(json => json.data)
+  return fetch(url, opts)
+  .then(successHandler, errorHandler)
   .then((json: HrflowAPIResponse) => json.data);
+  // return axios.get(url, opts)
+  // .then(json => json.data)
+  // .then((json: HrflowAPIResponse) => json.data);
 };
 
-export const httpPostRequest = (url: string, data?: any, file?: ReadStream, options?: any) => {
-  const body = data ? generateBody(data, file) : null;
+export const httpPostRequest = (url: string, data?: any, options?: any) => {
+  const body = data ? generateBody(data) : null;
 
   const opts = {
     ...options,
@@ -63,12 +63,12 @@ const errorHandler = (err: any) => {
   return Promise.reject(error);
 };
 
-const generateBody = (data: any, file?: ReadStream) => {
+const generateBody = (data: any) => {
   let body: any;
 
-  if (file) {
+  if (data.file) {
     body = new FormData();
-    body.append("file", file as any);
+    body.append("file", data.file as any);
     Object.keys(data).forEach((key) => {
       if ((data as any)[key] instanceof Array) {
         body.append(key, JSON.stringify((data as any)[key]));
