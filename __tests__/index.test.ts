@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { generateURLParams } from "../src/utils";
 import { httpRequest } from "../src/http";
 import Hrflow = require("../src/index");
-import { HrflowOptions, ProfilesOptions, ProfileUpload, StagePatch, Stage, RatingPatch, Seniority, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
+import { HrflowOptions, ProfilesSearchingOptions, ProfileUpload, Stage, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
 
 let app: Hrflow;
 
@@ -60,64 +60,34 @@ describe("Other tests", () => {
 describe("Wrapper test", () => {
     app = new Hrflow({API_Key: "api_key"});
     describe("Source endpoints", () => {
-        test("It should call the get source list endpoint", () =>
-        app.source.list().then((response: any) => {
-          expect(response).toMatchSnapshot();
-        }));
+        test("It should call the get source list endpoint", () => {
+          const options = {};
+          app.source.list(options).then((response: any) => {
+            expect(response).toMatchSnapshot();
+          })
+        }
+       );
 
         test("It should call the get source endpoint", () => {
-          app.source.get("id").then((response: any) => {
+          app.source.get("source_id").then((response: any) => {
             expect(response).toMatchSnapshot();
           });
         });
       });
 
-    describe("Filter endpoints", () => {
-      test("It should call the get filter list endpoint", () => {
-        app.filter.list()
-          .then((response: any) => {
-            expect(response).toMatchSnapshot();
-          });
-      });
-
-      test("It sould call the get filter endpoint with the filter id", () => {
-        const options = {
-          filter_id: "filter_id"
-        };
-        app.filter.get(options)
-          .then((response: any) => {
-            expect(response).toMatchSnapshot();
-          });
-      });
-
-      test("It sould call the get filter endpoint with the filter reference", () => {
-        const options = {
-          filter_reference: "filter_reference"
-        };
-        app.filter.get(options)
-          .then((response: any) => {
-            expect(response).toMatchSnapshot();
-          });
-      });
-    });
-
     describe("Profile endpoints", () => {
       test("It should call the get profile endpoint using Date object", () => {
-        const options: ProfilesOptions = {
+        const options: ProfilesSearchingOptions = {
           source_ids: ["source1", "source2"],
-          date_start: new Date(0),
-          date_end: new Date(1234),
+          timestamp_start: new Date(0),
+          timestamp_end: new Date(1234),
           page: 1,
-          seniority: Seniority.ALL,
-          filter_id: "filter_id",
-          filter_reference: "filter_reference",
           stage: Stage.YES,
-          rating: 1,
           limit: 30,
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.list(options)
+        app.profile.searching.get(options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
@@ -125,21 +95,17 @@ describe("Wrapper test", () => {
       });
 
       test("It should call the get profile endpoint using Date number", () => {
-        const options: ProfilesOptions = {
+        const options: ProfilesSearchingOptions = {
           source_ids: ["source1", "source2"],
-          date_start: 0,
-          date_end: (new Date("2018-01-01")).getTime(),
+          timestamp_start: 0,
+          timestamp_end: (new Date("2018-01-01")).getTime(),
           page: 1,
-          seniority: Seniority.ALL,
-          filter_id: "filter_id",
-          filter_reference: "filter_reference",
           stage: Stage.YES,
-          rating: 1,
           limit: 30,
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.list(options)
+        app.profile.searching.get(options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
@@ -171,7 +137,7 @@ describe("Wrapper test", () => {
           source_id: "source_id",
           profile_id: "profile_id",
         };
-        app.profile.document.list(options).then((response: any) => {
+        app.profile.attachment.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
@@ -181,7 +147,7 @@ describe("Wrapper test", () => {
           source_id: "source_id",
           profile_reference: "profile_reference",
         };
-        app.profile.document.list(options).then((response: any) => {
+        app.profile.attachment.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
@@ -227,8 +193,11 @@ describe("Wrapper test", () => {
       });
 
       test("It should call the post resume endpoint", () => {
+        const file = fs.createReadStream("./test.txt");
         const data: ProfileUpload = {
           source_id: "source_id",
+          file: file,
+          profile_type: 'file',
           profile_reference: "ref",
           timestamp_reception: new Date(Date.now()),
           training_metadata: [{
@@ -247,8 +216,7 @@ describe("Wrapper test", () => {
           }],
         };
 
-        const file = fs.createReadStream("./test.txt");
-        app.profile.add(data, file)
+        app.profile.add(data)
           .then((response: any) => {
             const responseWithoutBody = {
               url: response.url,
@@ -261,170 +229,171 @@ describe("Wrapper test", () => {
         });
       });
 
-      test("It should call the patch stage endpoint with the the profile id and filter id", () => {
-        const data: StagePatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          stage: Stage.YES,
-        };
+      // test("It should call the patch stage endpoint with the the profile id and filter id", () => {
+      //   const data: StagePatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     stage: Stage.YES,
+      //   };
 
-        app.profile.stage.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      //   app.profile.stage.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch stage endpoint with the the profile id and filter reference", () => {
-        const data: StagePatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          stage: Stage.YES,
-        };
-        app.profile.stage.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch stage endpoint with the the profile id and filter reference", () => {
+      //   const data: StagePatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     stage: Stage.YES,
+      //   };
+      //   app.profile.stage.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch stage endpoint with the the profile reference and filter id", () => {
-        const data: StagePatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          stage: Stage.YES,
-        };
-        app.profile.stage.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch stage endpoint with the the profile reference and filter id", () => {
+      //   const data: StagePatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     stage: Stage.YES,
+      //   };
+      //   app.profile.stage.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch stage endpoint with the the profile reference and filter reference", () => {
-        const data: StagePatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          stage: Stage.YES,
-        };
-        app.profile.stage.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch stage endpoint with the the profile reference and filter reference", () => {
+      //   const data: StagePatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     stage: Stage.YES,
+      //   };
+      //   app.profile.stage.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch rating endpoint with the the profile id and filter id", () => {
-        const data: RatingPatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          rating: 2
-        };
-        app.profile.rating.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch rating endpoint with the the profile id and filter id", () => {
+      //   const data: RatingPatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     rating: 2
+      //   };
+      //   app.profile.rating.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch rating endpoint with the the profile id and filter reference", () => {
-        const data: RatingPatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          rating: 2
-        };
-        app.profile.rating.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch rating endpoint with the the profile id and filter reference", () => {
+      //   const data: RatingPatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     rating: 2
+      //   };
+      //   app.profile.rating.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch rating endpoint with the the profile reference and filter id", () => {
-        const data: RatingPatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          rating: 2
-        };
-        app.profile.rating.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch rating endpoint with the the profile reference and filter id", () => {
+      //   const data: RatingPatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     rating: 2
+      //   };
+      //   app.profile.rating.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
-      test("It should call the patch rating endpoint with the the profile reference and filter reference", () => {
-        const data: RatingPatch = {
-          source_id: "source_id",
-          profile_id: "profile_id",
-          filter_id: "filter_id",
-          rating: 2
-        };
-        app.profile.rating.set(data)
-          .then((response: any) => {
-            const responseWithoutBody = {
-              url: response.url,
-              options: {
-                headers: response.options.headers,
-                method: response.options.method
-              }
-            };
-            expect(responseWithoutBody).toMatchSnapshot();
-          });
-      });
+      // test("It should call the patch rating endpoint with the the profile reference and filter reference", () => {
+      //   const data: RatingPatch = {
+      //     source_id: "source_id",
+      //     profile_id: "profile_id",
+      //     filter_id: "filter_id",
+      //     rating: 2
+      //   };
+      //   app.profile.rating.set(data)
+      //     .then((response: any) => {
+      //       const responseWithoutBody = {
+      //         url: response.url,
+      //         options: {
+      //           headers: response.options.headers,
+      //           method: response.options.method
+      //         }
+      //       };
+      //       expect(responseWithoutBody).toMatchSnapshot();
+      //     });
+      // });
 
       test("It should call the post profile data endpoint", () => {
         const json: JsonUpload = {
           source_id: "source_id",
+          profile_type: 'json',
           profile_reference: "macfly",
           profile_json: {
             name: "Marty McFly",
