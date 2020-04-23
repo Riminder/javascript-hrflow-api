@@ -73,19 +73,19 @@ describe("Webhooks tests",  () => {
             test("It should throw an error if we try to bind two functions to the same event", (done) => {
                 expect(() => {
                     app.webhooks
-                        .on("profile.parse.success", (data: Webhooks.Response, type: string) => {})
-                        .on("profile.parse.success", (data: Webhooks.Response, type: string) => {});
+                        .on("profile.parsing.success", (data: Webhooks.Response, type: string) => {})
+                        .on("profile.parsing.success", (data: Webhooks.Response, type: string) => {});
                 }).toThrowError("This callback already has been declared");
                 done();
             });
 
             test("It should bind the event correctly", (done) => {
-                expect(app.webhooks.on("profile.parse.success", (data: Webhooks.Response, type: string) => {
+                expect(app.webhooks.on("profile.parsing.success", (data: Webhooks.Response, type: string) => {
                     console.log(type);
                     return 42;
                 })).toBeInstanceOf(Webhooks);
-                expect(app.webhooks.binding.has("profile.parse.success")).toBeTruthy();
-                expect(app.webhooks.binding.get("profile.parse.success")({} as Webhooks.Response, "test")).toBe(42);
+                expect(app.webhooks.binding.has("profile.parsing.success")).toBeTruthy();
+                expect(app.webhooks.binding.get("profile.parsing.success")({} as Webhooks.Response, "test")).toBe(42);
                 done();
             });
         });
@@ -93,7 +93,7 @@ describe("Webhooks tests",  () => {
         describe("Webhooks call", () => {
             beforeAll(() => {
                 app = new Hrflow({ API_Key, Webhooks_Key });
-                app.webhooks.on("profile.parse.success", callbackMock);
+                app.webhooks.on("profile.parsing.success", callbackMock);
             });
 
             test("It should throw an error if the header is not given", () => {
@@ -101,7 +101,7 @@ describe("Webhooks tests",  () => {
             });
 
             test("It should throw an error if the signature is invalid", () => {
-                const signature = generateSignature("wrong_key", "profile.parse.success");
+                const signature = generateSignature("wrong_key", "profile.parsing.success");
                 const headers = {
                     "HTTP-RIMINDER-SIGNATURE": signature
                 };
@@ -117,11 +117,11 @@ describe("Webhooks tests",  () => {
             });
 
             test("It should call the callbacj function", () => {
-                const signature = generateSignature(Webhooks_Key, "profile.parse.error");
+                const signature = generateSignature(Webhooks_Key, "profile.parsing.error");
                 const headers = {
                     "HTTP-RIMINDER-SIGNATURE": signature
                 };
-                app.webhooks.on("profile.parse.error", callbackMock);
+                app.webhooks.on("profile.parsing.error", callbackMock);
                 app.webhooks.handle(headers)();
                 expect(callbackMock).toHaveBeenCalledTimes(1);
             });
