@@ -1,7 +1,6 @@
 import { HrflowOptions } from "./types";
 import { Webhooks } from "./webhooks";
 import Source from "./resources/source";
-import Filter from "./resources/filter";
 import Profile from "./resources/profile/profile";
 import Offer from "./resources/job/job";
 
@@ -11,7 +10,6 @@ class Hrflow {
   public Webhooks_Key: string;
   public webhooks: Webhooks;
   public source: Source;
-  public filter: Filter;
   public profile: Profile;
   public offer: Offer;
 
@@ -39,7 +37,6 @@ class Hrflow {
     }
 
     this.source = new Source(this);
-    this.filter = new Filter(this);
     this.profile = new Profile(this);
     this.offer = new Offer(this);
   }

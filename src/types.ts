@@ -1,3 +1,4 @@
+import { ReadStream } from "fs";
 export interface HrflowOptions {
   API_Key: string;
   Webhooks_Key?: string;
@@ -9,10 +10,18 @@ export interface HrflowAPIResponse {
   data?: any;
 }
 
+export interface SourcesOptions {
+  name?: string;
+  page?: number;
+  limit?: number;
+  sort_by?: string;
+  order_by?: string;
+} 
 export interface ProfilesSearchingOptions {
   source_ids: Array<string>;
   limit?: number;
   page?: number;
+  stage: Stage;
   order_by?: OrderBy;
   sort_by?: SortBy;
   timestamp_start?: Date | number;
@@ -37,10 +46,7 @@ export interface ProfilesSearchingOptions {
   skills_dict?: Array<string>;
   languages_dict?: Array<string>;
   interests_dict?: Array<string>;
-  tags_dict?: Array<string>;
-  seniority?: Seniority;
-  filter_id?: string;
-  filter_reference?: string;  
+  tags_dict?: Array<string>; 
 }
 
 export interface ProfilesScoringOptions {
@@ -49,10 +55,10 @@ export interface ProfilesScoringOptions {
 }
 
 export interface offersSearchingOptions {
-  page: number,
-  limit: number,
-  order_by: string,
-  sort_by: string,
+  page?: number,
+  limit?: number,
+  order_by?: string,
+  sort_by?: string,
 }
 
 export interface ProfileOptionId {
@@ -89,9 +95,14 @@ export interface TrainingMetadata {
 
 export interface ProfileUpload {
   source_id: string;
-  profile_reference: string;
-  timestamp_reception: Date | number;
+  file: ReadStream;
+  profile_type: string;
+  profile_reference?: string;
+  timestamp_reception?: Date | number;
   training_metadata?: Array<TrainingMetadata>;
+  sync_parsing?: boolean;
+  profile_labels?: any;
+  profile_tags?: any;
 }
 
 export interface StagePatchBase {
@@ -222,8 +233,10 @@ export interface JsonUploadCheck {
 export interface JsonUpload {
   source_id: string;
   profile_json: ProfileJSON;
+  profile_type: string;
   profile_reference?: string;
   training_metadata?: Array<TrainingMetadata>;
+  timestamp_reception?: Date | number;
 }
 
 export enum Stage {
