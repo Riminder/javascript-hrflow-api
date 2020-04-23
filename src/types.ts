@@ -54,7 +54,7 @@ export interface ProfilesScoringOptions {
   job_id: string;
 }
 
-export interface offersSearchingOptions {
+export interface jobsSearchingOptions {
   page?: number,
   limit?: number,
   order_by?: string,
@@ -76,15 +76,15 @@ export interface ProfileOptionReference {
 
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
 
-export interface OfferOptionId {
+export interface jobOptionId {
   job_id: string;
 }
 
-export interface OfferOptionReference {
+export interface jobOptionReference {
   job_reference: string;
 }
 
-export type OfferOptionIdOrReference = OfferOptionId | OfferOptionReference;
+export type jobOptionIdOrReference = jobOptionId | jobOptionReference;
 export interface TrainingMetadata {
   filter_reference: string;
   stage: Stage;

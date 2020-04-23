@@ -1,7 +1,7 @@
 import Hrflow = require("../..");
 import defaults from "../../defaults";
 import { generateURLParams } from "../../utils";
-import { OfferOptionIdOrReference } from "../../types";
+import { jobOptionIdOrReference } from "../../types";
 import { httpRequest } from "../../http";
 
 export default class Parsing {
@@ -11,7 +11,7 @@ export default class Parsing {
     this.hrflow = hrflow;
   }
 
-  get(options: OfferOptionIdOrReference) {
+  get(options: jobOptionIdOrReference) {
     const urlParams = generateURLParams(options);
     return httpRequest(`${defaults.API_URL}/job/parsing?${urlParams}`, { headers: this.hrflow.headers });
   }

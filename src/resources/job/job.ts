@@ -7,7 +7,7 @@ import Scoring from "../profile/scoring";
 import Searching from "./searching";
 
 
-export default class Offer {
+export default class Job {
   private hrflow: Hrflow;
   searching: Searching;
   parsing: Parsing;
