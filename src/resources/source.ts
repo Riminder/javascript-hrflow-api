@@ -1,5 +1,7 @@
 import Hrflow = require("..");
 import defaults from "../defaults";
+import { generateURLParams } from "../utils";
+import { SourcesOptions } from "../types";
 import { httpRequest } from "../http";
 
 export default class Source {
@@ -8,11 +10,12 @@ export default class Source {
     this.hrflow = hrflow;
   }
 
-  get(id: string) {
-    return httpRequest(`${defaults.API_URL}/source?source_id=${id}`, { headers: this.hrflow.headers });
+  get(source_id: string) {
+    return httpRequest(`${defaults.API_URL}/source?source_id=${source_id}`, { headers: this.hrflow.headers });
   }
 
-  list() {
+  list(options: SourcesOptions) {
+    const urlParams = generateURLParams(options);
     return httpRequest(`${defaults.API_URL}/sources`, { headers: this.hrflow.headers });
   }
 }

@@ -13,13 +13,13 @@ export default class JSON {
   add(data: JsonUpload) {
     const transformedData = this._tranformTimestamp(data);
     const url = `${defaults.API_URL}/profile/json`;
-    return httpPostRequest(url, transformedData, null, { headers: this.hrflow.headers });
+    return httpPostRequest(url, transformedData, { headers: this.hrflow.headers });
   }
 
   check(data: JsonUploadCheck) {
     const transformedData = this._tranformTimestamp(data);
     const url = `${defaults.API_URL}/profile/json/check`;
-    return httpPostRequest(url, transformedData, null, { headers: this.hrflow.headers });
+    return httpPostRequest(url, transformedData, { headers: this.hrflow.headers });
   }
 
   private _tranformTimestamp(data: JsonUpload | JsonUploadCheck): JsonUpload | JsonUploadCheck {

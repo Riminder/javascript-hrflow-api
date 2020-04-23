@@ -112,7 +112,7 @@ export class Webhooks {
 
   check(): Promise<WebhooksResponse> {
     const url = `${defaults.API_URL}/webhook/check`;
-    return httpPostRequest(url, null, null, { headers: this.hrflow.headers });
+    return httpPostRequest(url, null, { headers: this.hrflow.headers });
   }
 
   private _callBinding(payload: Webhooks.Response): void {
