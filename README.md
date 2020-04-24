@@ -9,9 +9,9 @@ npm install --save hrflow
 
 # Usage
 
-```typescript
+```javascript
 import Hrflow from 'hrflow';
-const client = new Hrflow({API_Key: "Your API Key"});
+const hrflow = new Hrflow({API_Key: "Your API Key"});
 ```
 
 # API
@@ -28,606 +28,86 @@ Class constructor for your client instance, it should be called with an `options
 
 Method that gets a list of sources.
 
-```typescript
-client.source.list();
+```javascript
+hrflow.source.list();
 ```
 
 ### hrflow.source.get
 
 Method that gets a source by its id.
 
-```typescript
-client.source.get("source_id_here");
+```javascript
+hrflow.source.get("source_id_here");
 ```
 
-## Filter
+## Job
 
-### hrflow.filter.list
+### hrflow.job.searching.get()
 
-Method that gets a list of filters.
+Method that gets a list of jobs.
 
-```typescript
-client.filter.list();
+```javascript
+hrflow.job.searching.get();
 ```
 
-### hrflow.filter.get
+### hrflow.job.parsing.get()
 
-Method that gets a filter by its id or its reference. It accepts an object as follows
+Method that gets the job parsing by its id or its reference. It accepts an object as follows
 
-```typescript
-const options: FilterIdOrReference = {
-    filter_id: "filter_id",
+```javascript
+const options = {
+    job_id: "job_id",
     // Or
-    filter_reference: "filter_reference"
+    job_reference: "job_reference"
 }
 
-client.filter.get(options);
+hrflow.job.parsing.get(options);
 ```
 
 ## Profile
 
-### hrflow.profile.list
+### hrflow.profile.searching.list()
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
+Only the array source_ids is required
 
-```typescript
-interface ProfilesOptions {
-  source_ids: Array<string>;
-  date_start: Date | number;
-  date_end: Date | number;
-  page?: number;
-  seniority?: Seniority;
-  filter_id?: string;
-  filter_reference?: string;
-  stage?: Stage;
-  rating?: number;
-  limit?: number;
-  sort_by: SortBy;
-  order_by?: OrderBy;
+```javascript
+const options =  {
+  source_ids: ['source_id1', 'source_id2',..], // Required, list of sources ids
+  limit: 10, //  Total profiles to search
+  page: 1, //  Page number
+  order_by: 'asc', // Order by 'asc' or 'desc'
+  sort_by: 'date_reception', // Sort by 'date_reception', 'date_creation', 'location', 'location_experience', 'location_education', 'score_semantic'  or 'score_predictive'
+  timestamp_start: 1569320033, // 'Start date'
+  timestamp_end: 1586945633,  // 'Start date'
+  name: 'name', // Profile's name  
+  email: 'exemple@exemple.com', // Profile's email
+  location_geopoint: {
+    // Filter by location's latitude and longitude
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  location_distance: 40, // Filter by location distance in km
+  summary_keywords: ['keyword1', 'keyword2',...], // Filter by summary keywords
+  text_keywords: ['keyword1', 'keyword2',...], // Filter by text keywords,
+  experience_keywords: ['keyword1', 'keyword2',...], // Filter by experience keywords
+  experience_location_geopoint: {
+  // Filter by experience's latitude and longitude
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  experience_location_distance:  40, // Filter by experience location distance in km
+  experiences_duration_min: 3, // Min total years of experience
+  experiences_duration_max: 7, // Max total years of experience
+  skills_dict: ['skill1', 'skill2', ...], // List of skills
+  languages_dict: ['lang1',..], // List of language
+  interests_dict: ['interest1', 'interest2',...], // List of interests 
+  tags_dict: ['tag1', 'tag2', ...], // List of tags
 }
 
-enum Stage {
-  NEW,
-  YES,
-  LATER,
-  NO
-}
 
-enum SortBy {
-  RECEPTION,
-  RANKING
-}
+hrflow.profile.searching.get(options);
 
-enum OrderBy {
-  DESC,
-  ASC
-}
-
-enum Seniority {
-  ALL,
-  SENIOR,
-  JUNIOR
-}
 ```
 
-```typescript
-const options: ProfilesOptions = {
-    source_ids: ["source_id_1"],
-    date_start: new Date(0),
-    date_end: Date.now(),
-    sort_by: SortBy.RANKING
-}
 
-client.profile.list(options);
-```
-
-### hrflow.profile.add
-
-Method that uploads a resume for a particular profile. It uses the following data:
-
-```typescript
-interface ProfileUpload {
-  source_id: string;
-  profile_reference: string;
-  timestamp_reception: Date | number;
-  training_metadata?: Array<TrainingMetadata>;
-}
-
-interface TrainingMetadata {
-  filter_reference: string;
-  stage: Stage;
-  stage_timestamp: Date | number;
-  rating: number;
-  rating_timestamp: Date | number;
-}
-```
-
-You also have to give a file using a `ReadStream`.
-
-```typescript
-const options: ProfileUpload = {
-    source_id: "source_id",
-    profile_reference: "profile_reference",
-    timestamp_reception: Date.now(),
-    training_metadata: [{
-        filter_reference: "filter_reference",
-        stage: Stage.YES,
-        stage_timestamp: Date.now(),
-        rating: 2,
-        rating_timestamp: Date.now()
-    }]
-}
-
-client.profile.add(data, fs.createReadStream("myFile"));
-```
-
-### hrflow.profile.get
-
-Method that gets a profile from a source using its id or reference.
-
-```typescript
-const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.get(options);
-```
-
-### JSON
-
-#### hrflow.profile.json.check
-
-Method that check if the structured profile is valid.
-
-```typescript
-
-export interface JsonUploadCheck {
-  profile_json: ProfileJSON;
-  training_metadata?: Array<TrainingMetadata>;
-}
-
-export interface ProfileJSON {
-  name: string;
-  email: string;
-  phone: string;
-  summary: string;
-  timestamp_reception: Date | number;
-  location_details: {
-    text: string;
-  };
-  experiences: Array<Experience>;
-  educations: Array<Education>;
-  skills: Array<string>;
-  languages: Array<string>;
-  interests: Array<string>;
-  urls: {
-    from_resume: Array<string>;
-    linkedin: string;
-    twitter: string;
-    facebook: string;
-    github: string;
-    picture: string;
-  };
-}
-
-export interface Experience {
-  start: string;
-  end: string;
-  title: string;
-  company: string;
-  location_details: {
-    text: string;
-  };
-  location: string;
-  description: string;
-}
-
-export interface Education {
-  start: string;
-  end: string;
-  title: string;
-  school: string;
-  location_details: {
-    text: string;
-  };
-  location: string;
-  description: string;
-}
-
-export interface TrainingMetadata {
-  stage: Stage;
-  stage_timestamp: Date | number;
-  rating: number;
-  rating_timestamp: Date | number;
-  filter_reference: string;
-}
-```
-
-```typescript
-const data: JsonUploadCheck = {
-  profile_json: {
-    name: "Marty McFly",
-    email: "marty.mcfly@gmail.com",
-    phone: "202-555-0141",
-    summary: "High school student, loves to time travel",
-    timestamp_reception: new Date("1985-10-21"),
-    location_details: {
-      text: "9303 Lyon Drive, Lyon Estates, Hill Valley CA 95420"
-    },
-    experiences: [{
-      start: "01/01/2017",
-      end: "01/01/2018",
-      title: "CusCo employee",
-      company: "CusCo",
-      location_details: {
-        text: "Hill Valley"
-      },
-      location: "Hill Valley",
-      description: "Fujitsu company"
-    }],
-    educations: [{
-      start: "01/01/1985",
-      end: "01/01/1986",
-      title: "Hill Valley High School",
-      school: "Hill Valley High School",
-      location_details: {
-        text: "Hill Valley"
-      },
-      location: "Hill Valley",
-      description: "a school"
-    }],
-    skills: [
-      "skate",
-      "time travel"
-    ],
-    languages: [
-      "english"
-    ],
-    interests: [
-      "music",
-    ],
-    urls: {
-      from_resume: [
-        "test.com"
-      ],
-      linkedin: "",
-      twitter: "",
-      facebook: "",
-      github: "",
-      picture: ""
-    }
-  }
-};
-
-client.profile.json.check(options);
-```
-
-#### hrflow.profile.json.add
-
-Method that upload a structured profile to the platform.
-
-```typescript
-export interface JsonUpload {
-  source_id: string;
-  profile_json: ProfileJSON;
-  profile_reference?: string;
-  training_metadata?: Array<TrainingMetadata>;
-}
-
-export interface ProfileJSON {
-  name: string;
-  email: string;
-  phone: string;
-  summary: string;
-  timestamp_reception: Date | number;
-  location_details: {
-    text: string;
-  };
-  experiences: Array<Experience>;
-  educations: Array<Education>;
-  skills: Array<string>;
-  languages: Array<string>;
-  interests: Array<string>;
-  urls: {
-    from_resume: Array<string>;
-    linkedin: string;
-    twitter: string;
-    facebook: string;
-    github: string;
-    picture: string;
-  };
-}
-
-export interface Experience {
-  start: string;
-  end: string;
-  title: string;
-  company: string;
-  location_details: {
-    text: string;
-  };
-  location: string;
-  description: string;
-}
-
-export interface Education {
-  start: string;
-  end: string;
-  title: string;
-  school: string;
-  location_details: {
-    text: string;
-  };
-  location: string;
-  description: string;
-}
-
-export interface TrainingMetadata {
-  stage: Stage;
-  stage_timestamp: Date | number;
-  rating: number;
-  rating_timestamp: Date | number;
-  filter_reference: string;
-}
-```
-
-```typescript
-const data: JsonUpload = {
-  source_id: "source_id",
-  profile_reference: "macfly",
-  profile_json: {
-    name: "Marty McFly",
-    email: "marty.mcfly@gmail.com",
-    phone: "202-555-0141",
-    summary: "High school student, loves to time travel",
-    timestamp_reception: new Date("1985-10-21"),
-    location_details: {
-      text: "9303 Lyon Drive, Lyon Estates, Hill Valley CA 95420"
-    },
-    experiences: [{
-      start: "01/01/2017",
-      end: "01/01/2018",
-      title: "CusCo employee",
-      company: "CusCo",
-      location_details: {
-        text: "Hill Valley"
-      },
-      location: "Hill Valley",
-      description: "Fujitsu company"
-    }],
-    educations: [{
-      start: "01/01/1985",
-      end: "01/01/1986",
-      title: "Hill Valley High School",
-      school: "Hill Valley High School",
-      location_details: {
-        text: "Hill Valley"
-      },
-      location: "Hill Valley",
-      description: "a school"
-    }],
-    skills: [
-      "skate",
-      "time travel"
-    ],
-    languages: [
-      "english"
-    ],
-    interests: [
-      "music",
-    ],
-    urls: {
-      from_resume: [
-        "test.com"
-      ],
-      linkedin: "",
-      twitter: "",
-      facebook: "",
-      github: "",
-      picture: ""
-    }
-  }
-};
-
-client.profile.json.add(options);
-```
-
-### Document
-
-#### hrflow.profile.document.list
-
-Method that gets the documents associated to a profile by its id or reference.
-
-```typescript
-const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.document.list(options);
-```
-
-### Parsing
-
-#### hrflow.profile.parsing.get
-
-Method that gets the parsing result of a profile by its id or reference.
-
-```typescript
-const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.parsing.get(options);
-```
-
-### Scoring
-
-#### hrflow.profile.scoring.list
-
-Method that gets the scoring result of a profile by its id or reference.
-
-```typescript
-const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.scoring.list(options);
-```
-
-### Revealing
-
-#### hrflow.profile.revealing.get
-
-Method that reveals the interpretability result of a profile (by id or reference) with a filter (by id or reference).
-
-```typescript
-const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference",
-    filter_id: "id",
-    // Or
-    filter_reference: "reference"
-}
-
-client.profile.revealing.get(options);
-```
-
-### Staging
-
-#### hrflow.profile.stage.set
-
-Method that updates the stage of a profile on a particular filter.
-
-```typescript
-enum Stage {
-  NEW,
-  YES,
-  LATER,
-  NO
-}
-
-const data: StagePatch = {
-    source_id: "source_id",
-    stage: Stage.YES,
-    profile_id: "profile_id",
-    // Or
-    profile_reference: "profile_reference",
-
-    filter_id: "filter_id",
-    // Or
-    filter_reference: "filter_reference"
-}
-
-client.profile.stage.set(data);
-```
-
-### Rating
-
-#### hrflow.profile.rating.set
-
-Method that updates the rating of a profile on a particular filter.
-
-```typescript
-const data: RatingPatch = {
-    source_id: "source_id",
-    rating: 2,
-    profile_id: "profile_id",
-    // Or
-    profile_reference: "profile_reference",
-
-    filter_id: "filter_id",
-    // Or
-    filter_reference: "filter_reference"
-}
-
-client.profile.rating.set(data);
-```
-
-# Webhooks
-
-## Hrflow.webhooks
-
-This object is used to handle webhooks. If you give your webhooks secret key when you create the Hrflow objects, you can set them up.
-
-```typescript
-const client = new Hrflow({
-    API_Key: "Your API Key",
-    Webhooks_Key: "Your Webhooks key"
-});
-```
-
-## Check
-
-### webhooks.check
-
-This function is used to check if the webhook integration is set up.
-
-```typescript
-client.webhooks.check().then((response: WebhooksResponse) => console.log(response))
-
-export interface WebhooksResponse {
-  team_name: string;
-  webhook_id: string;
-  webhook_url: string;
-}
-```
-
-## Events
-
-The current list of events is:
-
-```typescript
-const events = [
-  "profile.parse.success",
-  "profile.parse.error",
-  "profile.score.success",
-  "profile.score.error",
-  "filter.train.start",
-  "filter.train.success",
-  "filter.train.error",
-  "filter.score.start",
-  "filter.score.success",
-  "filter.score.error",
-  "action.stage.success",
-  "action.stage.error",
-  "action.rating.success",
-  "action.rating.error",
-];
-```
-
-### webhooks.on
-
-You can use this funtion to setup a callback function called when a particular event happens. The eventName is not mandatory, it's only here for simplicity.
-
-```typescript
-client.webhooks.on("profile.parse.success", (webhooksData: Webhooks.Response, eventName?: string) => {
-    console.log("profile.parse.success received !");
-});
-```
-
-> **Note:** You can set a callback up only once, otherwise it will throw an error.
-
-### webhooks.handle
-
-This function is the callback you need to call when a request is received on the webhook endpoint.
-It takes an object corresponding to the headers of the request and returns a function.
-
-```typescript
-router.post(".../webhooks", client.webhooks.handle(request.headers));
-```
-
-# Todos
