@@ -5,7 +5,6 @@
 
 ```bash
 npm install --save hrflow
-npm run build
 ```
 
 # Usage
