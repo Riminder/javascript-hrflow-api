@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { generateURLParams } from "../src/utils";
 import { httpRequest } from "../src/http";
 import Hrflow = require("../src/index");
-import { HrflowOptions, ProfilesSearchingOptions, ProfileUpload, Stage, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
+import { HrflowOptions, profilesSearchingOptions, ProfileUpload, Stage, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
 
 let app: Hrflow;
 
@@ -77,7 +77,7 @@ describe("Wrapper test", () => {
 
     describe("Profile endpoints", () => {
       test("It should call the get profile endpoint using Date object", () => {
-        const options: ProfilesSearchingOptions = {
+        const options: profilesSearchingOptions = {
           source_ids: ["source1", "source2"],
           timestamp_start: new Date(0),
           timestamp_end: new Date(1234),
@@ -95,7 +95,7 @@ describe("Wrapper test", () => {
       });
 
       test("It should call the get profile endpoint using Date number", () => {
-        const options: ProfilesSearchingOptions = {
+        const options: profilesSearchingOptions = {
           source_ids: ["source1", "source2"],
           timestamp_start: 0,
           timestamp_end: (new Date("2018-01-01")).getTime(),
