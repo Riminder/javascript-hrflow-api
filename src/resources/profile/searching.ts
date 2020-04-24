@@ -1,7 +1,7 @@
 import Hrflow = require("../..");
 import defaults from "../../defaults";
 import { generateURLParams } from "../../utils";
-import { ProfilesSearchingOptions } from "../../types";
+import { profilesSearchingOptions } from "../../types";
 import { httpRequest } from "../../http";
 
 export default class Parsing {
@@ -11,7 +11,7 @@ export default class Parsing {
     this.hrflow = hrflow;
   }
 
-  get(options: ProfilesSearchingOptions) {
+  get(options: profilesSearchingOptions) {
     if (options.timestamp_end) {
       if (options.timestamp_end && typeof options.timestamp_end === "object") {
         options.timestamp_end = Math.floor(options.timestamp_end.getTime() / 1000);

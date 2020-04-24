@@ -17,11 +17,11 @@ export interface SourcesOptions {
   sort_by?: string;
   order_by?: string;
 } 
-export interface ProfilesSearchingOptions {
+export interface profilesSearchingOptions {
   source_ids: Array<string>;
   limit?: number;
   page?: number;
-  stage: Stage;
+  stage?: Stage;
   order_by?: OrderBy;
   sort_by?: SortBy;
   timestamp_start?: Date | number;
