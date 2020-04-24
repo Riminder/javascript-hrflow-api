@@ -66,7 +66,7 @@ hrflow.job.parsing.get(options);
 
 ## Profile
 
-### hrflow.profile.searching.list()
+### hrflow.profile.searching.get()
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
 Only the array source_ids is required
