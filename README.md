@@ -1,5 +1,5 @@
 # node-hrflow-api
-⚡️ Hrflow API Node Wrapper
+⚡️ Hrflow API javascript/node Wrapper
 
 # Install
 
