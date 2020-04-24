@@ -11,12 +11,12 @@ export const httpRequest = (url: string, options?: any) => {
     credentials: "include",
     ...options
   };
-  return fetch(url, opts)
-  .then(successHandler, errorHandler)
-  .then((json: HrflowAPIResponse) => json.data);
-  // return axios.get(url, opts)
-  // .then(json => json.data)
+  // return fetch(url, opts)
+  // .then(successHandler, errorHandler)
   // .then((json: HrflowAPIResponse) => json.data);
+  return axios.get(url, opts)
+  .then(json => json.data)
+  .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPostRequest = (url: string, data?: any, options?: any) => {
@@ -28,8 +28,11 @@ export const httpPostRequest = (url: string, data?: any, options?: any) => {
     body,
   };
 
-  return fetch(url, opts)
-  .then(successHandler, errorHandler)
+  // return fetch(url, opts)
+  // .then(successHandler, errorHandler)
+  // .then((json: HrflowAPIResponse) => json.data);
+  return axios.get(url, opts)
+  .then(json => json.data)
   .then((json: HrflowAPIResponse) => json.data);
 };
 
@@ -43,8 +46,11 @@ export const httpPatchRequest = (url: string, data: any, options?: any) => {
     body
   };
 
-  return fetch(url, opts)
-  .then(successHandler, errorHandler)
+  // return fetch(url, opts)
+  // .then(successHandler, errorHandler)
+  // .then((json: HrflowAPIResponse) => json.data);
+  return axios.get(url, opts)
+  .then(json => json.data)
   .then((json: HrflowAPIResponse) => json.data);
 };
 
