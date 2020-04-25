@@ -1,4 +1,5 @@
 import { ReadStream } from "fs";
+import { AnyTxtRecord } from "dns";
 export interface HrflowOptions {
   API_Key: string;
   Webhooks_Key?: string;
@@ -52,6 +53,32 @@ export interface profilesSearchingOptions {
 export interface ProfilesScoringOptions {
   source_ids: Array<string>;
   job_id: string;
+  use_agent?: number;
+  stage?: string;
+  limit?: number;
+  page?: number;
+  order_by?: string;
+  sort_by?: string;
+  timestamp_start?: Date | number;
+  timestamp_end?: Date | number;
+  name?: string;
+  email?: string;
+  location_geopoint?: any;
+  location_distance?: number;
+  summary_keywords?: Array<string>;
+  text_keywords?: Array<string>;
+  experience_keywords?: Array<string>;
+  experience_location_geopoint?: {
+    lat: number;
+    lon: number;
+  };
+  experience_location_distance?: number;
+  experiences_duration_min?: number;
+  experiences_duration_max?: number;
+  skills_dict?: Array<string>;
+  languages_dict?: Array<string>;
+  interests_dict?: Array<string>;
+  tags_dict?: Array<string>; 
 }
 
 export interface jobsSearchingOptions {
