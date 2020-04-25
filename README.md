@@ -165,7 +165,7 @@ const data = {
   sync_parsing: true, // enable/disable real time parsing
 }
 
-hrflow.profile.add(data));
+hrflow.profile.addFile(data);
 ```
 
 
@@ -239,22 +239,6 @@ const data = {
 }
 
 hrflow.profile.addJson(data));
-```
-
-
-### hrflow.profile.get
-
-Method that gets a profile from a source using its id or reference.
-
-```typescript
-const data = {
-    source_id: "source_id",
-    profile_id: "id",
-    // Or
-    profile_reference: "reference",
-}
-
-hrflow.profile.get(data);
 ```
 
 
