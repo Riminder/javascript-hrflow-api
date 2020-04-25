@@ -39,5 +39,4 @@ export default [
   "agent.scoring.success",
   "agent.scoring.error",
   "agent.scoring.update",
-
 ];

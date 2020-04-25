@@ -5,7 +5,7 @@ Object {
   "options": Object {
     "body": null,
     "headers": Object {
-      "X-API-Key": "api_key",
+      "X-API-KEY": "api_key",
     },
     "method": "POST",
   },
