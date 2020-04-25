@@ -93,15 +93,68 @@ export interface TrainingMetadata {
   rating_timestamp: Date | number;
 }
 
+export interface ProfileLabels {
+  job_id?: string;
+  job_reference?: string;
+  stage?: string;
+  rating?: number;
+  stage_timestamp?: Date | number;
+}
 export interface ProfileUpload {
   source_id: string;
   file: ReadStream;
-  profile_type: string;
+  profile_type?: any;
+  profile_content_type?: string;
+  profile_labels?: Array<ProfileLabels>;
   profile_reference?: string;
   timestamp_reception?: Date | number;
   training_metadata?: Array<TrainingMetadata>;
   sync_parsing?: boolean;
-  profile_labels?: any;
+  profile_tags?: any;
+}
+
+export interface ProfileInfo {
+  phone?: string;
+  name?: string;
+  email?: string;
+  urls?: {
+    from_resume?: Array<string>;
+    linkedin?: string;
+    twitter?: string;
+    facebook?: string;
+    github?: string;
+    picture?: string;
+  };
+  location?: any;
+}
+export interface ProfileJSON {
+  name?: string;
+  email?: string;
+  address?: string;
+  summary?: string;
+  info?: ProfileInfo;
+  timestamp_reception?: Date | number;
+  location_details?: {
+    text?: string;
+  };
+  experiences?: Array<Experience>;
+  educations?: Array<Education>;
+  skills?: Array<string>;
+  tags?: any;
+  metadatas?: any;
+  labels?: any;
+  languages?: Array<string>;
+  interests?: Array<string>;
+
+}
+export interface JsonUpload {
+  source_id: string;
+  profile_json: ProfileJSON;
+  profile_type?: any;
+  profile_labels?: Array<ProfileLabels>;
+  profile_reference?: string;
+  training_metadata?: Array<TrainingMetadata>;
+  timestamp_reception?: Date | number;
   profile_tags?: any;
 }
 
@@ -201,43 +254,14 @@ export interface Education {
   description: string;
 }
 
-export interface ProfileJSON {
-  name: string;
-  email: string;
-  phone: string;
-  summary: string;
-  timestamp_reception: Date | number;
-  location_details: {
-    text: string;
-  };
-  experiences: Array<Experience>;
-  educations: Array<Education>;
-  skills: Array<string>;
-  languages: Array<string>;
-  interests: Array<string>;
-  urls: {
-    from_resume: Array<string>;
-    linkedin: string;
-    twitter: string;
-    facebook: string;
-    github: string;
-    picture: string;
-  };
-}
+
 
 export interface JsonUploadCheck {
   profile_json: ProfileJSON;
   training_metadata?: Array<TrainingMetadata>;
 }
 
-export interface JsonUpload {
-  source_id: string;
-  profile_json: ProfileJSON;
-  profile_type: string;
-  profile_reference?: string;
-  training_metadata?: Array<TrainingMetadata>;
-  timestamp_reception?: Date | number;
-}
+
 
 export enum Stage {
   NEW = "NEW",

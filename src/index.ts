@@ -22,7 +22,7 @@ class Hrflow {
 
     this.API_Key = options.API_Key;
     this.headers = {
-      "X-API-Key": this.API_Key,
+      "X-API-KEY": this.API_Key,
     };
     if (options.Webhooks_Key) {
       this.Webhooks_Key = options.Webhooks_Key;
