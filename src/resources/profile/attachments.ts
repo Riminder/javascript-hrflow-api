@@ -4,7 +4,7 @@ import { generateURLParams } from "../../utils";
 import { ProfileOptionIdOrReference } from "../../types";
 import { httpRequest } from "../../http";
 
-export default class Metadata {
+export default class Attachments {
   private hrflow: Hrflow;
 
   constructor(hrflow: Hrflow) {
@@ -13,6 +13,6 @@ export default class Metadata {
 
   list(options: ProfileOptionIdOrReference) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/profile/metadatas?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/profile/attachments?${urlParams}`, { headers: this.hrflow.headers });
   }
 }
