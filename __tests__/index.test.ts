@@ -36,7 +36,7 @@ describe("Other tests", () => {
   describe("http module relative tests", () => {
     test("It should throw an error if the error code is not 200 or 201", () => {
       const headers = {
-        "X-API-Key": "api_key",
+        "X-API-KEY": "api_key",
       };
 
       expect.assertions(1);
@@ -47,7 +47,7 @@ describe("Other tests", () => {
 
     test("it should throw an error if something went wrong with the request", () => {
       const headers = {
-        "X-API-Key": "api_key",
+        "X-API-KEY": "api_key",
       };
       expect.assertions(1);
       return httpRequest("localhost", { reject: true, headers }).catch((e) => {
@@ -132,12 +132,12 @@ describe("Wrapper test", () => {
         });
       });
 
-      test("It should call the get profile document endpoint with the profile id", () => {
+      test("It should call the get profile attachments endpoint with the profile id", () => {
         const options = {
           source_id: "source_id",
           profile_id: "profile_id",
         };
-        app.profile.attachment.list(options).then((response: any) => {
+        app.profile.attachments.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
@@ -147,7 +147,7 @@ describe("Wrapper test", () => {
           source_id: "source_id",
           profile_reference: "profile_reference",
         };
-        app.profile.attachment.list(options).then((response: any) => {
+        app.profile.attachments.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
@@ -216,7 +216,7 @@ describe("Wrapper test", () => {
           }],
         };
 
-        app.profile.add(data)
+        app.profile.addFile(data)
           .then((response: any) => {
             const responseWithoutBody = {
               url: response.url,
