@@ -1,4 +1,7 @@
+
+const fetchBrowser = require('whatwg-fetch');
 import "fetch-everywhere";
+
 const FormData = require("form-data");
 import axios from 'axios';
 
@@ -12,9 +15,16 @@ export const httpRequest = (url: string, options?: any) => {
     credentials: "include",
     ...options
   };
-  return fetch(url, opts)
-  .then(successHandler, errorHandler)
-  .then((json: HrflowAPIResponse) => json.data);
+  if (typeof process === 'object') {
+    return fetch(url, opts)
+      .then(successHandler, errorHandler)
+      .then((json: HrflowAPIResponse) => json.data);
+  } else {
+    return fetchBrowser(url, opts)
+    .then(successHandler, errorHandler)
+    .then((json: HrflowAPIResponse) => json.data);
+  }
+  
   // return axios.get(url, opts)
   // .then(json => json.data)
   // .then((json: HrflowAPIResponse) => json.data);
