@@ -6,6 +6,7 @@ import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
 
+// https://medium.com/@enetoOlveda/how-to-use-axios-typescript-like-a-pro-7c882f71e34a
 export const httpRequest = (url: string, options?: any) => {
   let opts = {
     credentials: "include",
