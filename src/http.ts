@@ -8,13 +8,12 @@ import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
 
-// https://medium.com/@enetoOlveda/how-to-use-axios-typescript-like-a-pro-7c882f71e34a
 export const httpRequest = (url: string, options?: any) => {
   let opts = {
     ...options
   };
   if ( typeof process === 'object' ) {
-    return this.fetch(url, opts)
+    return fetch(url, opts)
     .then(successHandler, errorHandler)
     .then((json: HrflowAPIResponse) => json.data);
   } else {
@@ -22,11 +21,6 @@ export const httpRequest = (url: string, options?: any) => {
     .then(successHandler, errorHandler)
     .then((json: HrflowAPIResponse) => json.data);
   }
-
-  
-  // return axios.get(url, opts)
-  // .then(json => json.data)
-  // .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPostRequest = (url: string, data?: any, options?: any) => {
@@ -39,7 +33,7 @@ export const httpPostRequest = (url: string, data?: any, options?: any) => {
   };
 
    if ( typeof process === 'object' ) {
-    return this.fetch(url, opts)
+    return fetch(url, opts)
     .then(successHandler, errorHandler)
     .then((json: HrflowAPIResponse) => json.data);
   } else {
@@ -47,9 +41,6 @@ export const httpPostRequest = (url: string, data?: any, options?: any) => {
     .then(successHandler, errorHandler)
     .then((json: HrflowAPIResponse) => json.data);
   }
-  // return axios.post(url, opts)
-  // .then(json => json.data)
-  // .then((json: HrflowAPIResponse) => json.data);
 };
 
 export const httpPatchRequest = (url: string, data: any, options?: any) => {
@@ -62,11 +53,8 @@ export const httpPatchRequest = (url: string, data: any, options?: any) => {
     body
   };
 
-  // return fetch(url, opts)
-  // .then(successHandler, errorHandler)
-  // .then((json: HrflowAPIResponse) => json.data);
   if ( typeof process === 'object' ) {
-    return this.fetch(url, opts)
+    return fetch(url, opts)
     .then(successHandler, errorHandler)
     .then((json: HrflowAPIResponse) => json.data);
   } else {

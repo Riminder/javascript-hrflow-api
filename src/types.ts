@@ -86,6 +86,7 @@ export interface jobsSearchingOptions {
   limit?: number,
   order_by?: string,
   sort_by?: string,
+  name?: string,
 }
 
 export interface ProfileOptionId {
