@@ -11,7 +11,7 @@ npm install --save hrflow
 
 ```javascript
 import Hrflow from 'hrflow';
-const hrflow = new Hrflow({API_Key: "Your API Key"});
+const client = new Hrflow({API_Key: "Your API Key"});
 ```
 
 # API
@@ -24,41 +24,43 @@ Class constructor for your client instance, it should be called with an `options
 
 ## Source
 
-### hrflow.source.list
+### client.source.list
 
 Method that gets a list of sources.
 
 ```javascript
-hrflow.source.list();
+client.source.list();
 ```
 
-### hrflow.source.get
+### client.source.get
 
 Method that gets a source by its id.
 
 ```javascript
-hrflow.source.get("source_id_here");
+client.source.get("source_id_here");
 ```
 
 ## Job
 
-### hrflow.job.searching.get
+### client.job.searching.get
 
 Method that gets a list of jobs.
 
 ```javascript
-const data = {
+const params = {
+    name: "data scientist",
     page: 1,
     limit: 10,
     order_by: "asc",
-    sort_by: "reception_date"
-
+    sort_by: "date"
 }
 
-hrflow.job.searching.get(data)
+client.job.searching.get(params).then(response => {
+    console.log(response);
+});
 ```
 
-### hrflow.job.parsing.get
+### client.job.parsing.get
 
 Method that gets the job parsing by its id or its reference. It accepts an object as follows
 
@@ -69,12 +71,12 @@ const data = {
     job_reference: "job_reference"
 }
 
-hrflow.job.parsing.get(data);
+client.job.parsing.get(data);
 ```
 
 ## Profile
 
-### hrflow.profile.searching.get
+### client.profile.searching.get
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
 Only the array source_ids is required
@@ -114,11 +116,11 @@ const data =  {
 }
 
 
-hrflow.profile.searching.get(data);
+client.profile.searching.get(data);
 
 ```
 
-### hrflow.profile.addFile()
+### client.profile.addFile()
 
 Method that uploads a resume for a particular profile. It uses the following data:
 
@@ -145,11 +147,11 @@ const data = {
   sync_parsing: true, // enable/disable real time parsing
 }
 
-hrflow.profile.addFile(data);
+client.profile.addFile(data);
 ```
 
 
-### hrflow.profile.addJson()
+### client.profile.addJson()
 
 Method that post a json data for a particular profile. It uses the following data:
 
@@ -218,11 +220,11 @@ const data = {
   sync_parsing: true, // enable/disable real time parsing
 }
 
-hrflow.profile.addJson(data));
+client.profile.addJson(data));
 ```
 
 
-### hrflow.profile.attachments.list
+### client.profile.attachments.list
 
 Method that gets the attachments associated to a profile by its id or reference.
 
@@ -234,11 +236,11 @@ const data = {
     profile_reference: "reference"
 }
 
-hrflow.profile.attachments.list(data);
+client.profile.attachments.list(data);
 ```
 
 
-### riminder.profile.tags.list
+### client.profile.tags.list
 
 Method that gets the tags associated to a profile by its id or reference.
 
@@ -250,10 +252,10 @@ const data = {
     profile_reference: "reference"
 }
 
-hrflow.profile.tags.list(data);
+client.profile.tags.list(data);
 ```
 
-### riminder.profile.metadatas.list
+### client.profile.metadatas.list
 
 Method that gets the metadatas associated to a profile by its id or reference.
 
@@ -265,10 +267,10 @@ const data = {
     profile_reference: "reference"
 }
 
-hrflow.profile.metadatas.list(data);
+client.profile.metadatas.list(data);
 ```
 
-### hrflow.profile.parsing.get
+### client.profile.parsing.get
 
 Method that gets the parsing result of a profile by its id or reference.
 
@@ -280,11 +282,11 @@ const data = {
     profile_reference: "reference"
 }
 
-hrflow.profile.parsing.get(data);
+client.profile.parsing.get(data);
 ```
 
 
-### hrflow.profile.scoring.list
+### client.profile.scoring.list
 
 Method that gets the scoring result of a profile by its id or reference.
 
@@ -325,11 +327,11 @@ const data = {
   tags_dict: ['tag1', 'tag2', ...], // List of tags
 }
 
-hrflow.profile.scoring.list(data);
+client.profile.scoring.list(data);
 ```
 
 
-### hrflow.profile.embedding.get
+### client.profile.embedding.get
 
 Method that reveals the embedding result of a profile (by id or reference) with a filter (by id or reference).
 
@@ -344,18 +346,18 @@ const options: ProfileOptionIdOrReference = {
     filter_reference: "reference"
 }
 
-hrflow.profile.embedding.get(options);
+client.profile.embedding.get(options);
 ```
 
 
 # Webhooks
 
-## Hrflow.webhooks
+## client.webhooks
 
-This object is used to handle webhooks. If you give your webhooks secret key when you create the Hrflow objects, you can set them up.
+This object is used to handle webhooks. If you give your webhooks secret key when you create the hrflow objects, you can set them up.
 
 ```typescript
-const hrflow = new Hrflow({
+const client = new Hrflow({
     API_Key: "Your API Key",
     Webhooks_Key: "Your Webhooks key"
 });
@@ -368,7 +370,7 @@ const hrflow = new Hrflow({
 This function is used to check if the webhook integration is set up.
 
 ```typescript
-hrflow.webhooks.check().then((response: WebhooksResponse) => console.log(response))
+client.webhooks.check().then((response: WebhooksResponse) => console.log(response))
 
 const WebhooksResponse {
   team_name: string;
