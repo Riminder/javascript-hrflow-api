@@ -69,7 +69,7 @@ describe("Wrapper test", () => {
        );
 
         test("It should call the get source endpoint", () => {
-          app.source.get("source_id").then((response: any) => {
+          app.source.get("source_key").then((response: any) => {
             expect(response).toMatchSnapshot();
           });
         });
@@ -78,7 +78,7 @@ describe("Wrapper test", () => {
     describe("Profile endpoints", () => {
       test("It should call the get profile endpoint using Date object", () => {
         const options: profilesSearchingOptions = {
-          source_ids: ["source1", "source2"],
+          source_keys: ["source1", "source2"],
           timestamp_start: new Date(0),
           timestamp_end: new Date(1234),
           page: 1,
@@ -96,7 +96,7 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile endpoint using Date number", () => {
         const options: profilesSearchingOptions = {
-          source_ids: ["source1", "source2"],
+          source_keys: ["source1", "source2"],
           timestamp_start: 0,
           timestamp_end: (new Date("2018-01-01")).getTime(),
           page: 1,
@@ -114,8 +114,8 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile endpoint with the profile id", () => {
         const options = {
-          source_id: "source_id",
-          profile_id: "profile_id",
+          source_key: "source_key",
+          profile_key: "profile_key",
         };
         app.profile.get(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -124,7 +124,7 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile endpoint with the profile reference", () => {
         const options = {
-          source_id: "source_id",
+          source_key: "source_key",
           profile_reference: "profile_reference",
         };
         app.profile.get(options).then((response: any) => {
@@ -134,8 +134,8 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile attachments endpoint with the profile id", () => {
         const options = {
-          source_id: "source_id",
-          profile_id: "profile_id",
+          source_key: "source_key",
+          profile_key: "profile_key",
         };
         app.profile.attachments.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -144,7 +144,7 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile document endpoint with the profile reference", () => {
         const options = {
-          source_id: "source_id",
+          source_key: "source_key",
           profile_reference: "profile_reference",
         };
         app.profile.attachments.list(options).then((response: any) => {
@@ -154,8 +154,8 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile parsing endpoint with the profile id", () => {
         const options = {
-          source_id: "source_id",
-          profile_id: "profile_id",
+          source_key: "source_key",
+          profile_key: "profile_key",
         };
         app.profile.parsing.get(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -164,7 +164,7 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile parsing endpoint with the profile reference", () => {
         const options = {
-          source_id: "source_id",
+          source_key: "source_key",
           profile_reference: "profile_reference",
         };
         app.profile.parsing.get(options).then((response: any) => {
@@ -174,8 +174,8 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile scoring endpoint with the profile id", () => {
         const options = {
-          source_id: "source_id",
-          profile_id: "profile_id",
+          source_key: "source_key",
+          profile_key: "profile_key",
         };
         app.profile.scoring.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -184,7 +184,7 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile scoring endpoint with the profile reference", () => {
         const options = {
-          source_id: "source_id",
+          source_key: "source_key",
           profile_reference: "profile_reference",
         };
         app.profile.scoring.list(options).then((response: any) => {
@@ -195,7 +195,7 @@ describe("Wrapper test", () => {
       test("It should call the post resume endpoint", () => {
         const file = fs.createReadStream("./test.txt");
         const data: ProfileUpload = {
-          source_key: "source_id",
+          source_key: "source_key",
           file: file,
           profile_type: 'file',
           profile_reference: "ref",
@@ -221,8 +221,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch stage endpoint with the the profile id and filter id", () => {
       //   const data: StagePatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     stage: Stage.YES,
       //   };
@@ -242,8 +242,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch stage endpoint with the the profile id and filter reference", () => {
       //   const data: StagePatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     stage: Stage.YES,
       //   };
@@ -262,8 +262,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch stage endpoint with the the profile reference and filter id", () => {
       //   const data: StagePatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     stage: Stage.YES,
       //   };
@@ -282,8 +282,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch stage endpoint with the the profile reference and filter reference", () => {
       //   const data: StagePatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     stage: Stage.YES,
       //   };
@@ -302,8 +302,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch rating endpoint with the the profile id and filter id", () => {
       //   const data: RatingPatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     rating: 2
       //   };
@@ -322,8 +322,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch rating endpoint with the the profile id and filter reference", () => {
       //   const data: RatingPatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     rating: 2
       //   };
@@ -342,8 +342,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch rating endpoint with the the profile reference and filter id", () => {
       //   const data: RatingPatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     rating: 2
       //   };
@@ -362,8 +362,8 @@ describe("Wrapper test", () => {
 
       // test("It should call the patch rating endpoint with the the profile reference and filter reference", () => {
       //   const data: RatingPatch = {
-      //     source_id: "source_id",
-      //     profile_id: "profile_id",
+      //     source_key: "source_key",
+      //     profile_key: "profile_key",
       //     filter_id: "filter_id",
       //     rating: 2
       //   };
@@ -382,7 +382,7 @@ describe("Wrapper test", () => {
 
       test("It should call the post profile data endpoint", () => {
         const json: ProfileJSON = {
-          source_key: "source_id",
+          source_key: "source_key",
           profile_reference: "macfly",
           info: {
             full_name: "Marty McFly",

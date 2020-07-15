@@ -1,6 +1,7 @@
 import Hrflow = require("../..");
-// import defaults from "../../defaults";
-// import { httpPostRequest } from "../../http";
+import defaults from "../../defaults";
+import { httpPostRequest, httpPutRequest } from "../../http";
+import { JobPostOptions } from "../../types";
 import Parsing from "./parsing";
 import Reasoning from "./reasoning";
 import Scoring from "../profile/scoring";
@@ -22,9 +23,13 @@ export default class Job {
     this.scoring = new Scoring(this.hrflow);
   }
 
-  // add(data: JobPostOptions) {
-  //   const url = `${defaults.API_URL}/profile`;
-  //   return httpPostRequest(url, data, file, { headers: this.hrflow.headers });
-  // }
+  add(data: JobPostOptions) {
+    const url = `${defaults.API_URL}/job/indexing`;
+    return httpPostRequest(url, data, { headers: this.hrflow.headers });
+  }
+  edit(data: JobPostOptions) {
+    const url = `${defaults.API_URL}/job/indexing`;
+    return httpPutRequest(url, data, { headers: this.hrflow.headers });
+  }
 
 }

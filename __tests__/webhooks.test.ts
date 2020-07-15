@@ -12,7 +12,7 @@ function generateSignature(key: string, event: string) {
         type: event,
         message: "The parsing succeeded",
         profile: {
-            profile_id: "id",
+            profile_key: "id",
             profile_reference: "reference"
         }
     };

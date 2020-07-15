@@ -49,7 +49,7 @@ export namespace Webhooks {
     ActionStageResponse;
 
   export interface Profile {
-    profile_id: string;
+    profile_key: string;
     profile_reference: string;
   }
 

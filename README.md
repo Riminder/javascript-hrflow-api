@@ -37,7 +37,7 @@ client.source.list();
 Method that gets a source by its id.
 
 ```javascript
-client.source.get("source_id_here");
+client.source.get("source_key_here");
 ```
 
 ## Job
@@ -66,7 +66,7 @@ Method that gets the job parsing by its id or its reference. It accepts an objec
 
 ```javascript
 const data = {
-    job_id: "job_id",
+    job_key: "job_key",
     // Or
     job_reference: "job_reference"
 }
@@ -79,11 +79,11 @@ client.job.parsing.get(data);
 ### client.profile.searching.get
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
-Only the array source_ids is required
+Only the array source_keys is required
 
 ```javascript
 const data =  {
-  source_ids: ['source_id1', 'source_id2',..], // Required, list of sources ids
+  source_keys: ['source_key1', 'source_key2',..], // Required, list of sources ids
   limit: 10, //  Total profiles to search
   page: 1, //  Page number
   order_by: 'asc', // Order by 'asc' or 'desc'
@@ -126,7 +126,7 @@ Method that uploads a resume for a particular profile. It uses the following dat
 
 ```javascript
 const data = {
-  source_id: "source_id", // Required, list of sources ids
+  source_key: "source_key", // Required, list of sources ids
   file: fs.createReadStream("path to your file"), // Required, profile's document
   timestamp_reception: 1569320033,  // Reception date
   training_metadata?: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
@@ -134,7 +134,7 @@ const data = {
   profile_reference: 'profile_reference', // Profile's reference
   profile_labels:  [ // Profile's label
     {
-      "job_id": "job_id",
+      "job_key": "job_key",
       "job_reference": "test",
       "stage": "yes",
       "stage_timestamp":1585662186,
@@ -195,11 +195,11 @@ const profleJson = {
   "interests": ["football"],
   "tags":[],
   "metadatas":[],
-  "labels":["stage":"yes","job_id":"job_id"]
+  "labels":["stage":"yes","job_key":"job_key"]
 }
 
 const data = {
-  source_id: "source_id", // Required, list of sources ids
+  source_key: "source_key", // Required, list of sources ids
   file: profleJson, // Required, Profile's json
   timestamp_reception: 1569320033,  // Reception date
   training_metadata?: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
@@ -207,7 +207,7 @@ const data = {
   profile_reference: 'profile_reference', // Profile's reference
   profile_labels:  [ // Profile's label
     {
-      "job_id": "job_id",
+      "job_key": "job_key",
       "job_reference": "test",
       "stage": "yes",
       "stage_timestamp":1585662186,
@@ -230,8 +230,8 @@ Method that gets the attachments associated to a profile by its id or reference.
 
 ```typescript
 const data = {
-    source_id: "source_id",
-    profile_id: "id",
+    source_key: "source_key",
+    profile_key: "id",
     // Or
     profile_reference: "reference"
 }
@@ -246,8 +246,8 @@ Method that gets the tags associated to a profile by its id or reference.
 
 ```typescript
 const data = {
-    source_id: "source_id",
-    profile_id: "id",
+    source_key: "source_key",
+    profile_key: "id",
     // Or
     profile_reference: "reference"
 }
@@ -261,8 +261,8 @@ Method that gets the metadatas associated to a profile by its id or reference.
 
 ```typescript
 const data = {
-    source_id: "source_id",
-    profile_id: "id",
+    source_key: "source_key",
+    profile_key: "id",
     // Or
     profile_reference: "reference"
 }
@@ -276,8 +276,8 @@ Method that gets the parsing result of a profile by its id or reference.
 
 ```typescript
 const data = {
-    source_id: "source_id",
-    profile_id: "id",
+    source_key: "source_key",
+    profile_key: "id",
     // Or
     profile_reference: "reference"
 }
@@ -292,8 +292,8 @@ Method that gets the scoring result of a profile by its id or reference.
 
 ```typescript
 const data = {
-  source_ids: ['source_id1', 'source_id2',..], // Required, list of sources ids
-  job_id: 'job_id', // Required, job id
+  source_keys: ['source_key1', 'source_key2',..], // Required, list of sources ids
+  job_key: 'job_key', // Required, job id
   use_agent: 1, // Use agent or not (ie. 0 or 1)
   stage: 'yes', // stage (ie. 'new', 'yes', 'later', 'no')
   limit: 10, //  Total profiles to search
@@ -337,8 +337,8 @@ Method that reveals the embedding result of a profile (by id or reference) with 
 
 ```typescript
 const options: ProfileOptionIdOrReference = {
-    source_id: "source_id",
-    profile_id: "id",
+    source_key: "source_key",
+    profile_key: "id",
     // Or
     profile_reference: "reference",
     filter_id: "id",

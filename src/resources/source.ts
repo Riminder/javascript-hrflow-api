@@ -10,8 +10,8 @@ export default class Source {
     this.hrflow = hrflow;
   }
 
-  get(source_id: string) {
-    return httpRequest(`${defaults.API_URL}/source?source_id=${source_id}`, { headers: this.hrflow.headers });
+  get(source_key: string) {
+    return httpRequest(`${defaults.API_URL}/source?source_key=${source_key}`, { headers: this.hrflow.headers });
   }
 
   list(options: SourcesOptions) {

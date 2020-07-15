@@ -13,6 +13,6 @@ export default class Parsing {
 
   get(options: jobOptionIdOrReference) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/job/parsing?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/job/indexing?${urlParams}`, { headers: this.hrflow.headers });
   }
 }

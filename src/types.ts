@@ -89,23 +89,69 @@ export interface ProfilesScoringOptions {
   tags?: Array<Tags>; 
 }
 
+export interface JobPostOptions {
+  name: string;
+  board_key: string;
+  agent_key: string;
+  url?: string;
+  reference?: string;
+  summary?: string;
+  sections?: Array<Sections>;
+  ranges_date?: Array<RangesDate>;
+  ranges_float?: Array<RangesFloat>;
+  location?: {
+    text: string;
+    lat: any;
+    lng: any;
+  };
+  skills?: Array<Skills>;
+  Interests?: Array<Interests>;
+  Languages?: Array<Languages>;
+  tags?: Array<Tags>;
+  metadatas?: Array<Metadatas>;
+  created_at?: number | Date | string;
+  members?: Array<string>;
+}
+
+export interface jobsScoringOptions {
+  board_keys: Array<string>;
+  agent_key: string;
+  profile_key: string;
+  source_key: string;
+  text_keywords?: Array<string>;
+  tags?: Array<Tags>;
+  use_agent?: any;
+  page?: number;
+  limit?: number;
+  order_by?: string;
+  sort_by?: string;
+  name?: string;
+  location_distance?: number;
+  location_geopoint: any;
+
+}
 export interface jobsSearchingOptions {
-  page?: number,
-  limit?: number,
-  order_by?: string,
-  sort_by?: string,
-  name?: string,
+  board_keys: Array<string>;
+  page?: number;
+  limit?: number;
+  order_by?: string;
+  sort_by?: string;
+  name?: string;
+  text_keywords?: Array<string>;
+  tags?: Array<Tags>;
+  location_distance?: number;
+  location_geopoint: any;
 }
 
 export interface ProfileOptionId {
-  source_id: string;
-  profile_id: string;
+  source_key: string;
+  profile_key: string;
   profile_email?: string;
   fields?: any;
 }
 
 export interface ProfileOptionReference {
-  source_id: string;
+  source_key: string;
   profile_reference: string;
   profile_email?: string;
 }
@@ -113,7 +159,7 @@ export interface ProfileOptionReference {
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
 
 export interface jobOptionId {
-  job_id: string;
+  job_key: string;
 }
 
 export interface jobOptionReference {
@@ -123,7 +169,7 @@ export interface jobOptionReference {
 export type jobOptionIdOrReference = jobOptionId | jobOptionReference;
 export interface Metadatas {
   name: string;
-  value: any,
+  value: any;
 }
 
 export interface Labels {
@@ -149,9 +195,9 @@ export interface ProfileUpload {
 }
 
 export interface ProfileInfo {
-  full_name?: string,
-  first_name?: string,
-  last_name?: string,
+  full_name?: string;
+  first_name?: string;
+  last_name?: string;
   phone?: string;
   email?: string;
   urls?: {
@@ -190,7 +236,7 @@ export interface ProfileJSON {
   source_key: string;
   info: ProfileInfo;
   profile_reference: string;
-  consent_algoritmic: ConsentAlgoritmic,
+  consent_algoritmic: ConsentAlgoritmic;
   experiences?: Array<Experience>;
   educations?: Array<Education>;
   educations_duration?: number;
@@ -207,17 +253,17 @@ export interface ProfileJSON {
 
 
 export interface StagePatchBase {
-  source_id: string;
+  source_key: string;
   stage: Stage | null;
 }
 
 export interface StagePatchProfileIdFilterId extends StagePatchBase {
-  profile_id: string;
+  profile_key: string;
   filter_id: string;
 }
 
 export interface StagePatchProfileIdFilterReference extends StagePatchBase {
-  profile_id: string;
+  profile_key: string;
   filter_reference: string;
 }
 
@@ -238,17 +284,17 @@ export type StagePatch =
   StagePatchProfileReferenceFilterReference;
 
 export interface RatingPatchBase {
-  source_id: string;
+  source_key: string;
   rating: number | null;
 }
 
 export interface RatingPatchProfileIdFilterId extends RatingPatchBase {
-  profile_id: string;
+  profile_key: string;
   filter_id: string;
 }
 
 export interface RatingPatchProfileIdFilterReference extends RatingPatchBase {
-  profile_id: string;
+  profile_key: string;
   filter_reference: string;
 }
 
@@ -301,24 +347,42 @@ export interface Education {
 }
 
 export interface Tags {
-  name: string,
+  name: string;
   value: any
 }
 export interface Skills {
-  name: string,
+  name: string;
   value: any
 }
 
 export interface Languages {
-  name: string,
+  name: string;
   value: any
 }
 
 export interface Interests {
-  name: string,
+  name: string;
   value: any
 }
 
+export interface Sections {
+  name: string;
+  title: string;
+  description: string;
+}
+
+export interface RangesFloat {
+  name: string;
+  unit: string;
+  value_min: number;
+  value_max: number;
+}
+
+export interface RangesDate {
+  name: string;
+  value_min?: number | Date | string;
+  value_max?:  number | Date | string;
+}
 
 export enum Stage {
   NEW = "NEW",

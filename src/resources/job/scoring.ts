@@ -1,7 +1,7 @@
 import Hrflow = require("../..");
 import defaults from "../../defaults";
 import { generateURLParams } from "../../utils";
-import { jobOptionIdOrReference } from "../../types";
+import { jobsScoringOptions } from "../../types";
 import { httpRequest } from "../../http";
 
 export default class Scoring {
@@ -10,7 +10,8 @@ export default class Scoring {
     this.hrflow = hrflow;
   }
 
-  list(options: jobOptionIdOrReference) {
+  list(options: jobsScoringOptions) {
+    options.use_agent = 1;
     const urlParams = generateURLParams(options);
     return httpRequest(`${defaults.API_URL}/jobs/scoring?${urlParams}`, { headers: this.hrflow.headers });
   }
