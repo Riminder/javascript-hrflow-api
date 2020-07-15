@@ -7,6 +7,7 @@ import axios from 'axios';
 import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
+import console = require("console");
 
 export const httpRequest = (url: string, options?: any) => {
   let opts = {
@@ -52,7 +53,6 @@ export const httpPatchRequest = (url: string, data: any, options?: any) => {
     method: "PATCH",
     body
   };
-
   if ( typeof process === 'object' ) {
     return fetch(url, opts)
     .then(successHandler, errorHandler)

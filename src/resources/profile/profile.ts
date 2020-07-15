@@ -1,6 +1,6 @@
 import Hrflow = require("../..");
 import defaults from "../../defaults";
-import { ProfileOptionIdOrReference, ProfileUpload, JsonUpload } from "../../types";
+import { ProfileOptionIdOrReference, ProfileUpload, ProfileJSON } from "../../types";
 import { generateURLParams } from "../../utils";
 import { httpPostRequest, httpRequest } from "../../http";
 import Attachments from "./attachments";
@@ -9,7 +9,7 @@ import Metadatas from "./metadatas";
 import Parsing from "./parsing";
 import Scoring from "./scoring";
 import Rating from "./rating";
-import JSON from "./json";
+// import JSON from "./json";
 import Revealing from "./revealing";
 import Embedding from './embedding';
 import Searching from './searching';
@@ -24,7 +24,7 @@ export default class Profile {
   embedding: Embedding;
   searching: Searching;
   rating: Rating;
-  json: JSON;
+  // json: JSON;
 
   constructor(hrflow: Hrflow) {
     this.hrflow = hrflow;
@@ -37,7 +37,7 @@ export default class Profile {
     this.embedding = new Embedding(this.hrflow);
     this.searching = new Searching(this.hrflow);
     this.rating = new Rating(this.hrflow);
-    this.json = new JSON(this.hrflow);
+    // this.json = new JSON(this.hrflow);
     
   }
 
@@ -47,29 +47,27 @@ export default class Profile {
   }
 
   addFile(data: ProfileUpload) {
-    if (data.timestamp_reception) {
-      if (data.timestamp_reception && typeof data.timestamp_reception === "object") {
-        data.timestamp_reception = Math.floor(data.timestamp_reception.getTime() / 1000);
+    if (data.created_at) {
+      if (data.created_at && typeof data.created_at === "object") {
+        data.created_at = Math.floor(data.created_at.getTime() / 1000);
       } else {
-        data.timestamp_reception = Math.floor(data.timestamp_reception as number / 1000);
+        data.created_at = Math.floor(data.created_at as number / 1000);
       }
     }
-    data.profile_type = 'file';
-    const url = `${defaults.API_URL}/profile`;
+    const url = `${defaults.API_URL}/profile/parsing/file`;
     console.log('headers', this.hrflow.headers)
     return httpPostRequest(url, data, { headers: this.hrflow.headers });
   }
 
-  addJson(data: JsonUpload) {
-    if (data.timestamp_reception) {
-      if (data.timestamp_reception && typeof data.timestamp_reception === "object") {
-        data.timestamp_reception = Math.floor(data.timestamp_reception.getTime() / 1000);
+  addJson(data: ProfileJSON) {
+    if (data.created_at) {
+      if (data.created_at && typeof data.created_at === "object") {
+        data.created_at = Math.floor(data.created_at.getTime() / 1000);
       } else {
-        data.timestamp_reception = Math.floor(data.timestamp_reception as number / 1000);
+        data.created_at = Math.floor(data.created_at as number / 1000);
       }
     }
-    data.profile_type = 'json';
-    const url = `${defaults.API_URL}/profile`;
+    const url = `${defaults.API_URL}/profile/indexing`;
     return httpPostRequest(url, data, { headers: this.hrflow.headers });
   }
 }

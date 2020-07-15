@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { generateURLParams } from "../src/utils";
 import { httpRequest } from "../src/http";
 import Hrflow = require("../src/index");
-import { HrflowOptions, profilesSearchingOptions, ProfileUpload, Stage, SortBy, OrderBy, JsonUpload, JsonUploadCheck } from "../src/types";
+import { HrflowOptions, profilesSearchingOptions, ProfileUpload, Stage, SortBy, OrderBy, ProfileJSON } from "../src/types";
 
 let app: Hrflow;
 
@@ -195,24 +195,14 @@ describe("Wrapper test", () => {
       test("It should call the post resume endpoint", () => {
         const file = fs.createReadStream("./test.txt");
         const data: ProfileUpload = {
-          source_id: "source_id",
+          source_key: "source_id",
           file: file,
           profile_type: 'file',
           profile_reference: "ref",
-          timestamp_reception: new Date(Date.now()),
-          training_metadata: [{
-            filter_reference: "filter_reference1",
-            stage: Stage.YES,
-            stage_timestamp: new Date(Date.now()),
-            rating: 2,
-            rating_timestamp: new Date(Date.now())
-          },
-          {
-            filter_reference: "filter_reference2",
-            stage: Stage.YES,
-            stage_timestamp: new Date(Date.now()),
-            rating: 2,
-            rating_timestamp: new Date(Date.now())
+          created_at: new Date(Date.now()),
+          metadatas: [{
+            name: "filter_reference",
+            value: "123456"
           }],
         };
 
@@ -391,51 +381,19 @@ describe("Wrapper test", () => {
       // });
 
       test("It should call the post profile data endpoint", () => {
-        const json: JsonUpload = {
-          source_id: "source_id",
-          profile_type: 'json',
+        const json: ProfileJSON = {
+          source_key: "source_id",
           profile_reference: "macfly",
-          profile_json: {
-            name: "Marty McFly",
+          info: {
+            full_name: "Marty McFly",
+            first_name: "Marty McFly",
+            last_name: "Marty McFly",
             email: "marty.mcfly@gmail.com",
             phone: "202-555-0141",
             summary: "High school student, loves to time travel",
-            timestamp_reception: new Date("1985-10-21"),
-            location_details: {
+            location: {
               text: "9303 Lyon Drive, Lyon Estates, Hill Valley CA 95420"
             },
-            experiences: [{
-              start: "01/01/2017",
-              end: "01/01/2018",
-              title: "CusCo employee",
-              company: "CusCo",
-              location_details: {
-                text: "Hill Valley"
-              },
-              location: "Hill Valley",
-              description: "Fujitsu company"
-            }],
-            educations: [{
-              start: "01/01/1985",
-              end: "01/01/1986",
-              title: "Hill Valley High School",
-              school: "Hill Valley High School",
-              location_details: {
-                text: "Hill Valley"
-              },
-              location: "Hill Valley",
-              description: "a school"
-            }],
-            skills: [
-              "skate",
-              "time travel"
-            ],
-            languages: [
-              "english"
-            ],
-            interests: [
-              "music",
-            ],
             urls: {
               from_resume: [
                 "test.com"
@@ -446,10 +404,56 @@ describe("Wrapper test", () => {
               github: "",
               picture: ""
             }
+          },
+          experiences: [{
+            date_start: "01/01/2017",
+            date_end: "01/01/2018",
+            title: "CusCo employee",
+            company: "CusCo",
+            location: {
+              text: "Hill Valley"
+            },
+            description: "Fujitsu company"
+          }],
+          educations: [{
+            date_start: "01/01/1985",
+            date_end: "01/01/1986",
+            title: "Hill Valley High School",
+            school: "Hill Valley High School",
+            location: {
+              text: "Hill Valley"
+            },
+            description: "a school"
+          }],
+          skills: [
+           {
+             name: 'python',
+             value: 'senior'
+           }
+          ],
+          languages: [
+            {
+              name: 'english',
+              value: 'fluent'
+            }
+          ],
+          interests: [
+            {
+              name: 'aptitude',
+              value: true,
+            }
+          ],
+          labels: {
+            job_key: "848491764713d6a6dd97480f865ffdb51077a6fb",
+            job_reference: "azerty123",
+            stage: "later",
+            stage_timestamp: 1594806495285,
+            rating: null,
+            rating_timestamp: null,
           }
         };
 
-        app.profile.json.add(json).then((response: any) => {
+        app.profile.addJson(json).then((response: any) => {
           const responseWithoutBody = {
             url: response.url,
             options: {
@@ -461,72 +465,72 @@ describe("Wrapper test", () => {
         });
       });
 
-      test("It should call the check profile data endpoint", () => {
-        const json: JsonUploadCheck = {
-          profile_json: {
-            name: "Marty McFly",
-            email: "marty.mcfly@gmail.com",
-            phone: "202-555-0141",
-            summary: "High school student, loves to time travel",
-            timestamp_reception: new Date("1985-10-21"),
-            location_details: {
-              text: "9303 Lyon Drive, Lyon Estates, Hill Valley CA 95420"
-            },
-            experiences: [{
-              start: "01/01/2017",
-              end: "01/01/2018",
-              title: "CusCo employee",
-              company: "CusCo",
-              location_details: {
-                text: "Hill Valley"
-              },
-              location: "Hill Valley",
-              description: "Fujitsu company"
-            }],
-            educations: [{
-              start: "01/01/1985",
-              end: "01/01/1986",
-              title: "Hill Valley High School",
-              school: "Hill Valley High School",
-              location_details: {
-                text: "Hill Valley"
-              },
-              location: "Hill Valley",
-              description: "a school"
-            }],
-            skills: [
-              "skate",
-              "time travel"
-            ],
-            languages: [
-              "english"
-            ],
-            interests: [
-              "music",
-            ],
-            urls: {
-              from_resume: [
-                "test.com"
-              ],
-              linkedin: "",
-              twitter: "",
-              facebook: "",
-              github: "",
-              picture: ""
-            }
-          }
-        };
+      // test("It should call the check profile data endpoint", () => {
+      //   const json: JsonUploadCheck = {
+      //     profile_json: {
+      //       name: "Marty McFly",
+      //       email: "marty.mcfly@gmail.com",
+      //       phone: "202-555-0141",
+      //       summary: "High school student, loves to time travel",
+      //       timestamp_reception: new Date("1985-10-21"),
+      //       location_details: {
+      //         text: "9303 Lyon Drive, Lyon Estates, Hill Valley CA 95420"
+      //       },
+      //       experiences: [{
+      //         start: "01/01/2017",
+      //         end: "01/01/2018",
+      //         title: "CusCo employee",
+      //         company: "CusCo",
+      //         location_details: {
+      //           text: "Hill Valley"
+      //         },
+      //         location: "Hill Valley",
+      //         description: "Fujitsu company"
+      //       }],
+      //       educations: [{
+      //         start: "01/01/1985",
+      //         end: "01/01/1986",
+      //         title: "Hill Valley High School",
+      //         school: "Hill Valley High School",
+      //         location_details: {
+      //           text: "Hill Valley"
+      //         },
+      //         location: "Hill Valley",
+      //         description: "a school"
+      //       }],
+      //       skills: [
+      //         "skate",
+      //         "time travel"
+      //       ],
+      //       languages: [
+      //         "english"
+      //       ],
+      //       interests: [
+      //         "music",
+      //       ],
+      //       urls: {
+      //         from_resume: [
+      //           "test.com"
+      //         ],
+      //         linkedin: "",
+      //         twitter: "",
+      //         facebook: "",
+      //         github: "",
+      //         picture: ""
+      //       }
+      //     }
+      //   };
 
-        app.profile.json.check(json).then((response: any) => {
-          const responseWithoutBody = {
-            url: response.url,
-            options: {
-              headers: response.options.headers,
-              method: response.options.method
-            }
-          };
-          expect(responseWithoutBody).toMatchSnapshot();
-        });
-      });
+      //   app.profile.json.check(json).then((response: any) => {
+      //     const responseWithoutBody = {
+      //       url: response.url,
+      //       options: {
+      //         headers: response.options.headers,
+      //         method: response.options.method
+      //       }
+      //     };
+      //     expect(responseWithoutBody).toMatchSnapshot();
+      //   });
+      // });
     });
 });

@@ -6,31 +6,6 @@ exports[`Other tests http module relative tests It should throw an error if the 
 
 exports[`Other tests http module relative tests it should throw an error if something went wrong with the request 1`] = `[Error: Error message]`;
 
-exports[`Wrapper test Profile endpoints It should call the check profile data endpoint 1`] = `
-Object {
-  "options": Object {
-    "headers": Object {
-      "X-API-KEY": "api_key",
-    },
-    "method": "POST",
-  },
-  "url": Url {
-    "auth": null,
-    "hash": null,
-    "host": "api.hrflow.ai",
-    "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/json/check",
-    "path": "/v1/profile/json/check",
-    "pathname": "/v1/profile/json/check",
-    "port": null,
-    "protocol": "https:",
-    "query": null,
-    "search": null,
-    "slashes": true,
-  },
-}
-`;
-
 exports[`Wrapper test Profile endpoints It should call the get profile attachments endpoint with the profile id 1`] = `
 Object {
   "options": Object {
@@ -284,9 +259,9 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/json",
-    "path": "/v1/profile/json",
-    "pathname": "/v1/profile/json",
+    "href": "https://api.hrflow.ai/v1/profile/indexing",
+    "path": "/v1/profile/indexing",
+    "pathname": "/v1/profile/indexing",
     "port": null,
     "protocol": "https:",
     "query": null,
@@ -309,9 +284,9 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile",
-    "path": "/v1/profile",
-    "pathname": "/v1/profile",
+    "href": "https://api.hrflow.ai/v1/profile/parsing/file",
+    "path": "/v1/profile/parsing/file",
+    "pathname": "/v1/profile/parsing/file",
     "port": null,
     "protocol": "https:",
     "query": null,

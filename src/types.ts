@@ -113,37 +113,38 @@ export interface jobOptionReference {
 }
 
 export type jobOptionIdOrReference = jobOptionId | jobOptionReference;
-export interface TrainingMetadata {
-  filter_reference: string;
-  stage: Stage;
-  stage_timestamp: Date | number;
-  rating: number;
-  rating_timestamp: Date | number;
+export interface Metadatas {
+  name: string;
+  value: any,
 }
 
-export interface ProfileLabels {
-  job_id?: string;
+export interface Labels {
+  job_key?: string;
   job_reference?: string;
   stage?: string;
-  rating?: number;
   stage_timestamp?: Date | number;
+  rating?: string;
+  rating_timestamp?: string;
 }
 export interface ProfileUpload {
-  source_id: string;
+  source_key: string;
+  sync_parsing?: number;
   file: ReadStream;
   profile_type?: any;
   profile_content_type?: string;
-  profile_labels?: Array<ProfileLabels>;
   profile_reference?: string;
-  timestamp_reception?: Date | number;
-  training_metadata?: Array<TrainingMetadata>;
-  sync_parsing?: boolean;
-  profile_tags?: any;
+  created_at?: Date | number;
+  tags?: Array<Tags>;
+  labels?: Labels;
+  metadatas?: Array<Metadatas>;
+  webhook_parsing_sending?: number;
 }
 
 export interface ProfileInfo {
+  full_name?: string,
+  first_name?: string,
+  last_name?: string,
   phone?: string;
-  name?: string;
   email?: string;
   urls?: {
     from_resume?: Array<string>;
@@ -153,38 +154,49 @@ export interface ProfileInfo {
     github?: string;
     picture?: string;
   };
-  location?: any;
+  location?: {
+    text: string
+  };
+  summary?: string;
+}
+
+export interface ConsentAlgoritmic {
+  owner: {
+      parsing: boolean;
+      revealing: boolean;
+      embedding: boolean;
+      searching: boolean;
+      scoring: boolean;
+      reasoning: boolean
+  };
+  controller: {
+      parsing: boolean;
+      revealing: boolean;
+      embedding: boolean;
+      searching: boolean;
+      scoring: boolean;
+      reasoning: boolean
+  }
 }
 export interface ProfileJSON {
-  name?: string;
-  email?: string;
-  address?: string;
-  summary?: string;
-  info?: ProfileInfo;
-  timestamp_reception?: Date | number;
-  location_details?: {
-    text?: string;
-  };
+  source_key: string;
+  info: ProfileInfo;
+  profile_reference: string;
+  consent_algoritmic: ConsentAlgoritmic,
   experiences?: Array<Experience>;
   educations?: Array<Education>;
-  skills?: Array<string>;
-  tags?: any;
+  educations_duration?: number;
+  eperience_duration?: number;
+  text?: string;
+  skills?: Array<Skills>;
+  tags?: Array<Tags>;
   metadatas?: any;
-  labels?: any;
-  languages?: Array<string>;
-  interests?: Array<string>;
+  labels?: Labels;
+  languages?: Array<Languages>;
+  interests?: Array<Interests>;
+  created_at?: number | Date;
+}
 
-}
-export interface JsonUpload {
-  source_id: string;
-  profile_json: ProfileJSON;
-  profile_type?: any;
-  profile_labels?: Array<ProfileLabels>;
-  profile_reference?: string;
-  training_metadata?: Array<TrainingMetadata>;
-  timestamp_reception?: Date | number;
-  profile_tags?: any;
-}
 
 export interface StagePatchBase {
   source_id: string;
@@ -259,36 +271,45 @@ export interface FilterReference {
 export type FilterIdOrReference = FilterId | FilterReference;
 
 export interface Experience {
-  start: string;
-  end: string;
+  date_start: string;
+  date_end: string;
   title: string;
   company: string;
-  location_details: {
+  location: {
     text: string;
   };
-  location: string;
   description: string;
 }
 
 export interface Education {
-  start: string;
-  end: string;
+  date_start: string;
+  date_end: string;
   title: string;
   school: string;
-  location_details: {
+  location: {
     text: string;
   };
-  location: string;
   description: string;
 }
 
-
-
-export interface JsonUploadCheck {
-  profile_json: ProfileJSON;
-  training_metadata?: Array<TrainingMetadata>;
+export interface Tags {
+  name: string,
+  value: any
+}
+export interface Skills {
+  name: string,
+  value: any
 }
 
+export interface Languages {
+  name: string,
+  value: any
+}
+
+export interface Interests {
+  name: string,
+  value: any
+}
 
 
 export enum Stage {
