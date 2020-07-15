@@ -11,7 +11,8 @@ export default class Scoring {
   }
 
   list(options: ProfilesScoringOptions) {
+    options.use_agent =  1;
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/profile/scoring?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/profiles/scoring?${urlParams}`, { headers: this.hrflow.headers });
   }
 }

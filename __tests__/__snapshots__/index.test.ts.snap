@@ -250,6 +250,7 @@ exports[`Wrapper test Profile endpoints It should call the post profile data end
 Object {
   "options": Object {
     "headers": Object {
+      "Content-type": "multipart/form-data",
       "X-API-KEY": "api_key",
     },
     "method": "POST",
@@ -275,6 +276,7 @@ exports[`Wrapper test Profile endpoints It should call the post resume endpoint 
 Object {
   "options": Object {
     "headers": Object {
+      "Content-type": "multipart/form-data",
       "X-API-KEY": "api_key",
     },
     "method": "POST",

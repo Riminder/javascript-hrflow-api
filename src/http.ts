@@ -25,6 +25,7 @@ export const httpRequest = (url: string, options?: any) => {
 };
 
 export const httpPostRequest = (url: string, data?: any, options?: any) => {
+  Object.assign(options.headers, { "Content-type": "multipart/form-data" });
   const body = data ? generateBody(data) : null;
 
   const opts = {
@@ -45,6 +46,26 @@ export const httpPostRequest = (url: string, data?: any, options?: any) => {
 };
 
 export const httpPatchRequest = (url: string, data: any, options?: any) => {
+  Object.assign(options.headers, { "Content-type": "application/json" });
+  const body = JSON.stringify(data);
+
+  const opts = {
+    ...options,
+    method: "PATCH",
+    body
+  };
+  if ( typeof process === 'object' ) {
+    return fetch(url, opts)
+    .then(successHandler, errorHandler)
+    .then((json: HrflowAPIResponse) => json.data);
+  } else {
+    return window.fetch(url, opts)
+    .then(successHandler, errorHandler)
+    .then((json: HrflowAPIResponse) => json.data);
+  }
+};
+
+export const httpPutRequest = (url: string, data: any, options?: any) => {
   Object.assign(options.headers, { "Content-type": "application/json" });
   const body = JSON.stringify(data);
 

@@ -5,6 +5,7 @@ Object {
   "options": Object {
     "body": null,
     "headers": Object {
+      "Content-type": "multipart/form-data",
       "X-API-KEY": "api_key",
     },
     "method": "POST",

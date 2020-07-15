@@ -2,7 +2,7 @@ import Hrflow = require("../..");
 import defaults from "../../defaults";
 import { ProfileOptionIdOrReference, ProfileUpload, ProfileJSON } from "../../types";
 import { generateURLParams } from "../../utils";
-import { httpPostRequest, httpRequest } from "../../http";
+import { httpPostRequest, httpRequest, httpPutRequest } from "../../http";
 import Attachments from "./attachments";
 import Tags from './tags';
 import Metadatas from "./metadatas";
@@ -69,5 +69,17 @@ export default class Profile {
     }
     const url = `${defaults.API_URL}/profile/indexing`;
     return httpPostRequest(url, data, { headers: this.hrflow.headers });
+  }
+
+  edit(data: ProfileJSON) {
+    if (data.created_at) {
+      if (data.created_at && typeof data.created_at === "object") {
+        data.created_at = Math.floor(data.created_at.getTime() / 1000);
+      } else {
+        data.created_at = Math.floor(data.created_at as number / 1000);
+      }
+    }
+    const url = `${defaults.API_URL}/profile/indexing`;
+    return httpPutRequest(url, data, { headers: this.hrflow.headers });
   }
 }
