@@ -34,7 +34,7 @@ client.source.list();
 
 ### client.source.get
 
-Method that gets a source by its id.
+Method that gets a source by its key.
 
 ```javascript
 client.source.get("source_key_here");
@@ -42,20 +42,51 @@ client.source.get("source_key_here");
 
 ## Job
 
-### client.job.searching.get
+### client.job.searching.list
 
 Method that gets a list of jobs.
 
 ```javascript
 const params = {
+    board_key: 'board_key'
     name: "data scientist",
     page: 1,
     limit: 10,
     order_by: "asc",
-    sort_by: "date"
+    sort_by: "date",
+    text_keywords: ["engineer", "python"],
+    tags: [{name: "active", value: true}],
+    location_distance: 30,
+    location_geopoint: {"lat":33.59662,"lng":-7.61889};
 }
 
-client.job.searching.get(params).then(response => {
+client.job.searching.list(params).then(response => {
+    console.log(response);
+});
+```
+
+### client.job.scoring.list
+
+Method that list the jobs scoring for a profile.
+
+```javascript
+const params = {
+    board_keys: ['board_key'], // Required
+    agent_key: 'agent_key', // Required
+    profile_key: 'profile_key', // Required
+    source_key: 'source_key', // Required
+    name: "data scientist",
+    page: 1,
+    limit: 10,
+    order_by: "asc",
+    sort_by: "date",
+    text_keywords: ["engineer", "python"],
+    tags: [{name: "active", value: true}],
+    location_distance: 30,
+    location_geopoint: {"lat":33.59662,"lng":-7.61889};
+}
+
+client.job.scoring.list(params).then(response => {
     console.log(response);
 });
 ```
@@ -88,8 +119,8 @@ const data =  {
   page: 1, //  Page number
   order_by: 'asc', // Order by 'asc' or 'desc'
   sort_by: 'date_reception', // Sort by 'date_reception', 'date_creation', 'location', 'location_experience', 'location_education', 'score_semantic'  or 'score_predictive'
-  timestamp_start: 1569320033, // 'Start date'
-  timestamp_end: 1586945633,  // 'Start date'
+  created_at_min: '2020-05-15T23:59:59.999Z', // 'Start date'
+  created_at_max: '2020-07-15T23:59:59.999Z',  // 'Start date'
   name: 'name', // Profile's name  
   email: 'exemple@exemple.com', // Profile's email
   location_geopoint: {
@@ -109,10 +140,10 @@ const data =  {
   experience_location_distance:  40, // Filter by experience location distance in km
   experiences_duration_min: 3, // Min total years of experience
   experiences_duration_max: 7, // Max total years of experience
-  skills_dict: ['skill1', 'skill2', ...], // List of skills
-  languages_dict: ['lang1',..], // List of language
-  interests_dict: ['interest1', 'interest2',...], // List of interests 
-  tags_dict: ['tag1', 'tag2', ...], // List of tags
+  skills: [{name: 'python', value: 0.9}], // List of skills
+  languages: [{name: 'english', value: 'fluent'}], // List of language
+  interests: [{name: 'design', value: 1}], // List of interests 
+  tags: [{name: 'active', value: true}], // List of tags
 }
 
 
@@ -128,11 +159,11 @@ Method that uploads a resume for a particular profile. It uses the following dat
 const data = {
   source_key: "source_key", // Required, list of sources ids
   file: fs.createReadStream("path to your file"), // Required, profile's document
-  timestamp_reception: 1569320033,  // Reception date
-  training_metadata?: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
+  created_at: 1569320033,  // Reception date
+  metadatas: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
   profile_content_type: 'application/pdf', // Document content type
   profile_reference: 'profile_reference', // Profile's reference
-  profile_labels:  [ // Profile's label
+  labels:  [ // Profile's label
     {
       "job_key": "job_key",
       "job_reference": "test",
@@ -143,8 +174,8 @@ const data = {
     }, 
     ...
   ],
-  profile_tags:  [{"name":"blacklist","value":True}, ...], // Profile's tags
-  sync_parsing: true, // enable/disable real time parsing
+  tags:  [{"name":"blacklist","value":True}, ...], // Profile's tags
+  sync_parsing: 1, // enable/disable real time parsing
 }
 
 client.profile.addFile(data);
@@ -156,69 +187,115 @@ client.profile.addFile(data);
 Method that post a json data for a particular profile. It uses the following data:
 
 ```javascript
-const profleJson = {
-  "name": "Harry Potter",
-  "email": "harry.potter@gmail.com",
-  "address": "1 rue streeling",
-  "info" : {
-      "name":"Harry Potter",
-      "email":"harry.potter@gmail.com",
-      "phone":"0202",
-      "location":"somewhere",
+const data ={
+  "source_key": "source_key",
+  "consent_algorithmic": {
+      "owner": {
+          "parsing": true,
+          "revealing": false,
+          "embedding": true,
+          "searching": false,
+          "scoring": true,
+          "reasoning": false
+      },
+      "controller": {
+          "parsing": true,
+          "revealing": false,
+          "embedding": true,
+          "searching": false,
+          "scoring": true,
+          "reasoning": false
+      }
+  },
+  "info": {
+      "full_name": "Harry Potter",
+      "first_name": "Harry",
+      "last_name": "Potter",
+      "email": "harry.potter@gmail.com",
+      "phone": "0202",
+      "gender": null,
       "urls": {
           "from_resume": [],
-          "linkedin":"",
-          "twitter":"",
-          "facebook":"",
-          "github":"",
-          "picture":""},
-      "location":{"text":""}},
-  "summary": "test summary",
-  "experiences": [{
-      "start": "15/02/1900",
-      "end": "",
-      "title": "Lead",
-      "company": "Mathematic Departement",
-      "location": {"text":"Paris"},
-      "description": "Developping."
-      }],
-  "educations": [{
-      "start": "12540",
-      "end": "12550",
-      "title": "Mathematicien",
-      "school": "University",
-      "description": "Description",
-      "location": {"text":"Scotland"}
-  }],
-  "skills": ["manual skill", "Creative spirit", "Writing skills", "Communication"],
-  "languages" : ["english"],
-  "interests": ["football"],
-  "tags":[],
-  "metadatas":[],
-  "labels":["stage":"yes","job_key":"job_key"]
-}
-
-const data = {
-  source_key: "source_key", // Required, list of sources ids
-  file: profleJson, // Required, Profile's json
-  timestamp_reception: 1569320033,  // Reception date
-  training_metadata?: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
-  profile_content_type: 'application/pdf', // Document content type
-  profile_reference: 'profile_reference', // Profile's reference
-  profile_labels:  [ // Profile's label
-    {
-      "job_key": "job_key",
-      "job_reference": "test",
-      "stage": "yes",
-      "stage_timestamp":1585662186,
-      "rating":0.5,
-      "stage_timestamp":1585662186
-    }, 
-    ...
+          "linkedin": "",
+          "twitter": "",
+          "facebook": "",
+          "github": "",
+          "picture": ""
+      },
+      "picture": null,
+      "location": {
+          "text": null
+      },
+      "summary": "Brief summary"
+  },
+  "text": "test text",
+  "experiences": [
+      {
+          "date_start": "15/02/1900",
+          "date_end": "",
+          "title": "Lead",
+          "company": "Mathematic Departement",
+          "location": {
+              "text": "Paris"
+          },
+          "description": "Developping."
+      }
   ],
-  profile_tags:  [{"name":"blacklist","value":True}, ...], // Profile's tags
-  sync_parsing: true, // enable/disable real time parsing
-}
+  "experiences_duration": 5,
+  "educations": [
+      {
+          "date_start": "12540",
+          "date_end": "12550",
+          "title": "Mathematicien",
+          "school": "University",
+          "description": "Description",
+          "location": {
+              "text": "Scotland"
+          }
+      }
+  ],
+  "educations_duration": 4,
+  "skills": [
+      {
+          "name": "manual skill",
+          "value": null
+      },
+      {
+          "name": "Creative spirit",
+          "value": null
+      },
+      {
+          "name": "Writing skills",
+          "value": null
+      },
+      {
+          "name": "Communication",
+          "value": null
+      }
+  ],
+  "languages": [
+      {
+          "name": "english",
+          "value": null
+      }
+  ],
+  "interests": [
+      {
+          "name": "football",
+          "value": null
+      }
+  ],
+  "tags": [],
+  "metadatas": [],
+  "labels": [
+      {
+          "stage": "yes",
+          "job_id": "job_id"
+      }
+  ],
+  "attachments": [],
+  "created_at": new Date().toISOString(),
+};
 
 client.profile.addJson(data));
 ```
@@ -277,7 +354,7 @@ Method that gets the parsing result of a profile by its id or reference.
 ```typescript
 const data = {
     source_key: "source_key",
-    profile_key: "id",
+    profile_key: "profile_key",
     // Or
     profile_reference: "reference"
 }
@@ -293,15 +370,15 @@ Method that gets the scoring result of a profile by its id or reference.
 ```typescript
 const data = {
   source_keys: ['source_key1', 'source_key2',..], // Required, list of sources ids
+  board_key: 'board_key', // required board key
   job_key: 'job_key', // Required, job id
   use_agent: 1, // Use agent or not (ie. 0 or 1)
-  stage: 'yes', // stage (ie. 'new', 'yes', 'later', 'no')
   limit: 10, //  Total profiles to search
   page: 1, //  Page number
   order_by: 'asc', // Order by 'asc' or 'desc'
   sort_by: 'date_reception', // Sort by 'date_reception', 'date_creation', 'location', 'location_experience', 'location_education', 'score_semantic'  or 'score_predictive'
-  timestamp_start: 1569320033, // 'Start date'
-  timestamp_end: 1586945633,  // 'Start date'
+  created_at_min: '2020-05-15T23:59:59.999Z', // 'Start date'
+  created_at_max: '2020-07-15T23:59:59.999Z',  // 'Start date'
   name: 'name', // Profile's name  
   email: 'exemple@exemple.com', // Profile's email
   location_geopoint: {
@@ -321,10 +398,10 @@ const data = {
   experience_location_distance:  40, // Filter by experience location distance in km
   experiences_duration_min: 3, // Min total years of experience
   experiences_duration_max: 7, // Max total years of experience
-  skills_dict: ['skill1', 'skill2', ...], // List of skills
-  languages_dict: ['lang1',..], // List of language
-  interests_dict: ['interest1', 'interest2',...], // List of interests 
-  tags_dict: ['tag1', 'tag2', ...], // List of tags
+  skills: [{name: 'python', value: 0.9}], // List of skills
+  languages: [{name: 'english', value: 'fluent'}], // List of language
+  interests: [{name: 'design', value: 1}], // List of interests 
+  tags: [{name: 'active', value: true}], // List of tags
 }
 
 client.profile.scoring.list(data);
