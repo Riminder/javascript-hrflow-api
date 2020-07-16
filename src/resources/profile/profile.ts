@@ -47,13 +47,13 @@ export default class Profile {
   }
 
   addFile(data: ProfileUpload) {
-    if (data.created_at) {
-      if (data.created_at && typeof data.created_at === "object") {
-        data.created_at = Math.floor(data.created_at.getTime() / 1000);
-      } else {
-        data.created_at = Math.floor(data.created_at as number / 1000);
-      }
-    }
+    // if (data.created_at) {
+    //   if (data.created_at && typeof data.created_at === "object") {
+    //     data.created_at = Math.floor(data.created_at.getTime() / 1000);
+    //   } else {
+    //     data.created_at = Math.floor(data.created_at as number / 1000);
+    //   }
+    // }
     const url = `${defaults.API_URL}/profile/parsing/file`;
     console.log('headers', this.hrflow.headers)
     return httpPostRequest(url, data, { headers: this.hrflow.headers });

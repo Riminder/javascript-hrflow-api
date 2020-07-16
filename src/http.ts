@@ -25,7 +25,8 @@ export const httpRequest = (url: string, options?: any) => {
 };
 
 export const httpPostRequest = (url: string, data?: any, options?: any) => {
-  Object.assign(options.headers, { "Content-type": "multipart/form-data" });
+  // Object.assign(options.headers, { "Content-type": "multipart/form-data" });
+  console.log('data', data);
   const body = data ? generateBody(data) : null;
 
   const opts = {
@@ -71,7 +72,7 @@ export const httpPutRequest = (url: string, data: any, options?: any) => {
 
   const opts = {
     ...options,
-    method: "PATCH",
+    method: "PUT",
     body
   };
   if ( typeof process === 'object' ) {
