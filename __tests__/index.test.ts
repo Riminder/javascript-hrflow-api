@@ -79,15 +79,15 @@ describe("Wrapper test", () => {
       test("It should call the get profile endpoint using Date object", () => {
         const options: profilesSearchingOptions = {
           source_keys: ["source1", "source2"],
-          timestamp_start: new Date(0),
-          timestamp_end: new Date(1234),
+          created_at_min: new Date(0),
+          created_at_max: new Date(1234),
           page: 1,
           stage: Stage.YES,
           limit: 30,
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.searching.get(options)
+        app.profile.searching.list(options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
@@ -97,15 +97,15 @@ describe("Wrapper test", () => {
       test("It should call the get profile endpoint using Date number", () => {
         const options: profilesSearchingOptions = {
           source_keys: ["source1", "source2"],
-          timestamp_start: 0,
-          timestamp_end: (new Date("2018-01-01")).getTime(),
+          created_at_min: 0,
+          created_at_max: (new Date("2018-01-01")).getTime(),
           page: 1,
           stage: Stage.YES,
           limit: 30,
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.searching.get(options)
+        app.profile.searching.list(options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
@@ -174,8 +174,9 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile scoring endpoint with the profile id", () => {
         const options = {
-          source_key: "source_key",
-          profile_key: "profile_key",
+          source_keys:  ["source_key"],
+          job_key: "job_key",
+          board_key: "board_key",
         };
         app.profile.scoring.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -184,8 +185,9 @@ describe("Wrapper test", () => {
 
       test("It should call the get profile scoring endpoint with the profile reference", () => {
         const options = {
-          source_key: "source_key",
-          profile_reference: "profile_reference",
+          source_keys:  ["source_key"],
+          job_key: "job_key",
+          board_key: "board_key",
         };
         app.profile.scoring.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -197,7 +199,6 @@ describe("Wrapper test", () => {
         const data: ProfileUpload = {
           source_key: "source_key",
           file: file,
-          profile_type: 'file',
           profile_reference: "ref",
           created_at: new Date(Date.now()),
           metadatas: [{

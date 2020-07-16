@@ -107,7 +107,7 @@ client.job.parsing.get(data);
 
 ## Profile
 
-### client.profile.searching.get
+### client.profile.searching.list
 
 Method that gets a list of profiles potentially filtered. It uses the following object to filter the results.
 Only the array source_keys is required
@@ -147,7 +147,7 @@ const data =  {
 }
 
 
-client.profile.searching.get(data);
+client.profile.searching.list(data);
 
 ```
 

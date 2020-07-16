@@ -26,7 +26,7 @@ export interface profilesSearchingOptions {
   order_by?: string;
   sort_by?: string;
   created_at_min?: Date | number | string;
-  timestamp_end?: Date | number | string;
+  created_at_max?: Date | number | string;
   name?: string;
   email?: string;
   location_geopoint?: any;
@@ -56,7 +56,7 @@ export interface ProfilesScoringOptions {
   source_keys: Array<string>;
   job_key: string;
   board_key: string;
-  use_agent: number;
+  use_agent?: number;
   stage?: string;
   limit?: number;
   page?: number;
@@ -127,7 +127,7 @@ export interface jobsScoringOptions {
   sort_by?: string;
   name?: string;
   location_distance?: number;
-  location_geopoint: any;
+  location_geopoint?: any;
 
 }
 export interface jobsSearchingOptions {
