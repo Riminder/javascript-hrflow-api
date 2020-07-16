@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Webhooks tests Webhook check It should check if the webhook is correctly set up 1`] = `
+Object {
+  "options": Object {
+    "body": null,
+    "headers": Object {
+      "X-API-KEY": "api_key",
+    },
+    "method": "POST",
+  },
+  "url": Url {
+    "auth": null,
+    "hash": null,
+    "host": "api.hrflow.ai",
+    "hostname": "api.hrflow.ai",
+    "href": "https://api.hrflow.ai/v1/webhook/check",
+    "path": "/v1/webhook/check",
+    "pathname": "/v1/webhook/check",
+    "port": null,
+    "protocol": "https:",
+    "query": null,
+    "search": null,
+    "slashes": true,
+  },
+}
+`;

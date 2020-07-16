@@ -7,7 +7,6 @@ import axios from 'axios';
 import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
-import console = require("console");
 
 export const httpRequest = (url: string, options?: any) => {
   let opts = {
@@ -26,7 +25,6 @@ export const httpRequest = (url: string, options?: any) => {
 
 export const httpPostRequest = (url: string, data?: any, options?: any) => {
   // Object.assign(options.headers, { "Content-type": "multipart/form-data" });
-  console.log('data', data);
   const body = data ? generateBody(data) : null;
 
   const opts = {

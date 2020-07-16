@@ -55,7 +55,6 @@ export default class Profile {
     //   }
     // }
     const url = `${defaults.API_URL}/profile/parsing/file`;
-    console.log('headers', this.hrflow.headers)
     return httpPostRequest(url, data, { headers: this.hrflow.headers });
   }
 
