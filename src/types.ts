@@ -145,7 +145,7 @@ export interface jobsSearchingOptions {
 
 export interface ProfileOptionId {
   source_key: string;
-  profile_key: string;
+  key: string;
   profile_email?: string;
   fields?: any;
 }
@@ -235,8 +235,8 @@ export interface ConsentAlgoritmic {
 export interface ProfileJSON {
   source_key: string;
   info: ProfileInfo;
-  profile_reference: string;
-  consent_algoritmic: ConsentAlgoritmic;
+  profile_reference?: string;
+  consent_algoritmic?: ConsentAlgoritmic;
   experiences?: Array<Experience>;
   educations?: Array<Education>;
   educations_duration?: number;

@@ -113,7 +113,7 @@ Method that gets a list of profiles potentially filtered. It uses the following 
 Only the array source_keys is required
 
 ```javascript
-const data =  {
+const data = {
   source_keys: ['source_key1', 'source_key2',..], // Required, list of sources ids
   limit: 10, //  Total profiles to search
   page: 1, //  Page number
@@ -174,7 +174,7 @@ const data = {
     }, 
     ...
   ],
-  tags:  [{"name":"blacklist","value":True}, ...], // Profile's tags
+  tags:  [{"name":"blacklist","value":true}, ...], // Profile's tags
   sync_parsing: 1, // enable/disable real time parsing
 }
 
@@ -187,7 +187,7 @@ client.profile.addFile(data);
 Method that post a json data for a particular profile. It uses the following data:
 
 ```javascript
-const data ={
+const data = {
   "source_key": "source_key",
   "consent_algorithmic": {
       "owner": {
@@ -290,7 +290,7 @@ const data ={
   "labels": [
       {
           "stage": "yes",
-          "job_id": "job_id"
+          "job_key": "job_key"
       }
   ],
   "attachments": [],
@@ -354,7 +354,7 @@ Method that gets the parsing result of a profile by its id or reference.
 ```typescript
 const data = {
     source_key: "source_key",
-    profile_key: "profile_key",
+    key: "profile_key",
     // Or
     profile_reference: "reference"
 }
