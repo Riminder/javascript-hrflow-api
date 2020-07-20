@@ -106,7 +106,7 @@ const generateBody = (data: any) => {
     body = new FormData();
     body.append("file", data.file as any);
     Object.keys(data).forEach((key) => {
-      if ((data as any)[key] instanceof Array) {
+      if ((data as any)[key] instanceof Array && key !== 'file') {
         body.append(key, JSON.stringify((data as any)[key]));
       } else {
         body.append(key, (data as any)[key]);
