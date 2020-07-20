@@ -48,7 +48,7 @@ Method that gets a list of jobs.
 
 ```javascript
 const params = {
-    board_key: 'board_key'
+    board_key: 'board_key',
     name: "data scientist",
     page: 1,
     limit: 10,
@@ -57,7 +57,7 @@ const params = {
     text_keywords: ["engineer", "python"],
     tags: [{name: "active", value: true}],
     location_distance: 30,
-    location_geopoint: {"lat":33.59662,"lng":-7.61889};
+    location_geopoint: {"lat":33.59662,"lng":-7.61889}
 }
 
 client.job.searching.list(params).then(response => {
@@ -83,7 +83,7 @@ const params = {
     text_keywords: ["engineer", "python"],
     tags: [{name: "active", value: true}],
     location_distance: 30,
-    location_geopoint: {"lat":33.59662,"lng":-7.61889};
+    location_geopoint: {"lat":33.59662,"lng":-7.61889}
 }
 
 client.job.scoring.list(params).then(response => {
