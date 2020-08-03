@@ -6,8 +6,9 @@ import Job from "./resources/job/job";
 
 class Hrflow {
   public headers: any;
-  public API_Key: string;
-  public Webhooks_Key: string;
+  public api_secret: string;
+  public webhooks_key: string;
+  public api_user: string;
   public webhooks: Webhooks;
   public source: Source;
   public profile: Profile;
@@ -15,17 +16,18 @@ class Hrflow {
 
   constructor(options: HrflowOptions) {
 
-    if (!options.API_Key) {
+    if (!options.api_secret) {
       let error = new Error("No API Key was supplied for Hrflow SDK");
       throw error;
     }
 
-    this.API_Key = options.API_Key;
+    this.api_secret = options.api_secret;
     this.headers = {
-      "X-API-KEY": this.API_Key,
+      "X-API-KEY": this.api_secret,
+      "X-USER-EMAIL": this.api_user
     };
-    if (options.Webhooks_Key) {
-      this.Webhooks_Key = options.Webhooks_Key;
+    if (options.webhooks_key) {
+      this.webhooks_key = options.webhooks_key;
     }
 
     this._init();

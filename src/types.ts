@@ -1,8 +1,8 @@
 import { ReadStream } from "fs";
-import { AnyTxtRecord } from "dns";
 export interface HrflowOptions {
-  API_Key: string;
-  Webhooks_Key?: string;
+  api_secret: string;
+  api_user: string;
+  webhooks_key?: string;
 }
 
 export interface HrflowAPIResponse {

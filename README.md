@@ -11,14 +11,14 @@ npm install --save hrflow
 
 ```javascript
 import Hrflow from 'hrflow';
-const client = new Hrflow({API_Key: "Your API Key"});
+const client = new Hrflow({ api_secret: "Your API Key",  api_user: "Your user email" });
 ```
 
 # API
 
 ## Hrflow
 
-Class constructor for your client instance, it should be called with an `options` object where you define your `API_Key`.
+Class constructor for your client instance, it should be called with an `options` object where you define your `api_secret`.
 
 > **Note:** All methods return a Promise when called. All promises can throw exceptions so you should catch them at the end of your promise.
 
@@ -435,8 +435,9 @@ This object is used to handle webhooks. If you give your webhooks secret key whe
 
 ```typescript
 const client = new Hrflow({
-    API_Key: "Your API Key",
-    Webhooks_Key: "Your Webhooks key"
+    api_secret: "Your API Key",
+    api_user: "Your user email",
+    webhooks_key: "Your Webhooks key",
 });
 ```
 

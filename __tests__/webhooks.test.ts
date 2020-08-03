@@ -4,8 +4,9 @@ import * as util from "tweetnacl-util";
 import * as sha256 from "fast-sha256";
 
 let app: Hrflow;
-const API_Key = "api_key";
-const Webhooks_Key = "webhooks_key";
+const api_secret = "api_key";
+const api_user = "api_user";
+const webhooks_key = "webhooks_key";
 
 function generateSignature(key: string, event: string) {
     const data: Webhooks.ProfileParseResponse = {
@@ -31,7 +32,7 @@ const callbackMock = jest.fn();
 describe("Webhooks tests",  () => {
     describe("Webhook check", () => {
         test("It should check if the webhook is correctly set up", () => {
-            app = new Hrflow({ API_Key, Webhooks_Key });
+            app = new Hrflow({ api_secret, api_user, webhooks_key });
             app.webhooks.check()
                 .then((response) => {
                     expect(response).toMatchSnapshot();
@@ -41,12 +42,12 @@ describe("Webhooks tests",  () => {
 
     describe("Webhook creation", () => {
         test("It should not create webhooks if no key is given", () => {
-            app = new Hrflow({ API_Key });
+            app = new Hrflow({ api_secret, api_user });
             expect(app.webhooks).toBeUndefined();
         });
 
         test("It should create webhooks if the key is given", () => {
-            app = new Hrflow({ API_Key, Webhooks_Key });
+            app = new Hrflow({ api_secret, api_user, webhooks_key });
             expect(app.webhooks).toBeDefined();
         });
 
@@ -60,7 +61,7 @@ describe("Webhooks tests",  () => {
     describe("Webhooks usage", () => {
         describe("Webhooks binding", () => {
             beforeEach(() => {
-                app = new Hrflow({ API_Key, Webhooks_Key });
+                app = new Hrflow({ api_secret, api_user, webhooks_key });
             });
 
             test("It should throw an error if we try to bind an inexistant event", (done) => {
@@ -92,7 +93,7 @@ describe("Webhooks tests",  () => {
 
         describe("Webhooks call", () => {
             beforeAll(() => {
-                app = new Hrflow({ API_Key, Webhooks_Key });
+                app = new Hrflow({ api_secret, api_user, webhooks_key });
                 app.webhooks.on("profile.parsing.success", callbackMock);
             });
 
@@ -109,7 +110,7 @@ describe("Webhooks tests",  () => {
             });
 
             test("It should throw an error if the event is unknown", () => {
-                const signature = generateSignature(Webhooks_Key, "unknwown.event");
+                const signature = generateSignature(webhooks_key, "unknwown.event");
                 const headers = {
                     "HTTP-RIMINDER-SIGNATURE": signature
                 };
@@ -117,7 +118,7 @@ describe("Webhooks tests",  () => {
             });
 
             test("It should call the callbacj function", () => {
-                const signature = generateSignature(Webhooks_Key, "profile.parsing.error");
+                const signature = generateSignature(webhooks_key, "profile.parsing.error");
                 const headers = {
                     "HTTP-RIMINDER-SIGNATURE": signature
                 };

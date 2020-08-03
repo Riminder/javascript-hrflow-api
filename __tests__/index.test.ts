@@ -58,7 +58,7 @@ describe("Other tests", () => {
 });
 
 describe("Wrapper test", () => {
-    app = new Hrflow({API_Key: "api_key"});
+    app = new Hrflow({api_secret : "api_key", api_user: "api_user"});
     describe("Source endpoints", () => {
         test("It should call the get source list endpoint", () => {
           const options = {};
