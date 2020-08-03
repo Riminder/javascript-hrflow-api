@@ -34,7 +34,7 @@ class Hrflow {
   }
 
   private _init() {
-    if (this.Webhooks_Key) {
+    if (this.webhooks_key) {
       this.webhooks = new Webhooks(this);
     }
 

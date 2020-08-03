@@ -66,7 +66,7 @@ export class Webhooks {
   binding: Webhooks.EventCallbackMap;
 
   constructor(hrflow: Hrflow) {
-    if (!hrflow  || !hrflow.Webhooks_Key) {
+    if (!hrflow  || !hrflow.webhooks_key) {
       throw new Error("The webhook secret key must be specified");
     }
 
@@ -81,7 +81,7 @@ export class Webhooks {
       }
 
       const [encodedSignature, encodedPayload] = headers["HTTP-RIMINDER-SIGNATURE"].split(".");
-      const expectedSignature = util.encodeBase64(sha256.hmac(util.decodeUTF8(this.hrflow.Webhooks_Key), util.decodeUTF8(encodedPayload)));
+      const expectedSignature = util.encodeBase64(sha256.hmac(util.decodeUTF8(this.hrflow.webhooks_key), util.decodeUTF8(encodedPayload)));
 
       if (encodedSignature !== expectedSignature) {
         throw new Error("The signature is invalid");
