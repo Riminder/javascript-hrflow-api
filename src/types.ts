@@ -91,6 +91,7 @@ export interface ProfilesScoringOptions {
 
 export interface JobPostOptions {
   name: string;
+  key?: string;
   board_key: string;
   agent_key: string;
   url?: string;
@@ -146,24 +147,26 @@ export interface jobsSearchingOptions {
 export interface ProfileOptionId {
   source_key: string;
   key: string;
-  profile_email?: string;
+  email?: string;
   fields?: any;
 }
 
 export interface ProfileOptionReference {
   source_key: string;
-  profile_reference: string;
-  profile_email?: string;
+  reference: string;
+  email?: string;
 }
 
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
 
 export interface jobOptionId {
-  job_key: string;
+  key: string;
+  board_key: string;
 }
 
 export interface jobOptionReference {
-  job_reference: string;
+  reference: string;
+  board_key: string;
 }
 
 export type jobOptionIdOrReference = jobOptionId | jobOptionReference;
@@ -186,12 +189,13 @@ export interface ProfileUpload {
   file: ReadStream;
   profile_type?: any;
   profile_content_type?: string;
-  profile_reference?: string;
+  reference?: string;
   created_at?: Date | number;
   tags?: Array<Tags>;
   labels?: Labels;
   metadatas?: Array<Metadatas>;
   webhook_parsing_sending?: number;
+  sync_parsing_indexing?: number;
 }
 
 export interface ProfileInfo {
@@ -235,7 +239,8 @@ export interface ConsentAlgoritmic {
 export interface ProfileJSON {
   source_key: string;
   info: ProfileInfo;
-  profile_reference?: string;
+  key?: string;
+  reference?: string;
   consent_algoritmic?: ConsentAlgoritmic;
   experiences?: Array<Experience>;
   educations?: Array<Education>;
@@ -268,12 +273,12 @@ export interface StagePatchProfileIdFilterReference extends StagePatchBase {
 }
 
 export interface StagePatchProfileReferenceFilterId extends StagePatchBase {
-  profile_reference: string;
+  reference: string;
   filter_id: string;
 }
 
 export interface StagePatchProfileReferenceFilterReference extends StagePatchBase {
-  profile_reference: string;
+  reference: string;
   filter_reference: string;
 }
 
@@ -299,12 +304,12 @@ export interface RatingPatchProfileIdFilterReference extends RatingPatchBase {
 }
 
 export interface RatingPatchProfileReferenceFilterId extends RatingPatchBase {
-  profile_reference: string;
+  reference: string;
   filter_id: string;
 }
 
 export interface RatingPatchProfileReferenceFilterReference extends RatingPatchBase {
-  profile_reference: string;
+  reference: string;
   filter_reference: string;
 }
 

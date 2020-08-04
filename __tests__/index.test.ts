@@ -125,7 +125,7 @@ describe("Wrapper test", () => {
       test("It should call the get profile endpoint with the profile reference", () => {
         const options = {
           source_key: "source_key",
-          profile_reference: "profile_reference",
+          reference: "reference",
         };
         app.profile.get(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -145,7 +145,7 @@ describe("Wrapper test", () => {
       test("It should call the get profile document endpoint with the profile reference", () => {
         const options = {
           source_key: "source_key",
-          profile_reference: "profile_reference",
+          reference: "reference",
         };
         app.profile.attachments.list(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -165,7 +165,7 @@ describe("Wrapper test", () => {
       test("It should call the get profile parsing endpoint with the profile reference", () => {
         const options = {
           source_key: "source_key",
-          profile_reference: "profile_reference",
+          reference: "reference",
         };
         app.profile.parsing.get(options).then((response: any) => {
           expect(response).toMatchSnapshot();
@@ -199,7 +199,7 @@ describe("Wrapper test", () => {
         const data: ProfileUpload = {
           source_key: "source_key",
           file: file,
-          profile_reference: "ref",
+          reference: "ref",
           created_at: new Date(Date.now()),
           metadatas: [{
             name: "filter_reference",
@@ -384,7 +384,7 @@ describe("Wrapper test", () => {
       test("It should call the post profile data endpoint", () => {
         const json: ProfileJSON = {
           source_key: "source_key",
-          profile_reference: "macfly",
+          reference: "macfly",
           info: {
             full_name: "Marty McFly",
             first_name: "Marty McFly",

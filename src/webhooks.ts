@@ -50,7 +50,7 @@ export namespace Webhooks {
 
   export interface Profile {
     profile_key: string;
-    profile_reference: string;
+    reference: string;
   }
 
   export interface Filter {

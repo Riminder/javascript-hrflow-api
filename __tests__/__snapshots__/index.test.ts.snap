@@ -11,6 +11,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -35,6 +36,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -42,13 +44,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/attachments?source_key=source_key&profile_reference=profile_reference",
-    "path": "/v1/profile/attachments?source_key=source_key&profile_reference=profile_reference",
+    "href": "https://api.hrflow.ai/v1/profile/attachments?source_key=source_key&reference=reference",
+    "path": "/v1/profile/attachments?source_key=source_key&reference=reference",
     "pathname": "/v1/profile/attachments",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_reference=profile_reference",
-    "search": "?source_key=source_key&profile_reference=profile_reference",
+    "query": "source_key=source_key&reference=reference",
+    "search": "?source_key=source_key&reference=reference",
     "slashes": true,
   },
 }
@@ -59,6 +61,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -83,6 +86,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -107,6 +111,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -131,6 +136,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -138,13 +144,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile?source_key=source_key&profile_reference=profile_reference",
-    "path": "/v1/profile?source_key=source_key&profile_reference=profile_reference",
+    "href": "https://api.hrflow.ai/v1/profile?source_key=source_key&reference=reference",
+    "path": "/v1/profile?source_key=source_key&reference=reference",
     "pathname": "/v1/profile",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_reference=profile_reference",
-    "search": "?source_key=source_key&profile_reference=profile_reference",
+    "query": "source_key=source_key&reference=reference",
+    "search": "?source_key=source_key&reference=reference",
     "slashes": true,
   },
 }
@@ -155,6 +161,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -179,6 +186,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -186,13 +194,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/parsing?source_key=source_key&profile_reference=profile_reference",
-    "path": "/v1/profile/parsing?source_key=source_key&profile_reference=profile_reference",
+    "href": "https://api.hrflow.ai/v1/profile/parsing?source_key=source_key&reference=reference",
+    "path": "/v1/profile/parsing?source_key=source_key&reference=reference",
     "pathname": "/v1/profile/parsing",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_reference=profile_reference",
-    "search": "?source_key=source_key&profile_reference=profile_reference",
+    "query": "source_key=source_key&reference=reference",
+    "search": "?source_key=source_key&reference=reference",
     "slashes": true,
   },
 }
@@ -203,6 +211,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -210,13 +219,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_key=source_key&profile_key=profile_key&use_agent=1",
-    "path": "/v1/profiles/scoring?source_key=source_key&profile_key=profile_key&use_agent=1",
+    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "path": "/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
     "pathname": "/v1/profiles/scoring",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_key=profile_key&use_agent=1",
-    "search": "?source_key=source_key&profile_key=profile_key&use_agent=1",
+    "query": "source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "search": "?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
     "slashes": true,
   },
 }
@@ -227,6 +236,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -234,13 +244,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_key=source_key&profile_reference=profile_reference&use_agent=1",
-    "path": "/v1/profiles/scoring?source_key=source_key&profile_reference=profile_reference&use_agent=1",
+    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "path": "/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
     "pathname": "/v1/profiles/scoring",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_reference=profile_reference&use_agent=1",
-    "search": "?source_key=source_key&profile_reference=profile_reference&use_agent=1",
+    "query": "source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "search": "?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
     "slashes": true,
   },
 }
@@ -251,6 +261,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
     "method": "POST",
   },
@@ -271,36 +282,12 @@ Object {
 }
 `;
 
-exports[`Wrapper test Profile endpoints It should call the post resume endpoint 1`] = `
-Object {
-  "options": Object {
-    "headers": Object {
-      "X-API-KEY": "api_key",
-    },
-    "method": "POST",
-  },
-  "url": Url {
-    "auth": null,
-    "hash": null,
-    "host": "api.hrflow.ai",
-    "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/parsing/file",
-    "path": "/v1/profile/parsing/file",
-    "pathname": "/v1/profile/parsing/file",
-    "port": null,
-    "protocol": "https:",
-    "query": null,
-    "search": null,
-    "slashes": true,
-  },
-}
-`;
-
 exports[`Wrapper test Source endpoints It should call the get source endpoint 1`] = `
 Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {
@@ -325,6 +312,7 @@ Object {
   "options": Object {
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
   },
   "url": Url {

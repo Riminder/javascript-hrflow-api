@@ -4,7 +4,7 @@ import { generateURLParams } from "../../utils";
 import { jobOptionIdOrReference } from "../../types";
 import { httpRequest } from "../../http";
 
-export default class Parsing {
+export default class Indexing {
   private hrflow: Hrflow;
 
   constructor(hrflow: Hrflow) {
@@ -13,6 +13,6 @@ export default class Parsing {
 
   get(options: jobOptionIdOrReference) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/job/parsing?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/job/indexing?${urlParams}`, { headers: this.hrflow.headers });
   }
 }

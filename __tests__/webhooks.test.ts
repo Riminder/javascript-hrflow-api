@@ -14,7 +14,7 @@ function generateSignature(key: string, event: string) {
         message: "The parsing succeeded",
         profile: {
             profile_key: "id",
-            profile_reference: "reference"
+            reference: "reference"
         }
     };
 

@@ -13,12 +13,14 @@ import Rating from "./rating";
 import Revealing from "./revealing";
 import Embedding from './embedding';
 import Searching from './searching';
+import Indexing from "./indexing";
 export default class Profile {
   private hrflow: Hrflow;
   attachments: Attachments;
   tags: Tags;
   metadatas: Metadatas;
   parsing: Parsing;
+  indexing: Indexing;
   scoring: Scoring;
   revealing: Revealing;
   embedding: Embedding;
@@ -32,6 +34,7 @@ export default class Profile {
     this.tags = new Tags(this.hrflow);
     this.metadatas = new Metadatas(this.hrflow);
     this.parsing = new Parsing(this.hrflow);
+    this.indexing = new Indexing(this.hrflow)
     this.scoring = new Scoring(this.hrflow);
     this.revealing = new Revealing(this.hrflow);
     this.embedding = new Embedding(this.hrflow);

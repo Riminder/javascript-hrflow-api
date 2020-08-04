@@ -6,6 +6,7 @@ Object {
     "body": null,
     "headers": Object {
       "X-API-KEY": "api_key",
+      "X-USER-EMAIL": undefined,
     },
     "method": "POST",
   },

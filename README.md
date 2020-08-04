@@ -11,14 +11,18 @@ npm install --save hrflow
 
 ```javascript
 import Hrflow from 'hrflow';
-const client = new Hrflow({ api_secret: "Your API Key",  api_user: "Your user email" });
+const client = new Hrflow({ 
+    api_secret: "Your API Key",
+    api_user: "Your API user email" 
+});
 ```
 
 # API
 
 ## Hrflow
 
-Class constructor for your client instance, it should be called with an `options` object where you define your `api_secret`.
+Class constructor for your client instance, it should be called with an `options` object where you define your `
+`.
 
 > **Note:** All methods return a Promise when called. All promises can throw exceptions so you should catch them at the end of your promise.
 
@@ -41,6 +45,82 @@ client.source.get("source_key_here");
 ```
 
 ## Job
+
+### client.job.add
+
+Method that allow you to add a new job given its json
+
+```javascript
+const data = {
+    "board_key": "board_key",
+    "name": "Data Engineer",
+    "agent_key": "agent_key",
+    "reference": "Job's reference abc",
+    "url": "https://www.pole-emploi.ai/jobs/data_engineer",
+    "summary": "As an engineer for the Data Engineering Infrastructure team,
+                you will design, build, scale, and evolve our data engineering
+                platform, services and tooling. Your work will have a critical 
+                impact on all areas of business: powering core data pipelines,
+                supporting detailed internal analytics, calculating customer
+                usage, securing our platform, and much more.",
+    "location": {
+                  "text": "Dampierre en Burly (45)",
+                  "geopoint": {
+                      "lat": 47.7667,
+                      "lon": 2.5167
+                  }
+                 },
+    "sections": [{
+                    "name": "profile",
+                    "title": "Searched Profile",
+                    "description": "Bac+5"
+                  }],
+    "skills": [{
+                  "name": "python",
+                  "value": null
+               },
+               {
+                  "name": "spark",
+                  "value": 0.9
+               }],
+    "languages": [{
+                     "name": "english",
+                     "value": 1
+                  },
+                 {  
+                     "name": "french",
+                     "value": 1
+                  }],
+    "tags": [{
+                "name": "archive",
+                "value": true
+             },
+             {  
+                "name": "tag example",
+                "value": "tag"
+              }],
+    "ranges_date": [{
+                       "name": "Dates",
+                       "value_min": "2020-05-18T21:59",
+                       "value_max": "2020-09-15T21:59"
+                    }],
+    "ranges_float": [{
+                       "name": "salary",
+                       "value_min": 30,
+                       "value_max": 40,
+                       "unit": "eur"
+                    }],
+    "metadatas": [{
+                     "name": "metadata example",
+                     "value": "metadata"
+                  }],
+}
+
+client.job.add(params);.then(response => {
+    console.log(response);
+});
+```
+
 
 ### client.job.searching.list
 
@@ -162,7 +242,7 @@ const data = {
   created_at: 1569320033,  // Reception date
   metadatas: [{"name":"mail","value":"test@test.com"}, ...], // Profile's metadatas
   profile_content_type: 'application/pdf', // Document content type
-  profile_reference: 'profile_reference', // Profile's reference
+  reference: 'reference', // Profile's reference
   labels:  [ // Profile's label
     {
       "job_key": "job_key",
@@ -300,52 +380,125 @@ const data = {
 client.profile.addJson(data));
 ```
 
+### client.profile.edit
 
-### client.profile.attachments.list
-
-Method that gets the attachments associated to a profile by its id or reference.
-
-```typescript
-const data = {
-    source_key: "source_key",
-    profile_key: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.attachments.list(data);
-```
-
-
-### client.profile.tags.list
-
-Method that gets the tags associated to a profile by its id or reference.
+Method that update an exesting profile.
 
 ```typescript
 const data = {
-    source_key: "source_key",
-    profile_key: "id",
-    // Or
-    profile_reference: "reference"
-}
+  "key" : "profile_key",
+  "source_key": "source_key",
+  "consent_algorithmic": {
+      "owner": {
+          "parsing": true,
+          "revealing": false,
+          "embedding": true,
+          "searching": false,
+          "scoring": true,
+          "reasoning": false
+      },
+      "controller": {
+          "parsing": true,
+          "revealing": false,
+          "embedding": true,
+          "searching": false,
+          "scoring": true,
+          "reasoning": false
+      }
+  },
+  "info": {
+      "full_name": "Harry Potter",
+      "first_name": "Harry",
+      "last_name": "Potter",
+      "email": "harry.potter@gmail.com",
+      "phone": "0202",
+      "gender": null,
+      "urls": {
+          "from_resume": [],
+          "linkedin": "",
+          "twitter": "",
+          "facebook": "",
+          "github": "",
+          "picture": ""
+      },
+      "picture": null,
+      "location": {
+          "text": null
+      },
+      "summary": "Brief summary"
+  },
+  "text": "test text",
+  "experiences": [
+      {
+          "date_start": "15/02/1900",
+          "date_end": "",
+          "title": "Lead",
+          "company": "Mathematic Departement",
+          "location": {
+              "text": "Paris"
+          },
+          "description": "Developping."
+      }
+  ],
+  "experiences_duration": 5,
+  "educations": [
+      {
+          "date_start": "12540",
+          "date_end": "12550",
+          "title": "Mathematicien",
+          "school": "University",
+          "description": "Description",
+          "location": {
+              "text": "Scotland"
+          }
+      }
+  ],
+  "educations_duration": 4,
+  "skills": [
+      {
+          "name": "manual skill",
+          "value": null
+      },
+      {
+          "name": "Creative spirit",
+          "value": null
+      },
+      {
+          "name": "Writing skills",
+          "value": null
+      },
+      {
+          "name": "Communication",
+          "value": null
+      }
+  ],
+  "languages": [
+      {
+          "name": "english",
+          "value": null
+      }
+  ],
+  "interests": [
+      {
+          "name": "football",
+          "value": null
+      }
+  ],
+  "tags": [],
+  "metadatas": [],
+  "labels": [
+      {
+          "stage": "yes",
+          "job_key": "job_key"
+      }
+  ],
+  "attachments": [],
+  "created_at": new Date().toISOString(),
+};
 
-client.profile.tags.list(data);
+client.profile.edit(data);
 ```
 
-### client.profile.metadatas.list
-
-Method that gets the metadatas associated to a profile by its id or reference.
-
-```typescript
-const data = {
-    source_key: "source_key",
-    profile_key: "id",
-    // Or
-    profile_reference: "reference"
-}
-
-client.profile.metadatas.list(data);
-```
 
 ### client.profile.parsing.get
 
@@ -356,55 +509,158 @@ const data = {
     source_key: "source_key",
     key: "profile_key",
     // Or
-    profile_reference: "reference"
+    reference: "reference"
 }
 
 client.profile.parsing.get(data);
 ```
 
+### client.profile.indexing.get
 
-### client.profile.scoring.list
-
-Method that gets the scoring result of a profile by its id or reference.
+Method that gets the indexing result of a profile by its id or reference.
 
 ```typescript
 const data = {
-  source_keys: ['source_key1', 'source_key2',..], // Required, list of sources ids
-  board_key: 'board_key', // required board key
-  job_key: 'job_key', // Required, job id
-  use_agent: 1, // Use agent or not (ie. 0 or 1)
-  limit: 10, //  Total profiles to search
-  page: 1, //  Page number
-  order_by: 'asc', // Order by 'asc' or 'desc'
-  sort_by: 'date_reception', // Sort by 'date_reception', 'date_creation', 'location', 'location_experience', 'location_education', 'score_semantic'  or 'score_predictive'
-  created_at_min: '2020-05-15T23:59:59.999Z', // 'Start date'
-  created_at_max: '2020-07-15T23:59:59.999Z',  // 'Start date'
-  name: 'name', // Profile's name  
-  email: 'exemple@exemple.com', // Profile's email
-  location_geopoint: {
-    // Filter by location's latitude and longitude
-    lat: '357516600',
-    lon: '10.7110900',
-  },
-  location_distance: 40, // Filter by location distance in km
-  summary_keywords: ['keyword1', 'keyword2',...], // Filter by summary keywords
-  text_keywords: ['keyword1', 'keyword2',...], // Filter by text keywords,
-  experience_keywords: ['keyword1', 'keyword2',...], // Filter by experience keywords
-  experience_location_geopoint: {
-  // Filter by experience's latitude and longitude
-    lat: '357516600',
-    lon: '10.7110900',
-  },
-  experience_location_distance:  40, // Filter by experience location distance in km
-  experiences_duration_min: 3, // Min total years of experience
-  experiences_duration_max: 7, // Max total years of experience
-  skills: [{name: 'python', value: 0.9}], // List of skills
-  languages: [{name: 'english', value: 'fluent'}], // List of language
-  interests: [{name: 'design', value: 1}], // List of interests 
-  tags: [{name: 'active', value: true}], // List of tags
+    source_key: "source_key",
+    key: "profile_key",
+    // Or
+    reference: "reference"
 }
 
-client.profile.scoring.list(data);
+client.profile.indexing.get(data);
+```
+
+### client.profile.attachments.list
+
+Method that gets the attachments associated to a profile by its key or reference.
+
+```typescript
+const data = {
+    source_key: "source_key",
+    profile_key: "profile_key",
+    // Or
+    reference: "reference",
+    email: 'example@example.com',
+}
+
+client.profile.attachments.list(data);
+```
+
+
+<!-- ### client.profile.tags.list
+
+Method that gets the tags associated to a profile by its id or reference.
+
+```typescript
+const data = {
+    source_key: "source_key",
+    profile_key: "id",
+    // Or
+    reference: "reference"
+}
+
+client.profile.tags.list(data);
+``` -->
+
+<!-- ### client.profile.metadatas.list
+
+Method that gets the metadatas associated to a profile by its id or reference.
+
+```typescript
+const data = {
+    source_key: "source_key",
+    profile_key: "id",
+    // Or
+    reference: "reference"
+}
+
+client.profile.metadatas.list(data);
+``` -->
+
+
+### client.profile.searching.list
+
+Method that search a list of profiles based on a list of filters.
+
+```typescript
+
+const params = {
+  source_keys: ['source_key1', 'source_key2'],
+  stage: 'new,
+  limit: 10,
+  page: 1,
+  order_by: 'asc',
+  sort_by: 'date',
+  created_at_min: '2020-05-15T23:59:59.999Z',
+  created_at_max: '2020-07-15T23:59:59.999Z',
+  name: 'name',
+  email: 'exemple@exemple.com',
+  location_geopoint: {
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  location_distance: 40,
+  summary_keywords: ['keyword1', 'keyword2'],
+  text_keywords: ['keyword1', 'keyword2'],
+  experience_keywords: ['keyword1', 'keyword2'],
+  experience_location_geopoint: {
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  experience_location_distance:  40,
+  experiences_duration_min: 3,
+  experiences_duration_max: 7,
+  skills: [{name: 'python', value: 0.9}],
+  languages: [{name: 'english', value: 'fluent'}],
+  interests: [{name: 'design', value: 1}],
+  tags: [{name: 'active', value: true}],
+}
+
+hrflow.profile.searching.list(params);
+```
+
+### client.profile.scoring.list
+
+Method that gets the scoring result of a profile by its key or reference.
+
+```typescript
+
+const params = {
+  source_keys: ['source_key1', 'source_key2'],
+  job_key: 'job_key',
+  board_key: 'board_key',
+  use_agent: 1,
+  stage: 'new,
+  limit: 10,
+  page: 1,
+  order_by: 'asc',
+  sort_by: 'date',
+  created_at_min: '2020-05-15T23:59:59.999Z',
+  created_at_max: '2020-07-15T23:59:59.999Z',
+  name: 'name',
+  email: 'exemple@exemple.com',
+  location_geopoint: {
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  location_distance: 40,
+  summary_keywords: ['keyword1', 'keyword2'],
+  text_keywords: ['keyword1', 'keyword2'],
+  experience_keywords: ['keyword1', 'keyword2'],
+  experience_location_geopoint: {
+    lat: '357516600',
+    lon: '10.7110900',
+  },
+  experience_location_distance:  40,
+  experiences_duration_min: 3,
+  experiences_duration_max: 7,
+  skills: [{name: 'python', value: 0.9}],
+  languages: [{name: 'english', value: 'fluent'}],
+  interests: [{name: 'design', value: 1}],
+  tags: [{name: 'active', value: true}],
+}
+
+hrflow.profile.scoring.list(params);
 ```
 
 
@@ -413,17 +669,16 @@ client.profile.scoring.list(data);
 Method that reveals the embedding result of a profile (by id or reference) with a filter (by id or reference).
 
 ```typescript
-const options: ProfileOptionIdOrReference = {
+const params = {
     source_key: "source_key",
-    profile_key: "id",
+    key: "profile_key",
     // Or
-    profile_reference: "reference",
-    filter_id: "id",
-    // Or
-    filter_reference: "reference"
+    reference: "reference",
+    email: 'example@example.com'
+    fields: {'profile': 1, 'skills':1, 'educations':[0]},
 }
 
-client.profile.embedding.get(options);
+client.profile.embedding.get(params);
 ```
 
 
@@ -435,7 +690,8 @@ This object is used to handle webhooks. If you give your webhooks secret key whe
 
 ```typescript
 const client = new Hrflow({
-    api_secret: "Your API Key",
+    
+    : "Your API Key",
     api_user: "Your user email",
     webhooks_key: "Your Webhooks key",
 });
