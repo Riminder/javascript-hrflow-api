@@ -116,7 +116,83 @@ const data = {
                   }],
 }
 
-client.job.add(params);.then(response => {
+client.job.add(data).then(response => {
+    console.log(response);
+});
+```
+
+### client.job.add
+
+Method that allow you to update an existing job using its key
+
+```javascript
+const data = {
+    "key": "job_key"
+    "board_key": "board_key",
+    "name": "Data Engineer",
+    "agent_key": "agent_key",
+    "reference": "Job's reference abc",
+    "url": "https://www.pole-emploi.ai/jobs/data_engineer",
+    "summary": "As an engineer for the Data Engineering Infrastructure team,
+                you will design, build, scale, and evolve our data engineering
+                platform, services and tooling. Your work will have a critical 
+                impact on all areas of business: powering core data pipelines,
+                supporting detailed internal analytics, calculating customer
+                usage, securing our platform, and much more.",
+    "location": {
+                  "text": "Dampierre en Burly (45)",
+                  "geopoint": {
+                      "lat": 47.7667,
+                      "lon": 2.5167
+                  }
+                 },
+    "sections": [{
+                    "name": "profile",
+                    "title": "Searched Profile",
+                    "description": "Bac+5"
+                  }],
+    "skills": [{
+                  "name": "python",
+                  "value": null
+               },
+               {
+                  "name": "spark",
+                  "value": 0.9
+               }],
+    "languages": [{
+                     "name": "english",
+                     "value": 1
+                  },
+                 {  
+                     "name": "french",
+                     "value": 1
+                  }],
+    "tags": [{
+                "name": "archive",
+                "value": true
+             },
+             {  
+                "name": "tag example",
+                "value": "tag"
+              }],
+    "ranges_date": [{
+                       "name": "Dates",
+                       "value_min": "2020-05-18T21:59",
+                       "value_max": "2020-09-15T21:59"
+                    }],
+    "ranges_float": [{
+                       "name": "salary",
+                       "value_min": 30,
+                       "value_max": 40,
+                       "unit": "eur"
+                    }],
+    "metadatas": [{
+                     "name": "metadata example",
+                     "value": "metadata"
+                  }],
+}
+
+client.job.edit(data).then(response => {
     console.log(response);
 });
 ```
@@ -145,33 +221,74 @@ client.job.searching.list(params).then(response => {
 });
 ```
 
+### client.job.indexing.get
+
+Method that gets the job indexing by its key or its reference.
+
+```javascript
+const data = {
+    board_key: "board_key"
+    key: "job_key",
+    // Or
+    job_reference: "job_reference"
+}
+
+client.job.indexing.get(data);
+```
+
 ### client.job.scoring.list
 
-Method that list the jobs scoring for a profile.
+Method that list the jobs scoring for a job.
 
 ```javascript
 const params = {
-    board_keys: ['board_key'], // Required
-    agent_key: 'agent_key', // Required
-    profile_key: 'profile_key', // Required
-    source_key: 'source_key', // Required
+    board_keys: ['board_key'],
+    agent_key: 'agent_key',
+    profile_key: 'profile_key',
+    source_key: 'source_key',
     name: "data scientist",
     page: 1,
     limit: 10,
     order_by: "asc",
     sort_by: "date",
     text_keywords: ["engineer", "python"],
-    tags: [{name: "active", value: true}],
+    tags_included: [[{name: "active", value: true}]],
     location_distance: 30,
     location_geopoint: {"lat":33.59662,"lng":-7.61889}
 }
+
 
 client.job.scoring.list(params).then(response => {
     console.log(response);
 });
 ```
 
-### client.job.parsing.get
+### client.job.searching.list
+
+Method that search for a list of jobs using a specific filters.
+
+```javascript
+const params = {
+    board_key: 'board_key',
+    name: "data scientist",
+    page: 1,
+    limit: 10,
+    order_by: "asc",
+    sort_by: "date",
+    text_keywords: ["engineer", "python"],
+    tags_included: [[{name: "active", value: true}]],
+    location_distance: 30,
+    location_geopoint: {"lat":33.59662,"lng":-7.61889}
+}
+
+
+client.job.searching.list(params).then(response => {
+    console.log(response);
+});
+```
+
+
+<!-- ### client.job.parsing.get
 
 Method that gets the job parsing by its id or its reference. It accepts an object as follows
 
@@ -183,7 +300,7 @@ const data = {
 }
 
 client.job.parsing.get(data);
-```
+``` -->
 
 ## Profile
 
