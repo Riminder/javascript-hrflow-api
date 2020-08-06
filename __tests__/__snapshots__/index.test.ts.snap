@@ -19,13 +19,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/attachments?source_key=source_key&profile_key=profile_key",
-    "path": "/v1/profile/attachments?source_key=source_key&profile_key=profile_key",
+    "href": "https://api.hrflow.ai/v1/profile/attachments?source_key=source_key&key=profile_key",
+    "path": "/v1/profile/attachments?source_key=source_key&key=profile_key",
     "pathname": "/v1/profile/attachments",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_key=profile_key",
-    "search": "?source_key=source_key&profile_key=profile_key",
+    "query": "source_key=source_key&key=profile_key",
+    "search": "?source_key=source_key&key=profile_key",
     "slashes": true,
   },
 }
@@ -69,19 +69,19 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/searching?source_keys=[%22source1%22,%22source2%22]&created_at_min=0&created_at_max=1514764800000&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "path": "/v1/profiles/searching?source_keys=[%22source1%22,%22source2%22]&created_at_min=0&created_at_max=1514764800000&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
+    "href": "https://api.hrflow.ai/v1/profiles/searching?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
+    "path": "/v1/profiles/searching?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
     "pathname": "/v1/profiles/searching",
     "port": null,
     "protocol": "https:",
-    "query": "source_keys=[%22source1%22,%22source2%22]&created_at_min=0&created_at_max=1514764800000&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "search": "?source_keys=[%22source1%22,%22source2%22]&created_at_min=0&created_at_max=1514764800000&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
+    "query": "created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
+    "search": "?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
     "slashes": true,
   },
 }
 `;
 
-exports[`Wrapper test Profile endpoints It should call the get profile endpoint using Date object 1`] = `
+exports[`Wrapper test Profile endpoints It should call the get profile endpoint with the profile key 1`] = `
 Object {
   "options": Object {
     "headers": Object {
@@ -94,38 +94,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/searching?source_keys=[%22source1%22,%22source2%22]&created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "path": "/v1/profiles/searching?source_keys=[%22source1%22,%22source2%22]&created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "pathname": "/v1/profiles/searching",
+    "href": "https://api.hrflow.ai/v1/profile/indexing?source_key=source_key&key=profile_key",
+    "path": "/v1/profile/indexing?source_key=source_key&key=profile_key",
+    "pathname": "/v1/profile/indexing",
     "port": null,
     "protocol": "https:",
-    "query": "source_keys=[%22source1%22,%22source2%22]&created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "search": "?source_keys=[%22source1%22,%22source2%22]&created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc",
-    "slashes": true,
-  },
-}
-`;
-
-exports[`Wrapper test Profile endpoints It should call the get profile endpoint with the profile id 1`] = `
-Object {
-  "options": Object {
-    "headers": Object {
-      "X-API-KEY": "api_key",
-      "X-USER-EMAIL": undefined,
-    },
-  },
-  "url": Url {
-    "auth": null,
-    "hash": null,
-    "host": "api.hrflow.ai",
-    "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile?source_key=source_key&profile_key=profile_key",
-    "path": "/v1/profile?source_key=source_key&profile_key=profile_key",
-    "pathname": "/v1/profile",
-    "port": null,
-    "protocol": "https:",
-    "query": "source_key=source_key&profile_key=profile_key",
-    "search": "?source_key=source_key&profile_key=profile_key",
+    "query": "source_key=source_key&key=profile_key",
+    "search": "?source_key=source_key&key=profile_key",
     "slashes": true,
   },
 }
@@ -144,9 +119,9 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile?source_key=source_key&reference=reference",
-    "path": "/v1/profile?source_key=source_key&reference=reference",
-    "pathname": "/v1/profile",
+    "href": "https://api.hrflow.ai/v1/profile/indexing?source_key=source_key&reference=reference",
+    "path": "/v1/profile/indexing?source_key=source_key&reference=reference",
+    "pathname": "/v1/profile/indexing",
     "port": null,
     "protocol": "https:",
     "query": "source_key=source_key&reference=reference",
@@ -169,13 +144,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profile/parsing?source_key=source_key&profile_key=profile_key",
-    "path": "/v1/profile/parsing?source_key=source_key&profile_key=profile_key",
+    "href": "https://api.hrflow.ai/v1/profile/parsing?source_key=source_key&key=profile_key",
+    "path": "/v1/profile/parsing?source_key=source_key&key=profile_key",
     "pathname": "/v1/profile/parsing",
     "port": null,
     "protocol": "https:",
-    "query": "source_key=source_key&profile_key=profile_key",
-    "search": "?source_key=source_key&profile_key=profile_key",
+    "query": "source_key=source_key&key=profile_key",
+    "search": "?source_key=source_key&key=profile_key",
     "slashes": true,
   },
 }
@@ -219,19 +194,19 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
-    "path": "/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "href": "https://api.hrflow.ai/v1/profiles/scoring?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&use_agent=1&page=1&stage=YES&limit=30&source_keys=[%22source_key%22]&board_key=board_key&job_key=job_key",
+    "path": "/v1/profiles/scoring?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&use_agent=1&page=1&stage=YES&limit=30&source_keys=[%22source_key%22]&board_key=board_key&job_key=job_key",
     "pathname": "/v1/profiles/scoring",
     "port": null,
     "protocol": "https:",
-    "query": "source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
-    "search": "?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "query": "created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&use_agent=1&page=1&stage=YES&limit=30&source_keys=[%22source_key%22]&board_key=board_key&job_key=job_key",
+    "search": "?created_at_min=2020-05-15T23:59:59.999Z&created_at_max=2020-07-15T23:59:59.999Z&use_agent=1&page=1&stage=YES&limit=30&source_keys=[%22source_key%22]&board_key=board_key&job_key=job_key",
     "slashes": true,
   },
 }
 `;
 
-exports[`Wrapper test Profile endpoints It should call the get profile scoring endpoint with the profile reference 1`] = `
+exports[`Wrapper test Profile endpoints It should call the list  profile searching endpoint 1`] = `
 Object {
   "options": Object {
     "headers": Object {
@@ -244,13 +219,13 @@ Object {
     "hash": null,
     "host": "api.hrflow.ai",
     "hostname": "api.hrflow.ai",
-    "href": "https://api.hrflow.ai/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
-    "path": "/v1/profiles/scoring?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
-    "pathname": "/v1/profiles/scoring",
+    "href": "https://api.hrflow.ai/v1/profiles/searching?created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
+    "path": "/v1/profiles/searching?created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
+    "pathname": "/v1/profiles/searching",
     "port": null,
     "protocol": "https:",
-    "query": "source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
-    "search": "?source_keys=[%22source_key%22]&job_key=job_key&board_key=board_key&use_agent=1",
+    "query": "created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
+    "search": "?created_at_min=Thu%20Jan%2001%201970%2000:00:00%20GMT+0000%20(GMT)&created_at_max=Thu%20Jan%2001%201970%2000:00:01%20GMT+0000%20(GMT)&page=1&stage=YES&limit=30&sort_by=date_reception&order_by=desc&source_keys=[%22source1%22,%22source2%22]",
     "slashes": true,
   },
 }

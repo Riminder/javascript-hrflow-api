@@ -11,8 +11,12 @@ export default class Parsing {
     this.hrflow = hrflow;
   }
 
-  list(options: profilesSearchingOptions) {
-    const urlParams = generateURLParams(options);
+  list(source_keys: Array<string>, options: profilesSearchingOptions) {
+    const params = {
+      ...options,
+      source_keys,
+    }
+    const urlParams = generateURLParams(params);
     return httpRequest(`${defaults.API_URL}/profiles/searching?${urlParams}`, { headers: this.hrflow.headers });
   }
 }

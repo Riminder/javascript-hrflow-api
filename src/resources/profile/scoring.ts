@@ -10,9 +10,15 @@ export default class Scoring {
     this.hrflow = hrflow;
   }
 
-  list(options: ProfilesScoringOptions) {
+  list( source_keys: Array<string>, board_key: string, job_key: string, options: ProfilesScoringOptions) {
     options.use_agent =  1;
-    const urlParams = generateURLParams(options);
+    const params = {
+      ...options,
+      source_keys,
+      board_key,
+      job_key,
+    }
+    const urlParams = generateURLParams(params);
     return httpRequest(`${defaults.API_URL}/profiles/scoring?${urlParams}`, { headers: this.hrflow.headers });
   }
 }

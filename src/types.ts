@@ -1,4 +1,4 @@
-import { ReadStream } from "fs";
+
 export interface HrflowOptions {
   api_secret: string;
   api_user: string;
@@ -19,7 +19,6 @@ export interface SourcesOptions {
   order_by?: string;
 } 
 export interface profilesSearchingOptions {
-  source_keys: Array<string>;
   stage?: string;
   limit?: number;
   page?: number;
@@ -50,12 +49,11 @@ export interface profilesSearchingOptions {
   languages?: Array<Languages>;
   interests?: Array<Interests>;
   tags?: Array<Tags>; 
+  tags_included?: any;
+  tags_excluded?: any;
 }
 
 export interface ProfilesScoringOptions {
-  source_keys: Array<string>;
-  job_key: string;
-  board_key: string;
   use_agent?: number;
   stage?: string;
   limit?: number;
@@ -86,7 +84,9 @@ export interface ProfilesScoringOptions {
   skills?: Array<Skills>;
   languages?: Array<Languages>;
   interests?: Array<Interests>;
-  tags?: Array<Tags>; 
+  tags?: Array<Tags>;
+  tags_included?: any;
+  tags_excluded?: any;
 }
 
 export interface JobPostOptions {
@@ -115,10 +115,6 @@ export interface JobPostOptions {
 }
 
 export interface jobsScoringOptions {
-  board_keys: Array<string>;
-  agent_key: string;
-  profile_key: string;
-  source_key: string;
   text_keywords?: Array<string>;
   tags?: Array<Tags>;
   use_agent?: any;
@@ -129,10 +125,11 @@ export interface jobsScoringOptions {
   name?: string;
   location_distance?: number;
   location_geopoint?: any;
+  tags_included?: any;
+  tags_excluded?: any;
 
 }
 export interface jobsSearchingOptions {
-  board_keys: Array<string>;
   page?: number;
   limit?: number;
   order_by?: string;
@@ -141,32 +138,31 @@ export interface jobsSearchingOptions {
   text_keywords?: Array<string>;
   tags?: Array<Tags>;
   location_distance?: number;
-  location_geopoint: any;
+  location_geopoint?: any;
+  tags_included?: any;
+  tags_excluded?: any;
 }
 
 export interface ProfileOptionId {
-  source_key: string;
   key: string;
   email?: string;
   fields?: any;
 }
 
 export interface ProfileOptionReference {
-  source_key: string;
   reference: string;
   email?: string;
+  fields?: any;
 }
 
 export type ProfileOptionIdOrReference = ProfileOptionId | ProfileOptionReference;
 
 export interface jobOptionId {
   key: string;
-  board_key: string;
 }
 
 export interface jobOptionReference {
   reference: string;
-  board_key: string;
 }
 
 export type jobOptionIdOrReference = jobOptionId | jobOptionReference;
@@ -184,9 +180,7 @@ export interface Labels {
   rating_timestamp?: string;
 }
 export interface ProfileUpload {
-  source_key: string;
   sync_parsing?: number;
-  file: ReadStream;
   profile_type?: any;
   profile_content_type?: string;
   reference?: string;
@@ -237,9 +231,7 @@ export interface ConsentAlgoritmic {
   }
 }
 export interface ProfileJSON {
-  source_key: string;
   info: ProfileInfo;
-  key?: string;
   reference?: string;
   consent_algoritmic?: ConsentAlgoritmic;
   experiences?: Array<Experience>;
@@ -355,6 +347,7 @@ export interface Tags {
   name: string;
   value: any
 }
+
 export interface Skills {
   name: string;
   value: any

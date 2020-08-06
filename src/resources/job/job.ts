@@ -1,7 +1,4 @@
 import Hrflow = require("../..");
-import defaults from "../../defaults";
-import { httpPostRequest, httpPutRequest } from "../../http";
-import { JobPostOptions } from "../../types";
 import Parsing from "./parsing";
 import Indexing from './indexing';
 import Reasoning from "./reasoning";
@@ -25,14 +22,4 @@ export default class Job {
     this.reasoning = new Reasoning(this.hrflow);
     this.scoring = new Scoring(this.hrflow);
   }
-
-  add(data: JobPostOptions) {
-    const url = `${defaults.API_URL}/job/indexing`;
-    return httpPostRequest(url, data, { headers: this.hrflow.headers });
-  }
-  edit(data: JobPostOptions) {
-    const url = `${defaults.API_URL}/job/indexing`;
-    return httpPutRequest(url, data, { headers: this.hrflow.headers });
-  }
-
 }

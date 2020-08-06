@@ -11,8 +11,8 @@ export default class Attachments {
     this.hrflow = hrflow;
   }
 
-  list(options: ProfileOptionIdOrReference) {
+  list(source_key: string, options: ProfileOptionIdOrReference) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/profile/attachments?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/profile/attachments?source_key=${source_key}&${urlParams}`, { headers: this.hrflow.headers });
   }
 }

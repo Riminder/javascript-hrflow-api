@@ -76,9 +76,9 @@ describe("Wrapper test", () => {
       });
 
     describe("Profile endpoints", () => {
-      test("It should call the get profile endpoint using Date object", () => {
+      test("It should call the list  profile searching endpoint", () => {
+        const  source_keys = ["source1", "source2"];
         const options: profilesSearchingOptions = {
-          source_keys: ["source1", "source2"],
           created_at_min: new Date(0),
           created_at_max: new Date(1234),
           page: 1,
@@ -87,7 +87,7 @@ describe("Wrapper test", () => {
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.searching.list(options)
+        app.profile.searching.list(source_keys ,options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
@@ -95,119 +95,114 @@ describe("Wrapper test", () => {
       });
 
       test("It should call the get profile endpoint using Date number", () => {
+        const  source_keys = ["source1", "source2"];
         const options: profilesSearchingOptions = {
-          source_keys: ["source1", "source2"],
-          created_at_min: 0,
-          created_at_max: (new Date("2018-01-01")).getTime(),
+          created_at_min: '2020-05-15T23:59:59.999Z',
+          created_at_max: '2020-07-15T23:59:59.999Z',
           page: 1,
           stage: Stage.YES,
           limit: 30,
           sort_by: SortBy.DATE_RECEPTION,
           order_by: OrderBy.DESC,
         };
-        app.profile.searching.list(options)
+        app.profile.searching.list(source_keys, options)
           .then((response: any) => {
           expect(response).toMatchSnapshot();
           expect(getQueryParamAsArray(response.url.query)).toEqual(Object.keys(options));
         });
       });
 
-      test("It should call the get profile endpoint with the profile id", () => {
+      test("It should call the get profile endpoint with the profile key", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
-          profile_key: "profile_key",
+          key: "profile_key",
         };
-        app.profile.get(options).then((response: any) => {
+        app.profile.indexing.get(source_key, options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile endpoint with the profile reference", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
           reference: "reference",
         };
-        app.profile.get(options).then((response: any) => {
+        app.profile.indexing.get(source_key ,options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile attachments endpoint with the profile id", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
-          profile_key: "profile_key",
+          key: "profile_key",
         };
-        app.profile.attachments.list(options).then((response: any) => {
+        app.profile.attachments.list(source_key, options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile document endpoint with the profile reference", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
           reference: "reference",
         };
-        app.profile.attachments.list(options).then((response: any) => {
+        app.profile.attachments.list(source_key ,options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile parsing endpoint with the profile id", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
-          profile_key: "profile_key",
+          key: "profile_key",
         };
-        app.profile.parsing.get(options).then((response: any) => {
+        app.profile.parsing.get(source_key, options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile parsing endpoint with the profile reference", () => {
+        const  source_key = "source_key";
         const options = {
-          source_key: "source_key",
           reference: "reference",
         };
-        app.profile.parsing.get(options).then((response: any) => {
+        app.profile.parsing.get(source_key, options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the get profile scoring endpoint with the profile id", () => {
+        const  source_keys = ["source_key"];
+        const board_key = "board_key";
+        const  job_key = "job_key";
         const options = {
-          source_keys:  ["source_key"],
-          job_key: "job_key",
-          board_key: "board_key",
+          created_at_min: '2020-05-15T23:59:59.999Z',
+          created_at_max: '2020-07-15T23:59:59.999Z',
+          use_agent: 1,
+          page: 1,
+          stage: Stage.YES,
+          limit: 30,
         };
-        app.profile.scoring.list(options).then((response: any) => {
-          expect(response).toMatchSnapshot();
-        });
-      });
-
-      test("It should call the get profile scoring endpoint with the profile reference", () => {
-        const options = {
-          source_keys:  ["source_key"],
-          job_key: "job_key",
-          board_key: "board_key",
-        };
-        app.profile.scoring.list(options).then((response: any) => {
+        app.profile.scoring.list( source_keys, board_key, job_key, options).then((response: any) => {
           expect(response).toMatchSnapshot();
         });
       });
 
       test("It should call the post resume endpoint", () => {
         const file = fs.createReadStream("./test.txt");
+        const  source_key = "source_key";
         const data: ProfileUpload = {
-          source_key: "source_key",
-          file: file,
           reference: "ref",
           created_at: new Date(Date.now()),
+          sync_parsing: 1,
           metadatas: [{
             name: "filter_reference",
             value: "123456"
           }],
         };
 
-        app.profile.addFile(data)
+        app.profile.parsing.addFile(source_key, file, data)
           .then((response: any) => {
             const responseWithoutBody = {
               url: response.url,
@@ -382,8 +377,8 @@ describe("Wrapper test", () => {
       // });
 
       test("It should call the post profile data endpoint", () => {
+        const source_key = "source_key";
         const json: ProfileJSON = {
-          source_key: "source_key",
           reference: "macfly",
           info: {
             full_name: "Marty McFly",
@@ -454,7 +449,7 @@ describe("Wrapper test", () => {
           }
         };
 
-        app.profile.addJson(json).then((response: any) => {
+        app.profile.indexing.addJson(source_key, json).then((response: any) => {
           const responseWithoutBody = {
             url: response.url,
             options: {
