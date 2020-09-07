@@ -3,6 +3,7 @@ import { Webhooks } from "./webhooks";
 import Source from "./resources/source";
 import Profile from "./resources/profile/profile";
 import Job from "./resources/job/job";
+import Document from "./resources/document/document";
 
 class Hrflow {
   public headers: any;
@@ -13,6 +14,7 @@ class Hrflow {
   public source: Source;
   public profile: Profile;
   public job: Job;
+  public document: Document;
 
   constructor(options: HrflowOptions) {
 
@@ -41,6 +43,7 @@ class Hrflow {
     this.source = new Source(this);
     this.profile = new Profile(this);
     this.job = new Job(this);
+    this.document = new Document(this);
   }
 }
 

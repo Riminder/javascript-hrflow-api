@@ -4,7 +4,6 @@ import "fetch-everywhere";
 const FormData = require("form-data");
 import axios from 'axios';
 
-import { ReadStream } from "fs";
 import { HrflowAPIResponse } from "./types";
 import { APIError } from "./errors";
 

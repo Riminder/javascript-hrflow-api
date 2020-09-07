@@ -10,12 +10,12 @@ export default class Source {
     this.hrflow = hrflow;
   }
 
-  get(source_key: string) {
-    return httpRequest(`${defaults.API_URL}/source?key=${source_key}`, { headers: this.hrflow.headers });
+  get(board_key: string) {
+    return httpRequest(`${defaults.API_URL}/board?key=${board_key}`, { headers: this.hrflow.headers });
   }
 
   list(options: SourcesOptions) {
     const urlParams = generateURLParams(options);
-    return httpRequest(`${defaults.API_URL}/sources?${urlParams}`, { headers: this.hrflow.headers });
+    return httpRequest(`${defaults.API_URL}/boards?${urlParams}`, { headers: this.hrflow.headers });
   }
 }
