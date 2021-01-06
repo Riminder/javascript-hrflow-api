@@ -11,7 +11,7 @@
   "author": "Nouayti Mohammed <mohammed.nouayti@riminder.net>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^23.0.1",
     "es6-map": "^0.1.5",
     "fast-sha256": "^1.1.0",
